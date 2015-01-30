@@ -1,4 +1,5 @@
-# fontmin
+# fontmin  [![Build Status](https://travis-ci.org/junmer/fontmin.svg?branch=master)](https://travis-ci.org/junmer/fontmin)
+
 
 > Minify font seamlessly
 
