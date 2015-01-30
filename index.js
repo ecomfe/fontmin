@@ -3,6 +3,8 @@
  * @author junmer
  */
 
+/* eslint-env node */
+
 var combine = require('stream-combiner');
 var concat = require('concat-stream');
 var EventEmitter = require('events').EventEmitter;
@@ -28,13 +30,15 @@ function Fontmin() {
 
 /**
  * Inherit from `EventEmitter`
+ * @type {Class}
  */
 inherits(Fontmin, EventEmitter);
 
 /**
  * Get or set the source files
  *
- * @param {Array|Buffer|String} file
+ * @param {Array|Buffer|String} file files to be optimized
+ * @return {Object} fontmin
  * @api public
  */
 Fontmin.prototype.src = function (file) {
@@ -49,7 +53,8 @@ Fontmin.prototype.src = function (file) {
 /**
  * Get or set the destination folder
  *
- * @param {String} dir
+ * @param {string} dir folder to written
+ * @return {Object} fontmin
  * @api public
  */
 Fontmin.prototype.dest = function (dir) {
@@ -64,7 +69,8 @@ Fontmin.prototype.dest = function (dir) {
 /**
  * Add a plugin to the middleware stack
  *
- * @param {Function} plugin
+ * @param {Function} plugin plugin
+ * @return {Object} fontmin
  * @api public
  */
 Fontmin.prototype.use = function (plugin) {
@@ -75,7 +81,8 @@ Fontmin.prototype.use = function (plugin) {
 /**
  * Optimize files
  *
- * @param {Function} cb
+ * @param {Function} cb callback
+ * @return {Stream} file stream
  * @api public
  */
 Fontmin.prototype.run = function (cb) {
@@ -107,7 +114,8 @@ Fontmin.prototype.run = function (cb) {
 /**
  * Read the source file
  *
- * @param {Array|Buffer|String} src
+ * @param {Array|Buffer|String} src files
+ * @return {Stream} file stream
  * @api private
  */
 Fontmin.prototype.read = function (src) {
@@ -132,16 +140,18 @@ Fontmin.prototype.read = function (src) {
 module.exports = Fontmin;
 
 // export pkged plugins
+
 [
-    'glyph' //,
+    'glyph'
     // 'ttf2eot',
     // 'ttf2woff',
     // 'ttf2svg'
-].forEach(function(plugin) {
+].forEach(function (plugin) {
     module.exports[plugin] = require('./plugins/' + plugin);
 });
 
 // export optional plugins
+//
 // [
 //     'svgo',
 // ].forEach(function (plugin) {
@@ -151,5 +161,6 @@ module.exports = Fontmin;
 // });
 
 
-// todo move to independent project
+// todo
+// move to independent project
 module.exports.connect = exports.middleware = require('./lib/middleware');

@@ -68,7 +68,7 @@ stream in `stream`
 
 ## Plugins
 
-The following plugins are bundled with fontmain:
+The following plugins are bundled with fontmin:
 
 * [glyph](#glyph) — Compress ttf by glyph.
 
