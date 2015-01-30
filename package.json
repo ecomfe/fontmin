@@ -21,7 +21,7 @@
   ],
   "repository": "https://github.com/junmer/fontmin.git",
   "scripts": {
-    "test": "mocha --timeout=50000 --reporter=nyan"
+    "test": "mocha --timeout=50000"
   },
   "dependencies": {
     "b3b": "0.0.1",

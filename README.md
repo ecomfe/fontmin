@@ -66,6 +66,25 @@ Optimize your files with the given settings.
 The callback will return an array of vinyl files in `files` and a Readable/Writable
 stream in `stream`
 
+## Plugins
+
+The following plugins are bundled with fontmain:
+
+* [glyph](#glyph) — Compress ttf by glyph.
+
+### .glyph()
+
+Compress ttf by glyph.
+
+```js
+var Fontmin = require('fontmin');
+
+var fontmin = new Fontmin()
+    .use(Fontmin.glyph({ 
+        text: '天地玄黄 宇宙洪荒'
+    }));
+```
+
 ## thx
 
 - [fonteditor-ttf](https://github.com/keke000/fonteditor-ttf)

@@ -128,10 +128,11 @@ function minifyTtf(ttfObject, text, useBasicText, plugin) {
  * glyph fontmin plugin
  *
  * @param {Object} opts
- * @param {string} opts.text [description]
+ * @param {string=} opts.text text
+ * @param {boolean=} opts.useBasicText useBasicText
+ * @param {Function=} opts.use plugin
  * @api public
  */
-
 module.exports = function(opts) {
     opts = opts || {};
 
@@ -167,7 +168,7 @@ module.exports = function(opts) {
                 minifyTtf(
                     ttfObject,
                     opts.text,
-                    !!opts.basicText,
+                    opts.useBasicText,
                     opts.use
                 )
             );
