@@ -1,0 +1,28 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+/*
+@font-face {
+  font-family: 'eduSong';
+  src: url('/fonts/eduSong.ttf');
+}
+
+.edusong{
+    font-family: 'eduSong'
+}
+*/
+
+@font-face {
+  font-family: 'bearfaced';
+  src: url('/fonts/bearfaced.otf');
+}
+
+.bearfaced{
+    font-family: 'bearfaced'
+}

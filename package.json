@@ -1,0 +1,39 @@
+{
+  "name": "fontmin",
+  "version": "0.0.1",
+  "description": "get required glyph from ttf, convert to ttf, eot, woff, svg",
+  "main": "index.js",
+  "keywords": [
+    "font",
+    "compress",
+    "minify",
+    "ttf",
+    "woff",
+    "eot",
+    "svg"
+  ],
+  "author": "junmer",
+  "license": "ISC",
+  "repository": "https://github.com/junmer/fontmin.git",
+  "scripts": {
+    "test": "mocha --timeout=20000 --reporter=nyan"
+  },
+  "dependencies": {
+    "b3b": "0.0.1",
+    "concat-stream": "^1.4.6",
+    "fonteditor-ttf": "0.0.4",
+    "is-ttf": "^0.2.0",
+    "lodash": "^2.4.1",
+    "pako": "^0.2.5",
+    "stream-combiner": "^0.2.1",
+    "through2": "^0.6.1",
+    "vinyl": "^0.4.3",
+    "vinyl-fs": "^0.3.7"
+  },
+  "devDependencies": {
+    "debug": "~2.0.0",
+    "express": "^4.11.1",
+    "jade": "~1.6.0",
+    "mocha": "*"
+  }
+}
