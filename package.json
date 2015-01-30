@@ -13,7 +13,12 @@
     "svg"
   ],
   "author": "junmer",
-  "license": "ISC",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.githubusercontent.com/junmer/fontmin/master/LICENSE"
+    }
+  ],
   "repository": "https://github.com/junmer/fontmin.git",
   "scripts": {
     "test": "mocha --timeout=20000 --reporter=nyan"
