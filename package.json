@@ -1,6 +1,6 @@
 {
   "name": "fontmin",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Minify font seamlessly, get required glyph from ttf, convert to ttf, eot, woff, svg",
   "main": "index.js",
   "keywords": [
@@ -21,7 +21,7 @@
   ],
   "repository": "https://github.com/junmer/fontmin.git",
   "scripts": {
-    "test": "mocha --timeout=20000 --reporter=nyan"
+    "test": "mocha --timeout=50000 --reporter=nyan"
   },
   "dependencies": {
     "b3b": "0.0.1",
