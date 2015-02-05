@@ -73,6 +73,7 @@ The following plugins are bundled with fontmin:
 * [glyph](#glyph) — Compress ttf by glyph.
 * [ttf2eot](#ttf2eot) — Convert ttf to eot.
 * [ttf2woff](#ttf2woff) — Convert ttf to woff.
+* [ttf2svg](#ttf2svg) — Convert ttf to svg.
 
 ### .glyph()
 
@@ -102,13 +103,26 @@ var fontmin = new Fontmin()
 
 ### .ttf2woff()
 
-Convert ttf to eot.
+Convert ttf to woff.
 
 ```js
 var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
     .use(Fontmin.ttf2woff({ 
+        clone: true
+    }));
+```
+
+### .ttf2svg()
+
+Convert ttf to svg.
+
+```js
+var Fontmin = require('fontmin');
+
+var fontmin = new Fontmin()
+    .use(Fontmin.ttf2svg({ 
         clone: true
     }));
 ```

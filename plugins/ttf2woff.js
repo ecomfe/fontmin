@@ -10,14 +10,19 @@ var through = require('through2');
 var ttf2woff = require('fonteditor-ttf').ttf2woff;
 var b2ab = require('b3b').b2ab;
 var ab2b = require('b3b').ab2b;
-var replaceExt= require('replace-ext');
-
+var replaceExt = require('replace-ext');
+var deflate = require('pako').deflate;
 
 function compileTtf(buffer, cb) {
     var output;
     try {
-        output = ab2b(ttf2woff(b2ab(buffer)));
-    } catch (ex) {
+        output = ab2b(
+            ttf2woff(
+                b2ab(buffer), {deflate: deflate}
+            )
+        );
+    }
+    catch (ex) {
         cb(ex);
     }
     cb(null, output);
@@ -70,7 +75,8 @@ module.exports = function (opts) {
         if (opts.clone) {
             if (file.isBuffer()) {
                 this.push(file.clone());
-            } else {
+            }
+            else {
                 var cntStream = file.contents;
                 file.contents = null;
                 var newFile = file.clone();
@@ -83,7 +89,7 @@ module.exports = function (opts) {
         // replace ext
         file.path = replaceExt(file.path, '.woff');
 
-        compileTtf(file.contents, function(err, buffer) {
+        compileTtf(file.contents, function (err, buffer) {
 
             if (err) {
                 cb(err);

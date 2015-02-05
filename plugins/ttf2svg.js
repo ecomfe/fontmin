@@ -1,5 +1,5 @@
 /**
- * @file ttf2eot
+ * @file ttf2svg
  * @author junmer
  */
 
@@ -7,16 +7,16 @@
 
 var isTtf = require('is-ttf');
 var through = require('through2');
-var ttf2eot = require('fonteditor-ttf').ttf2eot;
+var ttf2svg = require('fonteditor-ttf').ttf2svg;
 var b2ab = require('b3b').b2ab;
-var ab2b = require('b3b').ab2b;
 var replaceExt = require('replace-ext');
 
 
 function compileTtf(buffer, cb) {
     var output;
     try {
-        output = ab2b(ttf2eot(b2ab(buffer)));
+        // output = ttf2svg(b2ab(buffer));
+        output = new Buffer(ttf2svg(b2ab(buffer)));
     }
     catch (ex) {
         cb(ex);
@@ -36,7 +36,7 @@ function noopStream() {
 }
 
 /**
- * ttf2eot fontmin plugin
+ * ttf2svg fontmin plugin
  *
  * @param {Object} opts opts
  * @return {Object} stream.Transform instance
@@ -83,7 +83,7 @@ module.exports = function (opts) {
         }
 
         // replace ext
-        file.path = replaceExt(file.path, '.eot');
+        file.path = replaceExt(file.path, '.svg');
 
         compileTtf(file.contents, function (err, buffer) {
 

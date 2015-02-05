@@ -6,15 +6,17 @@
 var assert = require('assert');
 var fs = require('fs');
 var path = require('path');
+var clean = require('gulp-clean');
 var isEot = require('is-eot');
 var isWoff = require('is-woff');
+var isSvg = require('is-svg');
 var Fontmin = require('../index');
 
 var srcPath = path.resolve(__dirname, '../fonts/eduSong.ttf');
-var destPath = path.resolve(__dirname, '../fonts/dest/eduSong');
+var destPath = path.resolve(__dirname, '../fonts/dest');
+var destFile = destPath + '/eduSong';
 
 var text = '细雨带风湿透黄昏的街道 抹去雨水双眼无故地仰望';
-
 
 function getFile(files, ext) {
     var re = new RegExp(ext + '$');
@@ -24,35 +26,49 @@ function getFile(files, ext) {
     return vf[0];
 }
 
-var fontmin = new Fontmin()
-    .src(srcPath)
-    .use(Fontmin.glyph({
-        text: text
-    }))
-    .use(Fontmin.ttf2eot({
-        clone: true
-    }))
-    .use(Fontmin.ttf2woff({
-        clone: true
-    }))
-    .dest(path.resolve(__dirname, '../fonts/dest/'));
 
 var outputFiles;
-var outputError;
 
 before(function(done) {
+
+    // clean
+    Fontmin()
+        .src(destPath)
+        .use(clean())
+        .run();
+
+    // minfy
+    var fontmin = new Fontmin()
+        .src(srcPath)
+        .use(Fontmin.glyph({
+            text: text
+        }))
+        .use(Fontmin.ttf2eot({
+            clone: true
+        }))
+        .use(Fontmin.ttf2woff({
+            clone: true
+        }))
+        .use(Fontmin.ttf2svg({
+            clone: true
+        }))
+        .dest(path.resolve(__dirname, '../fonts/dest/'));
+
+
     fontmin.run(function(err, files, stream) {
-        outputError = err;
+
+        if (err) {
+            console.log(err);
+            process.exit(-1);
+        }
+
         outputFiles = files;
         done();
     });
+
 });
 
 describe('ttf2eot plugin', function() {
-
-    it('should not has err', function() {
-        assert(!outputError);
-    });
 
     it('output buffer should be eot', function() {
         assert(isEot(getFile(outputFiles, 'eot').contents));
@@ -60,7 +76,7 @@ describe('ttf2eot plugin', function() {
 
     it('dest file should exist', function() {
         assert(
-            fs.existsSync(destPath + '.eot')
+            fs.existsSync(destFile + '.eot')
         );
     });
 
@@ -68,7 +84,7 @@ describe('ttf2eot plugin', function() {
         try {
             assert(
                 isEot(
-                    fs.readFileSync(destPath + '.eot')
+                    fs.readFileSync(destFile + '.eot')
                 )
             );
         } catch (ex) {
@@ -80,17 +96,13 @@ describe('ttf2eot plugin', function() {
 
 describe('ttf2woff plugin', function() {
 
-    it('should not has err', function() {
-        assert(!outputError);
-    });
-
     it('output buffer should be woff', function() {
         assert(isWoff(getFile(outputFiles, 'woff').contents));
     });
 
     it('dest file should exist woff', function() {
         assert(
-            fs.existsSync(destPath + '.woff')
+            fs.existsSync(destFile + '.woff')
         );
     });
 
@@ -98,7 +110,33 @@ describe('ttf2woff plugin', function() {
         try {
             assert(
                 isWoff(
-                    fs.readFileSync(destPath + '.woff')
+                    fs.readFileSync(destFile + '.woff')
+                )
+            );
+        } catch (ex) {
+            assert(false);
+        }
+    });
+
+});
+
+describe('ttf2svg plugin', function() {
+
+    it('output buffer should be svg', function() {
+        assert(isSvg(getFile(outputFiles, 'svg').contents));
+    });
+
+    it('dest file should exist svg', function() {
+        assert(
+            fs.existsSync(destFile + '.svg')
+        );
+    });
+
+    it('dest file should be svg', function() {
+        try {
+            assert(
+                isSvg(
+                    fs.readFileSync(destFile + '.svg')
                 )
             );
         } catch (ex) {

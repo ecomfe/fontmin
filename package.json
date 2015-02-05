@@ -12,7 +12,8 @@
     "eot",
     "svg",
     "ttf2eot",
-    "ttf2woff"
+    "ttf2woff",
+    "ttf2svg"
   ],
   "author": "junmer",
   "licenses": [
@@ -41,7 +42,9 @@
   "devDependencies": {
     "debug": "~2.0.0",
     "express": "^4.11.1",
+    "gulp-clean": "^0.3.1",
     "is-eot": "^1.0.0",
+    "is-svg": "^1.0.1",
     "is-woff": "^1.0.1",
     "jade": "~1.6.0",
     "mocha": "*"

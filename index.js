@@ -144,21 +144,11 @@ module.exports = Fontmin;
 [
     'glyph',
     'ttf2eot',
-    'ttf2woff'
-    // 'ttf2svg'
+    'ttf2woff',
+    'ttf2svg'
 ].forEach(function (plugin) {
     module.exports[plugin] = require('./plugins/' + plugin);
 });
-
-// export optional plugins
-//
-// [
-//     'glyph',
-// ].forEach(function (plugin) {
-//     module.exports[plugin] = optional('fontmin-' + plugin) || function () {
-//         return through.ctor({ objectMode: true });
-//     };
-// });
 
 
 // todo
