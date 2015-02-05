@@ -12,3 +12,6 @@ TODO
 - [ ] independent koa middleware
 - [ ] refactor plugin code 
 - [ ] font-face css generator
+- [ ] ttf2woff2
+- [ ] otf
+- [ ] app
