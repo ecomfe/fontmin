@@ -7,6 +7,7 @@ var assert = require('assert');
 var fs = require('fs');
 var path = require('path');
 var clean = require('gulp-clean');
+var isTtf = require('is-ttf');
 var isEot = require('is-eot');
 var isWoff = require('is-woff');
 var isSvg = require('is-svg');
@@ -26,9 +27,9 @@ function getFile(files, ext) {
     return vf[0];
 }
 
-
 var outputFiles;
 
+/* global before */
 before(function(done) {
 
     // clean
@@ -64,6 +65,37 @@ before(function(done) {
 
         outputFiles = files;
         done();
+    });
+
+});
+
+describe('glyph plugin', function() {
+
+    it('output buffer should be ttf', function() {
+        assert(isTtf(getFile(outputFiles, 'ttf').contents));
+    });
+
+    it('output should miner than input', function() {
+        var srcBuffer = fs.readFileSync(srcPath);
+        assert(srcBuffer.length > getFile(outputFiles, 'ttf').contents.length);
+    });
+
+    it('dest file should exist', function() {
+        assert(
+            fs.existsSync(destFile + '.ttf')
+        );
+    });
+
+    it('dest file should be ttf', function() {
+        try {
+            assert(
+                isTtf(
+                    fs.readFileSync(destFile + '.ttf')
+                )
+            );
+        } catch (ex) {
+            assert(false);
+        }
     });
 
 });
