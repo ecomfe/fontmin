@@ -1,5 +1,5 @@
 /**
- * @file  ttf2eot
+ * @file  ttf2xxx
  * @author junmer
  */
 
@@ -7,10 +7,12 @@ var assert = require('assert');
 var fs = require('fs');
 var path = require('path');
 var isEot = require('is-eot');
+var isWoff = require('is-woff');
 var Fontmin = require('../index');
 
 var srcPath = path.resolve(__dirname, '../fonts/eduSong.ttf');
-var destPath = path.resolve(__dirname, '../fonts/dest/eduSong.eot');
+var destPath = path.resolve(__dirname, '../fonts/dest/eduSong');
+
 var text = '细雨带风湿透黄昏的街道 抹去雨水双眼无故地仰望';
 
 
@@ -28,6 +30,9 @@ var fontmin = new Fontmin()
         text: text
     }))
     .use(Fontmin.ttf2eot({
+        clone: true
+    }))
+    .use(Fontmin.ttf2woff({
         clone: true
     }))
     .dest(path.resolve(__dirname, '../fonts/dest/'));
@@ -55,7 +60,7 @@ describe('ttf2eot plugin', function() {
 
     it('dest file should exist', function() {
         assert(
-            fs.existsSync(destPath)
+            fs.existsSync(destPath + '.eot')
         );
     });
 
@@ -63,11 +68,40 @@ describe('ttf2eot plugin', function() {
         try {
             assert(
                 isEot(
-                    fs.readFileSync(destPath)
+                    fs.readFileSync(destPath + '.eot')
                 )
             );
+        } catch (ex) {
+            assert(false);
         }
-        catch (ex) {
+    });
+
+});
+
+describe('ttf2woff plugin', function() {
+
+    it('should not has err', function() {
+        assert(!outputError);
+    });
+
+    it('output buffer should be woff', function() {
+        assert(isWoff(getFile(outputFiles, 'woff').contents));
+    });
+
+    it('dest file should exist woff', function() {
+        assert(
+            fs.existsSync(destPath + '.woff')
+        );
+    });
+
+    it('dest file should be woff', function() {
+        try {
+            assert(
+                isWoff(
+                    fs.readFileSync(destPath + '.woff')
+                )
+            );
+        } catch (ex) {
             assert(false);
         }
     });

@@ -1,5 +1,5 @@
 /**
- * @file ttf2eot
+ * @file ttf2woff
  * @author junmer
  */
 
@@ -7,7 +7,7 @@
 
 var isTtf = require('is-ttf');
 var through = require('through2');
-var ttf2eot = require('fonteditor-ttf').ttf2eot;
+var ttf2woff = require('fonteditor-ttf').ttf2woff;
 var b2ab = require('b3b').b2ab;
 var ab2b = require('b3b').ab2b;
 var replaceExt= require('replace-ext');
@@ -16,7 +16,7 @@ var replaceExt= require('replace-ext');
 function compileTtf(buffer, cb) {
     var output;
     try {
-        output = ab2b(ttf2eot(b2ab(buffer)));
+        output = ab2b(ttf2woff(b2ab(buffer)));
     } catch (ex) {
         cb(ex);
     }
@@ -35,7 +35,7 @@ function noopStream() {
 }
 
 /**
- * ttf2eot fontmin plugin
+ * ttf2woff fontmin plugin
  *
  * @param {Object} opts opts
  * @return {Object} stream.Transform instance
@@ -81,7 +81,7 @@ module.exports = function (opts) {
         }
 
         // replace ext
-        file.path = replaceExt(file.path, '.eot');
+        file.path = replaceExt(file.path, '.woff');
 
         compileTtf(file.contents, function(err, buffer) {
 
