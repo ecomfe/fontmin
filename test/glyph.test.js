@@ -14,6 +14,7 @@ var destPath = path.resolve(__dirname, '../fonts/dest/eduSong.ttf');
 var text = '细雨带风湿透黄昏的街道 抹去雨水双眼无故地仰望';
 // var text = '天地玄黄 宇宙洪荒';
 
+
 var fontmin = new Fontmin()
     .src(srcPath)
     .use(Fontmin.glyph({

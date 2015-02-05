@@ -3,6 +3,8 @@
  * @author junmer
  */
 
+/* eslint-env node */
+
 var _ = require('lodash');
 var isTtf = require('is-ttf');
 var through = require('through2');
@@ -11,6 +13,7 @@ var TTFReader = require('fonteditor-ttf').TTFReader;
 var TTFWriter = require('fonteditor-ttf').TTFWriter;
 var b2ab = require('b3b').b2ab;
 var ab2b = require('b3b').ab2b;
+
 
 /**
  * basic chars
@@ -67,7 +70,7 @@ function getStringGlyfs(ttf, str) {
     var glyphs = [];
 
     var indexList = ttf.findGlyf({
-        unicode: str.split('').map(function(s) {
+        unicode: str.split('').map(function (s) {
             return s.charCodeAt(0);
         })
     });
@@ -82,9 +85,8 @@ function getStringGlyfs(ttf, str) {
 }
 
 
-
 /**
- * minifyTtf
+ * minifyTtfObject
  *
  * @param  {Object} ttfObject    ttfObject
  * @param  {string} text         text
@@ -92,7 +94,7 @@ function getStringGlyfs(ttf, str) {
  * @param  {Function=} plugin       use plugin
  * @return {Object}              ttfObject
  */
-function minifyTtf(ttfObject, text, useBasicText, plugin) {
+function minifyTtfObject(ttfObject, text, useBasicText, plugin) {
 
     // check null
     if (!text) {
@@ -125,20 +127,46 @@ function minifyTtf(ttfObject, text, useBasicText, plugin) {
 }
 
 /**
+ * minifyTtfBuffer
+ *
+ * @param  {string} contents         contents
+ * @param  {Object} opts         opts
+ * @return {Buffer}              buffer
+ */
+function minifyTtfBuffer(contents, opts) {
+
+    var ttfobj = new TTFReader().read(b2ab(contents));
+
+    var ttfBuffer = new TTFWriter().write(
+        minifyTtfObject(
+            ttfobj,
+            opts.text,
+            opts.useBasicText,
+            opts.use
+        )
+    );
+
+    return ab2b(ttfBuffer);
+
+}
+
+
+/**
  * glyph fontmin plugin
  *
- * @param {Object} opts
+ * @param {Object} opts opts
  * @param {string=} opts.text text
  * @param {boolean=} opts.useBasicText useBasicText
  * @param {Function=} opts.use plugin
+ * @return {Object} stream.Transform instance
  * @api public
  */
-module.exports = function(opts) {
+module.exports = function (opts) {
     opts = opts || {};
 
     return through.ctor({
         objectMode: true
-    }, function(file, enc, cb) {
+    }, function (file, enc, cb) {
 
         // check null
         if (file.isNull()) {
@@ -149,7 +177,6 @@ module.exports = function(opts) {
         // check stream
         if (file.isStream()) {
             cb(new Error('Streaming is not supported'));
-            return;
         }
 
         // check ttf
@@ -158,23 +185,10 @@ module.exports = function(opts) {
             return;
         }
 
-        // get ttf data from buffer
-        var ttfObject = new TTFReader().read(b2ab(file.contents));
-
         try {
 
-            // minify and toArrayBuffer
-            var ttfBuffer = new TTFWriter().write(
-                minifyTtf(
-                    ttfObject,
-                    opts.text,
-                    opts.useBasicText,
-                    opts.use
-                )
-            );
-
             // write file buffer
-            file.contents = ab2b(ttfBuffer);
+            file.contents = minifyTtfBuffer(file.contents, opts);
 
             cb(null, file);
 
