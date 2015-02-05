@@ -15,7 +15,6 @@ var replaceExt = require('replace-ext');
 function compileTtf(buffer, cb) {
     var output;
     try {
-        // output = ttf2svg(b2ab(buffer));
         output = new Buffer(ttf2svg(b2ab(buffer)));
     }
     catch (ex) {
