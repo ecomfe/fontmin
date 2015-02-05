@@ -142,8 +142,8 @@ module.exports = Fontmin;
 // export pkged plugins
 
 [
-    'glyph'
-    // 'ttf2eot',
+    'glyph',
+    'ttf2eot',
     // 'ttf2woff',
     // 'ttf2svg'
 ].forEach(function (plugin) {
@@ -153,7 +153,7 @@ module.exports = Fontmin;
 // export optional plugins
 //
 // [
-//     'svgo',
+//     'glyph',
 // ].forEach(function (plugin) {
 //     module.exports[plugin] = optional('fontmin-' + plugin) || function () {
 //         return through.ctor({ objectMode: true });
