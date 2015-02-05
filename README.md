@@ -71,6 +71,8 @@ stream in `stream`
 The following plugins are bundled with fontmin:
 
 * [glyph](#glyph) — Compress ttf by glyph.
+* [ttf2eot](#ttf2eot) — Convert ttf to eot.
+* [ttf2woff](#ttf2woff) — Convert ttf to woff.
 
 ### .glyph()
 
@@ -85,7 +87,33 @@ var fontmin = new Fontmin()
     }));
 ```
 
-## thx
+### .ttf2eot()
+
+Convert ttf to eot.
+
+```js
+var Fontmin = require('fontmin');
+
+var fontmin = new Fontmin()
+    .use(Fontmin.ttf2eot({ 
+        clone: true
+    }));
+```
+
+### .ttf2woff()
+
+Convert ttf to eot.
+
+```js
+var Fontmin = require('fontmin');
+
+var fontmin = new Fontmin()
+    .use(Fontmin.ttf2woff({ 
+        clone: true
+    }));
+```
+
+## Thx
 
 - [fonteditor-ttf](https://github.com/keke000/fonteditor-ttf)
 - [imagemin](https://github.com/imagemin/imagemin)

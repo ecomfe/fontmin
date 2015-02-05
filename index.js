@@ -144,7 +144,7 @@ module.exports = Fontmin;
 [
     'glyph',
     'ttf2eot',
-    // 'ttf2woff',
+    'ttf2woff'
     // 'ttf2svg'
 ].forEach(function (plugin) {
     module.exports[plugin] = require('./plugins/' + plugin);
