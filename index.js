@@ -145,12 +145,13 @@ module.exports = Fontmin;
     'glyph',
     'ttf2eot',
     'ttf2woff',
-    'ttf2svg'
+    'ttf2svg',
+    'css'   // temp
 ].forEach(function (plugin) {
     module.exports[plugin] = require('./plugins/' + plugin);
 });
 
 
-// todo
-// move to independent project
-module.exports.connect = exports.middleware = require('./lib/middleware');
+// exports util, mime
+module.exports.util = exports.util = require('./lib/util');
+module.exports.mime = exports.mime = require('./lib/mime-types');

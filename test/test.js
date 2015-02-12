@@ -1,9 +1,11 @@
 /**
- * @file  ttf2xxx
+ * @file  fontmin test
  * @author junmer
  */
 
-var assert = require('assert');
+var assert = require('chai').assert;
+var expect = require('chai').expect;
+
 var fs = require('fs');
 var path = require('path');
 var clean = require('gulp-clean');
@@ -67,6 +69,19 @@ before(function(done) {
         done();
     });
 
+});
+
+describe('Fontmin util', function() {
+
+    it('getFontFolder should be string', function() {
+        expect(Fontmin.util.getFontFolder()).to.be.a('string');
+    });
+
+    it('getFonts should be array', function() {
+
+        console.log(Fontmin.util.getFonts());
+        expect(Fontmin.util.getFonts()).to.be.a('array');
+    });
 });
 
 describe('glyph plugin', function() {
