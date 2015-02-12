@@ -1,6 +1,6 @@
 {
   "name": "fontmin",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "Minify font seamlessly, get required glyph from ttf, convert to ttf, eot, woff, svg",
   "main": "index.js",
   "keywords": [
@@ -8,6 +8,7 @@
     "font-face",
     "compress",
     "minify",
+    "font-cli",
     "ttf",
     "woff",
     "eot",
@@ -34,8 +35,10 @@
     "b3b": "0.0.1",
     "concat-stream": "^1.4.6",
     "fonteditor-ttf": "0.0.4",
+    "get-stdin": "^4.0.1",
     "is-ttf": "^0.2.0",
     "lodash": "^2.4.1",
+    "meow": "^3.0.0",
     "pako": "^0.2.5",
     "replace-ext": "0.0.1",
     "stream-combiner": "^0.2.1",
@@ -45,12 +48,10 @@
   },
   "devDependencies": {
     "chai": "^2.0.0",
-    "get-stdin": "^4.0.1",
     "gulp-clean": "^0.3.1",
     "is-eot": "^1.0.0",
     "is-svg": "^1.0.1",
     "is-woff": "^1.0.1",
-    "meow": "^3.0.0",
     "mocha": "*"
   }
 }
