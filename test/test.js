@@ -23,7 +23,7 @@ var text = '细雨带风湿透黄昏的街道 抹去雨水双眼无故地仰望'
 
 function getFile(files, ext) {
     var re = new RegExp(ext + '$');
-    var vf = files.filter(function(file) {
+    var vf = files.filter(function (file) {
         return re.test(file.path);
     });
     return vf[0];
@@ -31,8 +31,7 @@ function getFile(files, ext) {
 
 var outputFiles;
 
-/* global before */
-before(function(done) {
+before(function (done) {
 
     // clean
     Fontmin()
@@ -71,122 +70,125 @@ before(function(done) {
 
 });
 
-describe('Fontmin util', function() {
+describe('Fontmin util', function () {
 
-    it('getFontFolder should be string', function() {
+    it('getFontFolder should be string', function () {
         expect(Fontmin.util.getFontFolder()).to.be.a('string');
     });
 
-    it('getFonts should be array', function() {
-
-        console.log(Fontmin.util.getFonts());
+    it('getFonts should be array', function () {
         expect(Fontmin.util.getFonts()).to.be.a('array');
     });
+
 });
 
-describe('glyph plugin', function() {
+describe('glyph plugin', function () {
 
-    it('output buffer should be ttf', function() {
+    it('output buffer should be ttf', function () {
         assert(isTtf(getFile(outputFiles, 'ttf').contents));
     });
 
-    it('output should miner than input', function() {
+    it('output should miner than input', function () {
         var srcBuffer = fs.readFileSync(srcPath);
         assert(srcBuffer.length > getFile(outputFiles, 'ttf').contents.length);
     });
 
-    it('dest file should exist', function() {
+    it('dest file should exist', function () {
         assert(
             fs.existsSync(destFile + '.ttf')
         );
     });
 
-    it('dest file should be ttf', function() {
+    it('dest file should be ttf', function () {
         try {
             assert(
                 isTtf(
                     fs.readFileSync(destFile + '.ttf')
                 )
             );
-        } catch (ex) {
+        }
+        catch (ex) {
             assert(false);
         }
     });
 
 });
 
-describe('ttf2eot plugin', function() {
+describe('ttf2eot plugin', function () {
 
-    it('output buffer should be eot', function() {
+    it('output buffer should be eot', function () {
         assert(isEot(getFile(outputFiles, 'eot').contents));
     });
 
-    it('dest file should exist', function() {
+    it('dest file should exist', function () {
         assert(
             fs.existsSync(destFile + '.eot')
         );
     });
 
-    it('dest file should be eot', function() {
+    it('dest file should be eot', function () {
         try {
             assert(
                 isEot(
                     fs.readFileSync(destFile + '.eot')
                 )
             );
-        } catch (ex) {
+        }
+        catch (ex) {
             assert(false);
         }
     });
 
 });
 
-describe('ttf2woff plugin', function() {
+describe('ttf2woff plugin', function () {
 
-    it('output buffer should be woff', function() {
+    it('output buffer should be woff', function () {
         assert(isWoff(getFile(outputFiles, 'woff').contents));
     });
 
-    it('dest file should exist woff', function() {
+    it('dest file should exist woff', function () {
         assert(
             fs.existsSync(destFile + '.woff')
         );
     });
 
-    it('dest file should be woff', function() {
+    it('dest file should be woff', function () {
         try {
             assert(
                 isWoff(
                     fs.readFileSync(destFile + '.woff')
                 )
             );
-        } catch (ex) {
+        }
+        catch (ex) {
             assert(false);
         }
     });
 
 });
 
-describe('ttf2svg plugin', function() {
+describe('ttf2svg plugin', function () {
 
-    it('output buffer should be svg', function() {
+    it('output buffer should be svg', function () {
         assert(isSvg(getFile(outputFiles, 'svg').contents));
     });
 
-    it('dest file should exist svg', function() {
+    it('dest file should exist svg', function () {
         assert(
             fs.existsSync(destFile + '.svg')
         );
     });
 
-    it('dest file should be svg', function() {
+    it('dest file should be svg', function () {
         try {
             assert(
                 isSvg(
                     fs.readFileSync(destFile + '.svg')
                 )
             );
-        } catch (ex) {
+        }
+        catch (ex) {
             assert(false);
         }
     });

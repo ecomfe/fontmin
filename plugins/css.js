@@ -85,7 +85,7 @@ module.exports = function (opts) {
         }
 
         file.path = replaceExt(file.path, '.css');
-        var fontFile = path.basename(file.path, '.css')
+        var fontFile = path.basename(file.path, '.css');
         var fontInfo = {
             fontFamily: opts['font-family'] || fontFile,
             fontUri: fontFile
