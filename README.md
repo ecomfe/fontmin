@@ -168,6 +168,7 @@ $ fontmin --help
     -t, --text                          require glyphs by text
     -b, --basic-text                    require glyphs with base chars
     -f, --font-family                   font-family for @font-face CSS
+    -T, --show-time                     show time fontmin cost
 ```
 
 ## Thx

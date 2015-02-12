@@ -24,18 +24,21 @@ var cli = meow({
         'Options',
         '  -t, --text                          require glyphs by text',
         '  -b, --basic-text                    require glyphs with base chars',
-        '  -f, --font-family                   font-family for @font-face CSS'
+        '  -f, --font-family                   font-family for @font-face CSS',
+        '  -T, --show-time                     show time fontmin cost'
     ].join('\n')
 }, {
     boolean: [
-        'basic-text'
+        'basic-text',
+        'show-time'
     ],
     string: [
         'text'
     ],
     alias: {
         t: 'text',
-        b: 'basic-text'
+        b: 'basic-text',
+        T: 'show-time'
     }
 });
 
@@ -53,6 +56,9 @@ function isFile(path) {
 
 
 function run(src, dest) {
+
+    cli.flags['showTime'] && console.time('fontmin use');
+
     var fontmin = new Fontmin()
         .src(src)
         .use(Fontmin.glyph(cli.flags))
@@ -76,6 +82,8 @@ function run(src, dest) {
                 process.stdout.write(file.contents);
             });
         }
+
+        cli.flags['showTime'] && console.timeEnd('fontmin use');
     });
 }
 
