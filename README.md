@@ -29,6 +29,17 @@ fontmin.run(function (err, files) {
 });
 ```
 
+You can use [gulp-rename](https://github.com/hparra/gulp-rename) to rename your files:
+
+```js
+var Fontmin = require('Fontmin');
+var rename = require('gulp-rename');
+
+var fontmin = new Fontmin()
+    .src('fonts/big.ttf')
+    .use(rename('small.ttf'));
+```
+
 ## API
 
 ### new Fontmin()
@@ -118,13 +129,45 @@ var fontmin = new Fontmin()
 
 Convert ttf to svg.
 
+you can use [imagemin-svgo](https://github.com/imagemin/imagemin-svgo) to compress svg:
+
 ```js
 var Fontmin = require('fontmin');
+var svgo = require('imagemin-svgo');
 
 var fontmin = new Fontmin()
     .use(Fontmin.ttf2svg({ 
         clone: true
     }));
+    .use(svgo());
+
+```
+
+## CLI
+
+```bash
+$ npm install -g fontmin
+```
+
+```sh
+$ fontmin --help
+
+  Usage
+    $ fontmin <file> <directory>
+    $ fontmin <directory> <output>
+    $ fontmin <file> > <output>
+    $ cat <file> | fontmin > <output>
+
+  Example
+    $ fontmin fonts/* build
+    $ fontmin fonts build
+    $ fontmin foo.ttf > foo-optimized.ttf
+    $ cat foo.ttf | fontmin > foo-optimized.ttf
+
+  Options
+    -t, --text                          require glyphs by text
+    -b, --basic-text                    require glyphs with base chars
+    -f, --font-family                   font-family for @font-face CSS
 ```
 
 ## Thx
