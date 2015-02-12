@@ -141,7 +141,7 @@ function minifyTtfBuffer(contents, opts) {
         minifyTtfObject(
             ttfobj,
             opts.text,
-            opts.useBasicText,
+            opts.basicText,
             opts.use
         )
     );
@@ -156,7 +156,7 @@ function minifyTtfBuffer(contents, opts) {
  *
  * @param {Object} opts opts
  * @param {string=} opts.text text
- * @param {boolean=} opts.useBasicText useBasicText
+ * @param {boolean=} opts.basicText useBasicText
  * @param {Function=} opts.use plugin
  * @return {Object} stream.Transform instance
  * @api public
