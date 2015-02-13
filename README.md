@@ -191,6 +191,14 @@ $ npm install -g html-to-text
 $ text=`curl www.baidu.com | html-to-text` && fontmin -t $text font.ttf
 ```
 
+what is more, to generate font for `SPA` running JS template or websites running on PHP, ASP, Rails and more.
+you can use [phantom-fetch-cli](https://www.npmjs.com/package/phantom-fetch-cli) :
+
+```sh
+$ npm install -g phantom-fetch-cli
+$ text=`phantom-fetch http://www.chinaw3c.org` && fontmin -t $text font.ttf
+```
+
 ## Thx
 
 - [fonteditor-ttf](https://github.com/keke000/fonteditor-ttf)
@@ -212,5 +220,6 @@ MIT © [fontmin](https://raw.githubusercontent.com/junmer/fontmin/master/LICENSE
 
 [dep-url]: https://david-dm.org/junmer/fontmin
 [dep-image]: http://img.shields.io/david/junmer/fontmin.svg
+
 [font-image]:https://img.shields.io/badge/font-eonway-blue.svg
 [font-url]: http://dongxi.douban.com/show/1101577/
