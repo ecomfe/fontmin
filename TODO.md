@@ -16,3 +16,4 @@ TODO
 - [ ] otf
 - [ ] app
 - [ ] ttfmin, only analysis cmap table, get glyph by buffer offset
+- [x] get font text from web page - cli
