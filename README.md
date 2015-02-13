@@ -1,8 +1,15 @@
-# fontmin  [![Build Status](https://travis-ci.org/junmer/fontmin.svg?branch=master)](https://travis-ci.org/junmer/fontmin)
 
+<p align="center">
+    <img height="128" width="128" src="https://raw.githubusercontent.com/junmer/fontmin/master/fontmin.png">
+</p>
 
-> Minify font seamlessly
+# fontmin
+**Minify font seamlessly**
 
+[![NPM version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Downloads][downloads-image]][npm-url]
+[![Dependencies][dep-image]][dep-url]
 
 ## Install
 
@@ -188,3 +195,15 @@ $ text=`curl www.baidu.com | html-to-text` && fontmin -t $text font.ttf
 - [fonteditor-ttf](https://github.com/keke000/fonteditor-ttf)
 - [imagemin](https://github.com/imagemin/imagemin)
 - [free chinese font](https://github.com/zenozeng/Free-Chinese-Fonts)
+
+
+
+[downloads-image]: http://img.shields.io/npm/dm/fontmin.svg
+[npm-url]: https://npmjs.org/package/fontmin
+[npm-image]: http://img.shields.io/npm/v/fontmin.svg
+
+[travis-url]: https://travis-ci.org/junmer/fontmin
+[travis-image]: http://img.shields.io/travis/junmer/fontmin.svg
+
+[dep-url]: https://david-dm.org/junmer/fontmin
+[dep-image]: http://img.shields.io/david/junmer/fontmin.svg
