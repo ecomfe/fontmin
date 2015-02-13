@@ -171,6 +171,18 @@ $ fontmin --help
     -T, --show-time                     show time fontmin cost
 ```
 
+you can use `curl` to generate font for a web page:
+
+```sh
+$ text=`curl www.baidu.com` && fontmin -t $text font.ttf
+```
+or you can use [html-to-text](https://www.npmjs.com/package/html-to-text) to make it smaller:
+
+```sh
+$ npm install -g html-to-text
+$ text=`curl www.baidu.com | html-to-text` && fontmin -t $text font.ttf
+```
+
 ## Thx
 
 - [fonteditor-ttf](https://github.com/keke000/fonteditor-ttf)
