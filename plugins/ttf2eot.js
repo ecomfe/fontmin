@@ -66,20 +66,9 @@ module.exports = function (opts) {
             return;
         }
 
-        // Fix for the vinyl clone method...
-        // https://github.com/wearefractal/vinyl/pull/9
+        // clone
         if (opts.clone) {
-            if (file.isBuffer()) {
-                this.push(file.clone());
-            }
-            else {
-                var cntStream = file.contents;
-                file.contents = null;
-                var newFile = file.clone();
-                file.contents = cntStream.pipe(noopStream);
-                newFile.contents = cntStream.pipe(noopStream);
-                this.push(newFile);
-            }
+            this.push(file.clone());
         }
 
         // replace ext

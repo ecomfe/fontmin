@@ -8,10 +8,10 @@
 var combine = require('stream-combiner');
 var concat = require('concat-stream');
 var EventEmitter = require('events').EventEmitter;
-var File = require('vinyl');
-var fs = require('vinyl-fs');
 var inherits = require('util').inherits;
 var through = require('through2');
+var bufferToVinyl = require('buffer-to-vinyl');
+var vfs = require('vinyl-fs');
 
 /**
  * Initialize Fontmin
@@ -88,65 +88,66 @@ Fontmin.prototype.use = function (plugin) {
 Fontmin.prototype.run = function (cb) {
     cb = cb || function () {};
 
-    if (!this.streams.length) {
-        this.use(Fontmin.glyph());
-    }
+    var stream = this.createStream();
 
-    this.streams.unshift(this.read(this.src()));
+    stream.on('error', cb);
+    stream.pipe(concat(cb.bind(null, null)));
 
-    if (this.dest()) {
-        this.streams.push(fs.dest(this.dest()));
-    }
-
-    var pipe = combine(this.streams);
-    var end = concat(function (files) {
-        cb(null, files, pipe);
-    });
-
-    pipe.on('data', this.emit.bind(this, 'data'));
-    pipe.on('end', this.emit.bind(this, 'end'));
-    pipe.on('error', cb);
-    pipe.pipe(end);
-
-    return pipe;
+    return stream;
 };
 
 /**
- * Read the source file
+ * Create stream
  *
- * @param {Array|Buffer|String} src files
  * @return {Stream} file stream
  * @api private
  */
-Fontmin.prototype.read = function (src) {
-    if (Buffer.isBuffer(src)) {
-        var stream = through.obj();
+Fontmin.prototype.createStream = function () {
+    this.streams.unshift(this.getFiles());
 
-        stream.end(new File({
-            contents: src
-        }));
-
-        return stream;
+    if (this.streams.length === 1) {
+        this.use(Fontmin.ttf2eot());
+        this.use(Fontmin.ttf2woff());
+        this.use(Fontmin.ttf2svg());
+        this.use(Fontmin.css());
     }
 
-    return fs.src(src);
+    if (this.dest()) {
+        this.streams.push(vfs.dest(this.dest()));
+    }
+
+    return combine(this.streams);
+};
+
+
+
+/**
+ * Get files
+ *
+ * @return {Stream} file stream
+ * @api private
+ */
+Fontmin.prototype.getFiles = function () {
+    if (Buffer.isBuffer(this.src())) {
+        return bufferToVinyl.stream(this.src());
+    }
+
+    return vfs.src(this.src());
 };
 
 
 /**
  * Module exports
  */
-
 module.exports = Fontmin;
 
 // export pkged plugins
-
 [
     'glyph',
     'ttf2eot',
     'ttf2woff',
     'ttf2svg',
-    'css'   // temp
+    'css'
 ].forEach(function (plugin) {
     module.exports[plugin] = require('./plugins/' + plugin);
 });

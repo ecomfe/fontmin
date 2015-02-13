@@ -70,19 +70,9 @@ module.exports = function (opts) {
             return;
         }
 
-        // Fix for the vinyl clone method...
-        // https://github.com/wearefractal/vinyl/pull/9
-        if (file.isBuffer()) {
-            this.push(file.clone());
-        }
-        else {
-            var cntStream = file.contents;
-            file.contents = null;
-            var newFile = file.clone();
-            file.contents = cntStream.pipe(noopStream);
-            newFile.contents = cntStream.pipe(noopStream);
-            this.push(newFile);
-        }
+        // clone
+        this.push(file.clone());
+
 
         file.path = replaceExt(file.path, '.css');
         var fontFile = path.basename(file.path, '.css');
