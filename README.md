@@ -10,6 +10,7 @@
 [![Build Status][travis-image]][travis-url]
 [![Downloads][downloads-image]][npm-url]
 [![Dependencies][dep-image]][dep-url]
+[![Font support][font-image]][font-url]
 
 ## Install
 
@@ -195,7 +196,11 @@ $ text=`curl www.baidu.com | html-to-text` && fontmin -t $text font.ttf
 - [fonteditor-ttf](https://github.com/keke000/fonteditor-ttf)
 - [imagemin](https://github.com/imagemin/imagemin)
 - [free chinese font](https://github.com/zenozeng/Free-Chinese-Fonts)
+- [浙江民间书刻体][font-url]
 
+## License
+
+MIT © [fontmin](https://raw.githubusercontent.com/junmer/fontmin/master/LICENSE)
 
 
 [downloads-image]: http://img.shields.io/npm/dm/fontmin.svg
@@ -207,3 +212,5 @@ $ text=`curl www.baidu.com | html-to-text` && fontmin -t $text font.ttf
 
 [dep-url]: https://david-dm.org/junmer/fontmin
 [dep-image]: http://img.shields.io/david/junmer/fontmin.svg
+[font-image]:https://img.shields.io/badge/font-eonway-blue.svg
+[font-url]: http://dongxi.douban.com/show/1101577/
