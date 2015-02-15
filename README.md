@@ -179,7 +179,7 @@ $ fontmin --help
     -T, --show-time                     show time fontmin cost
 ```
 
-you can use `curl` to generate font for a web page:
+you can use `curl` to generate font for websites running on PHP, ASP, Rails and more:
 
 ```sh
 $ text=`curl www.baidu.com` && fontmin -t $text font.ttf
@@ -191,17 +191,21 @@ $ npm install -g html-to-text
 $ text=`curl www.baidu.com | html-to-text` && fontmin -t $text font.ttf
 ```
 
-what is more, to generate font for `SPA` running JS template or websites running on PHP, ASP, Rails and more.
-you can use [phantom-fetch-cli](https://www.npmjs.com/package/phantom-fetch-cli) :
+what is more, you can use [phantom-fetch-cli](https://www.npmjs.com/package/phantom-fetch-cli) to generate font for `SPA` running JS template:
 
 ```sh
 $ npm install -g phantom-fetch-cli
 $ text=`phantom-fetch http://www.chinaw3c.org` && fontmin -t $text font.ttf
 ```
 
-## Thx
+## Related
 
-- [fonteditor-ttf](https://github.com/keke000/fonteditor-ttf)
+- [fontmin-app](https://github.com/junmer/fontmin-app)
+- [fontmin-otf2ttf](https://github.com/junmer/fontmin-otf2ttf)
+- [fonteditor](https://github.com/ecomfe/fonteditor)
+
+## Thanks
+
 - [imagemin](https://github.com/imagemin/imagemin)
 - [free chinese font](https://github.com/zenozeng/Free-Chinese-Fonts)
 - [浙江民间书刻体][font-url]
