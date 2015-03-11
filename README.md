@@ -1,6 +1,6 @@
 
 <p align="center">
-    <img height="128" width="128" src="https://raw.githubusercontent.com/junmer/fontmin/master/fontmin.png">
+    <img height="128" width="128" src="https://raw.githubusercontent.com/ecomfe/fontmin/master/fontmin.png">
 </p>
 
 # fontmin
@@ -200,30 +200,30 @@ $ text=`phantom-fetch http://www.chinaw3c.org` && fontmin -t $text font.ttf
 
 ## Related
 
-- [fontmin-app](https://github.com/junmer/fontmin-app)
+- [fontmin-app](https://github.com/ecomfe/fontmin-app)
 - [fontmin-otf2ttf](https://github.com/junmer/fontmin-otf2ttf)
 - [fonteditor](https://github.com/ecomfe/fonteditor)
 
 ## Thanks
 
 - [imagemin](https://github.com/imagemin/imagemin)
-- [free chinese font](https://github.com/zenozeng/Free-Chinese-Fonts)
+- [free chinese font](http://zenozeng.github.io/Free-Chinese-Fonts/)
 - [浙江民间书刻体][font-url]
 
 ## License
 
-MIT © [fontmin](https://raw.githubusercontent.com/junmer/fontmin/master/LICENSE)
+MIT © [fontmin](https://raw.githubusercontent.com/ecomfe/fontmin/master/LICENSE)
 
 
 [downloads-image]: http://img.shields.io/npm/dm/fontmin.svg
 [npm-url]: https://npmjs.org/package/fontmin
 [npm-image]: http://img.shields.io/npm/v/fontmin.svg
 
-[travis-url]: https://travis-ci.org/junmer/fontmin
-[travis-image]: http://img.shields.io/travis/junmer/fontmin.svg
+[travis-url]: https://travis-ci.org/ecomfe/fontmin
+[travis-image]: http://img.shields.io/travis/ecomfe/fontmin.svg
 
-[dep-url]: https://david-dm.org/junmer/fontmin
-[dep-image]: http://img.shields.io/david/junmer/fontmin.svg
+[dep-url]: https://david-dm.org/ecomfe/fontmin
+[dep-image]: http://img.shields.io/david/ecomfe/fontmin.svg
 
 [font-image]:https://img.shields.io/badge/font-eonway-blue.svg
-[font-url]: http://dongxi.douban.com/show/1101577/
+[font-url]: http://item.taobao.com/item.htm?sche=fontmin&id=35030917699

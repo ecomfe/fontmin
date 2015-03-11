@@ -21,10 +21,10 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://raw.githubusercontent.com/junmer/fontmin/master/LICENSE"
+      "url": "https://raw.githubusercontent.com/ecomfe/fontmin/master/LICENSE"
     }
   ],
-  "repository": "https://github.com/junmer/fontmin.git",
+  "repository": "ecomfe/fontmin",
   "bin": {
     "fontmin": "cli.js"
   },
