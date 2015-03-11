@@ -1,4 +1,12 @@
 #!/usr/bin/env node
+
+/**
+ * @file cli
+ * @author junmer
+ */
+
+/* eslint-env node */
+
 'use strict';
 
 var fs = require('fs');
@@ -28,7 +36,7 @@ var cli = meow({
         '  -T, --show-time                     show time fontmin cost'
     ].join('\n')
 }, {
-    boolean: [
+    'boolean': [
         'basic-text',
         'show-time'
     ],
@@ -43,13 +51,14 @@ var cli = meow({
 });
 
 function isFile(path) {
-    if (/^[^\s]+\.\w*$/g.test(path)) {
+    if (/^[^\s]+\.\w*$/.test(path)) {
         return true;
     }
 
     try {
         return fs.statSync(path).isFile();
-    } catch (err) {
+    }
+    catch (err) {
         return false;
     }
 }
@@ -57,7 +66,7 @@ function isFile(path) {
 
 function run(src, dest) {
 
-    cli.flags['showTime'] && console.time('fontmin use');
+    cli.flags.showTime && console.time('fontmin use');
 
     var fontmin = new Fontmin()
         .src(src)
@@ -83,7 +92,7 @@ function run(src, dest) {
             });
         }
 
-        cli.flags['showTime'] && console.timeEnd('fontmin use');
+        cli.flags.showTime && console.timeEnd('fontmin use');
     });
 }
 
@@ -118,6 +127,7 @@ if (process.stdin.isTTY) {
     });
 
     run(src, dest);
-} else {
+}
+else {
     stdin.buffer(run);
 }
