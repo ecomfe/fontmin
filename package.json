@@ -1,6 +1,6 @@
 {
   "name": "fontmin",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "description": "Minify font seamlessly, get required glyph from ttf, convert to ttf, eot, woff, svg",
   "main": "index.js",
   "keywords": [
