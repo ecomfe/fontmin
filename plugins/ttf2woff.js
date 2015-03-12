@@ -17,8 +17,9 @@ function compileTtf(buffer, cb) {
     var output;
     try {
         output = ab2b(
+            // fix: have problem in some android device, close deflate
             ttf2woff(
-                b2ab(buffer), {deflate: deflate}
+                b2ab(buffer)
             )
         );
     }
