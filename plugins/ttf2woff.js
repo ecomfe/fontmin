@@ -13,13 +13,21 @@ var ab2b = require('b3b').ab2b;
 var replaceExt = require('replace-ext');
 var deflate = require('pako').deflate;
 
-function compileTtf(buffer, cb) {
+function compileTtf(buffer, options, cb) {
     var output;
     try {
+
+        var ttf2woffOpts = {};
+
+        if (options.deflate) {
+            ttf2woffOpts.deflate = deflate;
+        }
+
         output = ab2b(
             // fix: have problem in some android device, close deflate
             ttf2woff(
-                b2ab(buffer)
+                b2ab(buffer),
+                ttf2woffOpts
             )
         );
     }
@@ -27,17 +35,6 @@ function compileTtf(buffer, cb) {
         cb(ex);
     }
     cb(null, output);
-}
-
-/**
- * empty Transform
- *
- * @return {Object} stream.Transform instance
- */
-function noopStream() {
-    return through.ctor({
-        objectMode: true
-    });
 }
 
 /**
@@ -79,7 +76,7 @@ module.exports = function (opts) {
         // replace ext
         file.path = replaceExt(file.path, '.woff');
 
-        compileTtf(file.contents, function (err, buffer) {
+        compileTtf(file.contents, opts, function (err, buffer) {
 
             if (err) {
                 cb(err);

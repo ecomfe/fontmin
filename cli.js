@@ -32,13 +32,15 @@ var cli = meow({
         'Options',
         '  -t, --text                          require glyphs by text',
         '  -b, --basic-text                    require glyphs with base chars',
+        '  -d, --deflate-woff                  deflate woff',
         '  -f, --font-family                   font-family for @font-face CSS',
         '  -T, --show-time                     show time fontmin cost'
     ].join('\n')
 }, {
     'boolean': [
         'basic-text',
-        'show-time'
+        'show-time',
+        'deflate-woff'
     ],
     string: [
         'text'
@@ -46,6 +48,7 @@ var cli = meow({
     alias: {
         t: 'text',
         b: 'basic-text',
+        d: 'deflate-woff',
         T: 'show-time'
     }
 });

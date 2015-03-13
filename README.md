@@ -129,7 +129,8 @@ var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
     .use(Fontmin.ttf2woff({ 
-        clone: true
+        clone: true,
+        deflate: true          // deflate woff. default = false
     }));
 ```
 
@@ -175,6 +176,7 @@ $ fontmin --help
   Options
     -t, --text                          require glyphs by text
     -b, --basic-text                    require glyphs with base chars
+    -d, --deflate-woff                  deflate woff
     -f, --font-family                   font-family for @font-face CSS
     -T, --show-time                     show time fontmin cost
 ```
