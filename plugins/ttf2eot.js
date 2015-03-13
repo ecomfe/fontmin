@@ -24,16 +24,6 @@ function compileTtf(buffer, cb) {
     cb(null, output);
 }
 
-/**
- * empty Transform
- *
- * @return {Object} stream.Transform instance
- */
-function noopStream() {
-    return through.ctor({
-        objectMode: true
-    });
-}
 
 /**
  * ttf2eot fontmin plugin
