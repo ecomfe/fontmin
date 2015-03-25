@@ -14,6 +14,7 @@ var meow = require('meow');
 var path = require('path');
 var stdin = require('get-stdin');
 var Fontmin = require('./');
+var _ = require('lodash');
 
 var cli = meow({
     help: [
@@ -71,13 +72,19 @@ function run(src, dest) {
 
     cli.flags.showTime && console.time('fontmin use');
 
+    var pluginOpts = _.extend({
+        clone: true
+    }, cli.flags, {
+        deflate: cli.flags.deflateWoff
+    });
+
     var fontmin = new Fontmin()
         .src(src)
-        .use(Fontmin.glyph(cli.flags))
-        .use(Fontmin.ttf2eot({clone: true}))
-        .use(Fontmin.ttf2svg({clone: true}))
-        .use(Fontmin.ttf2woff({clone: true}))
-        .use(Fontmin.css(cli.flags));
+        .use(Fontmin.glyph(pluginOpts))
+        .use(Fontmin.ttf2eot(pluginOpts))
+        .use(Fontmin.ttf2svg(pluginOpts))
+        .use(Fontmin.ttf2woff(pluginOpts))
+        .use(Fontmin.css(pluginOpts));
 
     if (process.stdout.isTTY) {
         fontmin.dest(dest ? dest : 'build');
