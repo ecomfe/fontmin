@@ -13,7 +13,8 @@ var TTFReader = require('fonteditor-ttf').TTFReader;
 var TTFWriter = require('fonteditor-ttf').TTFWriter;
 var b2ab = require('b3b').b2ab;
 var ab2b = require('b3b').ab2b;
-
+var bufferToVinyl = require('buffer-to-vinyl');
+var replaceExt = require('replace-ext');
 
 /**
  * basic chars
@@ -137,16 +138,19 @@ function minifyTtfBuffer(contents, opts) {
 
     var ttfobj = new TTFReader().read(b2ab(contents));
 
-    var ttfBuffer = new TTFWriter().write(
-        minifyTtfObject(
-            ttfobj,
-            opts.text,
-            opts.basicText,
-            opts.use
-        )
+    var miniObj = minifyTtfObject(
+        ttfobj,
+        opts.text,
+        opts.basicText,
+        opts.use
     );
 
-    return ab2b(ttfBuffer);
+    var ttfBuffer = ab2b(new TTFWriter().write(miniObj));
+
+    return {
+        object: miniObj,
+        buffer: ttfBuffer
+    };
 
 }
 
@@ -188,7 +192,9 @@ module.exports = function (opts) {
         try {
 
             // write file buffer
-            file.contents = minifyTtfBuffer(file.contents, opts);
+            var miniTtf = minifyTtfBuffer(file.contents, opts);
+            file.contents = miniTtf.buffer;
+            file.ttfObject = miniTtf.object;
 
             cb(null, file);
 

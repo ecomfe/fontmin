@@ -29,20 +29,61 @@ var renderCss = _.template(tpl);
 
 
 /**
- * empty Transform
+ * listUnicode
  *
- * @return {Object} stream.Transform instance
+ * @param  {Array} unicode unicode
+ * @return {string}         unicode string
  */
-function noopStream() {
-    return through.ctor({
-        objectMode: true
+function listUnicode(unicode) {
+    return unicode.map(function (u) {
+        return '\\' + u.toString(16);
+    }).join(',');
+}
+
+/**
+ * ttf数据结构转icon数据结构
+ *
+ * @param {ttfObject} ttf ttfObject对象
+ * @param {Object} options 选项
+ * @param {Object} options.iconPrefix icon 前缀
+ * @param {Object} options.fontFamily fontFamily
+ * @return {Object} icon obj
+ */
+function ttfobject2icon(ttf, options) {
+
+    var glyfList = [];
+
+    // glyf 信息
+    var filtered = ttf.glyf.filter(function (g) {
+        return g.name !== '.notdef'
+            && g.name !== '.null'
+            && g.name !== 'nonmarkingreturn'
+            && g.unicode && g.unicode.length;
     });
+
+    filtered.forEach(function (g) {
+        glyfList.push({
+            code: '&#x' + g.unicode[0].toString(16) + ';',
+            codeName: listUnicode(g.unicode),
+            name: g.name
+        });
+    });
+
+    return {
+        fontFamily: options.fontFamily || ttf.name.fontFamily,
+        iconPrefix: options.iconPrefix || 'icon',
+        glyfList: glyfList
+    };
+
 }
 
 /**
  * css fontmin plugin
  *
  * @param {Object} opts opts
+ * @param {Object} opts.glyph      生成字型 css
+ * @param {Object} opts.iconPrefix icon 前缀
+ * @param {Object} opts.fontFamily fontFamily
  * @return {Object} stream.Transform instance
  * @api public
  */
@@ -73,13 +114,26 @@ module.exports = function (opts) {
         // clone
         this.push(file.clone());
 
-
         file.path = replaceExt(file.path, '.css');
         var fontFile = path.basename(file.path, '.css');
+
+        // font data
         var fontInfo = {
-            fontFamily: opts['font-family'] || fontFile,
             fontUri: fontFile
         };
+
+        if (opts.glyph && file.ttfObject) {
+            _.defaults(
+                fontInfo,
+                ttfobject2icon(file.ttfObject, opts),
+                {
+                    fontFamily: fontFile
+                }
+            );
+        }
+        else {
+            fontInfo.fontFamily = fontFile;
+        }
 
         file.contents = new Buffer(renderCss(fontInfo));
 

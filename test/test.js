@@ -54,6 +54,9 @@ before(function (done) {
         .use(Fontmin.ttf2svg({
             clone: true
         }))
+        .use(Fontmin.css({
+            glyph: true
+        }))
         .dest(path.resolve(__dirname, '../fonts/dest/'));
 
 
@@ -187,6 +190,38 @@ describe('ttf2svg plugin', function () {
                     fs.readFileSync(destFile + '.svg')
                 )
             );
+        }
+        catch (ex) {
+            assert(false);
+        }
+    });
+
+});
+
+describe('css plugin', function () {
+
+    it('dest file should exist svg', function () {
+        assert(
+            fs.existsSync(destFile + '.css')
+        );
+    });
+
+    it('dest css should have "@font-face"', function() {
+        try {
+            expect(fs.readFileSync(destFile + '.css', {
+                encoding: 'utf-8'
+            })).to.have.string('@font-face');
+        }
+        catch (ex) {
+            assert(false);
+        }
+    });
+
+    it('dest css should have ".icon-:before"', function() {
+        try {
+            expect(fs.readFileSync(destFile + '.css', {
+                encoding: 'utf-8'
+            })).to.have.string('.icon-:before');
         }
         catch (ex) {
             assert(false);

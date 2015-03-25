@@ -10,7 +10,7 @@ TODO
 - [x] travis ci
 - [ ] independent connect middleware
 - [ ] independent koa middleware
-- [ ] refactor plugin code 
+- [x] refactor plugin code 
 - [x] font-face css generator
 - [ ] ttf2woff2
 - [ ] otf

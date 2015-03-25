@@ -40,7 +40,7 @@ fontmin.run(function (err, files) {
 You can use [gulp-rename](https://github.com/hparra/gulp-rename) to rename your files:
 
 ```js
-var Fontmin = require('Fontmin');
+var Fontmin = require('fontmin');
 var rename = require('gulp-rename');
 
 var fontmin = new Fontmin()
@@ -93,6 +93,7 @@ The following plugins are bundled with fontmin:
 * [ttf2eot](#ttf2eot) — Convert ttf to eot.
 * [ttf2woff](#ttf2woff) — Convert ttf to woff.
 * [ttf2svg](#ttf2svg) — Convert ttf to svg.
+* [css](#css) — Generate css from ttf, often used to make iconfont.
 
 ### .glyph()
 
@@ -130,7 +131,7 @@ var Fontmin = require('fontmin');
 var fontmin = new Fontmin()
     .use(Fontmin.ttf2woff({ 
         clone: true,
-        deflate: true          // deflate woff. default = false
+        deflate: true           // deflate woff. default = false
     }));
 ```
 
@@ -150,6 +151,21 @@ var fontmin = new Fontmin()
     }));
     .use(svgo());
 
+```
+
+### .css()
+
+Generate css from ttf, often used to make iconfont.
+
+```js
+var Fontmin = require('fontmin');
+
+var fontmin = new Fontmin()
+    .use(Fontmin.css({
+        glyf: true,             // generate class for each glyf. default = false
+        iconPrefix: 'my-icon',  // class prefix, only work when glyf is `true`. default to "icon"
+        fontFamily: 'myfont'    // custom fontFamily, default to filename or get from analysed ttf file
+    }));
 ```
 
 ## CLI
