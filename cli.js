@@ -50,7 +50,8 @@ var cli = meow({
         t: 'text',
         b: 'basic-text',
         d: 'deflate-woff',
-        T: 'show-time'
+        T: 'show-time',
+        h: 'help'
     }
 });
 
@@ -117,7 +118,9 @@ if (process.stdin.isTTY) {
             'Example',
             '  fontmin font/* build',
             '  fontmin foo.ttf > foo-optimized.ttf',
-            '  cat foo.ttf | fontmin > foo-optimized.ttf'
+            '  cat foo.ttf | fontmin > foo-optimized.ttf',
+            '',
+            'See `fontmin --help` for more information.'
         ].join('\n'));
 
         process.exit(1);
