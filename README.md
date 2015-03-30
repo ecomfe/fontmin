@@ -162,8 +162,8 @@ var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
     .use(Fontmin.css({
-        glyf: true,             // generate class for each glyf. default = false
-        iconPrefix: 'my-icon',  // class prefix, only work when glyf is `true`. default to "icon"
+        glyph: true,            // generate class for each glyph. default = false
+        iconPrefix: 'my-icon',  // class prefix, only work when glyph is `true`. default to "icon"
         fontFamily: 'myfont'    // custom fontFamily, default to filename or get from analysed ttf file
     }));
 ```
