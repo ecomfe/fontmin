@@ -34,17 +34,20 @@ var cli = meow({
         '  -t, --text                          require glyphs by text',
         '  -b, --basic-text                    require glyphs with base chars',
         '  -d, --deflate-woff                  deflate woff',
-        '  -f, --font-family                   font-family for @font-face CSS',
+        '  --font-family                       font-family for @font-face CSS',
+        '  --css-glyph                         generate class for each glyf. default = false',
         '  -T, --show-time                     show time fontmin cost'
     ].join('\n')
 }, {
     'boolean': [
         'basic-text',
         'show-time',
-        'deflate-woff'
+        'deflate-woff',
+        'css-glyph'
     ],
     string: [
-        'text'
+        'text',
+        'font-family'
     ],
     alias: {
         t: 'text',
@@ -76,6 +79,7 @@ function run(src, dest) {
         clone: true
     }, cli.flags, {
         deflate: cli.flags.deflateWoff
+        glyph: cli.flags.cssGlyph
     });
 
     var fontmin = new Fontmin()
