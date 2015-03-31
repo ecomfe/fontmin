@@ -193,7 +193,8 @@ $ fontmin --help
     -t, --text                          require glyphs by text
     -b, --basic-text                    require glyphs with base chars
     -d, --deflate-woff                  deflate woff
-    -f, --font-family                   font-family for @font-face CSS
+    --font-family                       font-family for @font-face CSS
+    --css-glyph                         generate class for each glyf. default = false
     -T, --show-time                     show time fontmin cost
 ```
 
