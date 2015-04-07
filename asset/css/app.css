@@ -45,7 +45,7 @@ html,body{margin:0;padding:0;overflow:hidden;-webkit-tap-highlight-color:rgba(0,
 }
 @font-face{font-family:SentyBrush;src:url(../font/SentyBrush.woff) format('woff'),url(../font/SentyBrush.ttf) format('truetype');font-weight:400;font-style:normal}
 @font-face{font-family:SentyWEN1215;src:url(../font/SentyWEN1215.woff) format('woff'),url(../font/SentyWEN1215.ttf) format('truetype');font-weight:400;font-style:normal}
-@font-face{font-family:SourceHanSanSC-Light;src:url(../font/SourceHanSanSC-Light.woff) format('woff'),url(../font/SourceHanSanSC-Light.ttf) format('truetype');font-weight:400;font-style:normal}
+@font-face{font-family:SourceHanSanSC-Light;src:url(../font/SourceHanSansSC-Light.woff) format('woff'),url(../font/SourceHanSansSC-Light.ttf) format('truetype');font-weight:400;font-style:normal}
 html,body{font-size:16px;font-family:SourceHanSanSC-Light,'Helvetica Neue',sans-serif}
 h1,h2{font-style:normal;font-weight:400}
 #loading{position:absolute;top:0;right:0;bottom:0;left:0;z-index:10;text-align:center;visibility:visible}
