@@ -12,9 +12,13 @@
         'baseUrl': 'asset',
         'paths': {
             'jquery': '../dep/jquery/dist/jquery.min',
+            'lettering': '../dep/Lettering.js/jquery.lettering',
             'fullpage': '../dep/fullpage/jquery.fullPage.min'
         },
-        'shim': { 'fullpage': ['jquery'] },
+        'shim': {
+            'lettering': ['jquery'],
+            'fullpage': ['jquery']
+        },
         'packages': []
     });
     </script>
@@ -22,7 +26,7 @@
 
 <body>
 <!--[if lt IE 8]>
-    <div style="width:100%;height:100%;z-index:99999;">
+<div style="width:100%;height:100%;z-index:99999;">
     <p style="text-align:center;font-size:3em;line-height:1.5;margin:5em 0">您正在用 <strong style="color:#DB043D">过时的</strong> 浏览器，请 <a style="color:#538BF2" href="http://browsehappy.com/">升级您的浏览器</a></p>
     <p style="text-align:center;font-size:6em;line-height:2">
         ╮(￣▽￣)╭　
@@ -59,8 +63,7 @@
         <div class="feature-left">
             <div class="font-body">
                 <div class="font-chars">
-                    <p>道可道，非常道。</p>
-                    <p>名可名，非常名。</p>
+                    <p>道可道，非常道。名可名，非常名。</p>
                 </div>
                 <p class="font-info">
                     <span class="font-name">新蒂文征明体</span>
@@ -100,6 +103,7 @@
             <h1>使用</h1>
         </div>
         <pre>
+<code class="language-javascript">
 var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
@@ -114,9 +118,12 @@ fontmin.run(function (err, files) {
     console.log(files[0]);
     // => { contents: <Buffer 00 01 00 ...> }
 });
+</code>
         </pre>
         <p class="links">
-            Doc: <a href="https://github.com/ecomfe/fontmin#api">API</a> / <a href="https://github.com/ecomfe/fontmin#plugins">Plugins</a>
+            Doc:
+            <a target="_blank" href="https://github.com/ecomfe/fontmin#api">API</a> /
+            <a target="_blank" href="https://github.com/ecomfe/fontmin#plugins">Plugins</a>
         </p>
     </div>
     <div class="section terminal">
@@ -124,7 +131,7 @@ fontmin.run(function (err, files) {
             <div class="bg"></div>
             <h1>终端</h1>
         </div>
-        <img src="asset/img/terminal.png" alt="terminal">
+        <img src="asset/img/terminal.png" srcset="src/img/terminal@2x.png 2x" alt="terminal">
         <p>
             安装 <i>Fontmin</i> 命令行工具：<em>npm i -g fontmin</em>
         </p>
@@ -134,10 +141,11 @@ fontmin.run(function (err, files) {
             <div class="bg"></div>
             <h1>应用</h1>
         </div>
-        <img src="asset/img/app.png" alt="app">
+        <img src="asset/img/app.png" srcset="src/img/app@2x.png 2x" alt="app">
         <a href="https://github.com/fontmin/fontmin-app" class="down-btn">下载 Fontmin 客户端 for Windows</a>
         <div>
-            <a class="down-link" href="https://github.com/fontmin/fontmin-app">Fontmin for OSX</a> / <a href="https://github.com/fontmin/fontmin-app">Github</a>
+            <a class="down-link" href="https://github.com/fontmin/fontmin-app">Fontmin for OSX</a> /
+            <a target="_blank" href="https://github.com/fontmin/fontmin-app">Github</a>
         </div>
     </div>
     <div class="section source">
@@ -145,16 +153,35 @@ fontmin.run(function (err, files) {
             <div class="bg"></div>
             <h1>源码</h1>
         </div>
-        <a class="github" href="//github.com/ecomfe/fontmin">github.com/ecomfe/fontmin</a>
+        <a class="github" target="_blank" href="//github.com/ecomfe/fontmin">github.com/ecomfe/fontmin</a>
         <p>
-            <a href="https://npmjs.org/package/fontmin"><img data-src="http://img.shields.io/npm/v/fontmin.svg" alt="NPM version"></a>
-            <a href="https://travis-ci.org/junmer/fontmin"><img data-src="http://img.shields.io/travis/junmer/fontmin.svg" alt="Build Status"></a>
-            <a href="https://npmjs.org/package/fontmin"><img data-src="http://img.shields.io/npm/dm/fontmin.svg" alt="Downloads"></a>
+            <a target="_blank" href="https://npmjs.org/package/fontmin">
+                <img data-src="http://img.shields.io/npm/v/fontmin.svg" alt="NPM version">
+            </a>
+            <a target="_blank" href="https://travis-ci.org/junmer/fontmin">
+                <img data-src="http://img.shields.io/travis/junmer/fontmin.svg" alt="Build Status">
+            </a>
+            <a target="_blank" href="https://npmjs.org/package/fontmin">
+                <img data-src="http://img.shields.io/npm/dm/fontmin.svg" alt="Downloads">
+            </a>
         </p>
-        <div class="star">如果你觉得 Fontmin 还不错，给个
-<iframe class="star-btn" data-src="https://ghbtns.com/github-btn.html?user=ecomfe&repo=fontmin&type=star&count=true" frameborder="0" scrolling="0" width="90px" height="20px"></iframe>             呗，反正不花钱 :-)</div>
-        <div class="thanks">鸣谢: <a href="">新蒂字体</a> / <a href="">浙江民间书刻体</a> / <a href="">思源字体</a></div>
-        <div class="links">Links: <a href="http://font.baidu.com">Baidu FontEditor</a> / <a href="http://font-spider.org">FontSpider</a> / <a href="http://efe.baidu.com">EFE Tech</a></div>
+        <div class="star">
+            如果你觉得 Fontmin 还不错，给个
+            <iframe class="star-btn" data-src="https://ghbtns.com/github-btn.html?user=ecomfe&repo=fontmin&type=star&count=true" frameborder="0" scrolling="0" width="90px" height="20px"></iframe>
+            呗，反正不花钱 :-)
+        </div>
+        <div class="thanks">
+            鸣谢:
+            <a target="_blank" href="http://www.sentyfont.com/">新蒂字体</a> /
+            <a target="_blank" href="http://weibo.com/eonway">浙江民间书刻体</a> /
+            <a target="_blank" href="http://blog.typekit.com/alternate/source-han-sans-chs/">思源字体</a>
+        </div>
+        <div class="links">
+            Links:
+            <a target="_blank" href="http://font.baidu.com">Baidu FontEditor</a> /
+            <a target="_blank" href="http://font-spider.org">FontSpider</a> /
+            <a target="_blank" href="http://efe.baidu.com">EFE Tech</a>
+        </div>
         <div class="copyright">© 2015 Baidu EFE</div>
     </div>
 </div>
