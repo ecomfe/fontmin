@@ -1,6 +1,8 @@
 
 <p align="center">
-    <img height="128" width="128" src="https://raw.githubusercontent.com/ecomfe/fontmin/master/fontmin.png">
+    <a href="http://fontmin.github.io">
+        <img height="128" width="128" src="https://raw.githubusercontent.com/ecomfe/fontmin/master/fontmin.png">
+    </a>
 </p>
 
 # fontmin
@@ -244,5 +246,5 @@ MIT © [fontmin](https://raw.githubusercontent.com/ecomfe/fontmin/master/LICENSE
 [dep-url]: https://david-dm.org/ecomfe/fontmin
 [dep-image]: http://img.shields.io/david/ecomfe/fontmin.svg
 
-[font-image]:https://img.shields.io/badge/font-eonway-blue.svg
-[font-url]: http://item.taobao.com/item.htm?sche=fontmin&id=35030917699
+[font-image]: https://img.shields.io/badge/font-eonway-blue.svg
+[font-url]: http://weibo.com/eonway
