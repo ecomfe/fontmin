@@ -79,7 +79,7 @@ function run(src, dest) {
     var pluginOpts = _.extend({
         clone: true
     }, cli.flags, {
-        deflate: cli.flags.deflateWoff
+        deflate: cli.flags.deflateWoff,
         glyph: cli.flags.cssGlyph
     });
 
