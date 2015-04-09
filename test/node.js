@@ -1,5 +1,5 @@
 /**
- * @file  fontmin test
+ * @file  fontmin node
  * @author junmer
  */
 
@@ -200,7 +200,7 @@ describe('ttf2svg plugin', function () {
 
 describe('css plugin', function () {
 
-    it('dest file should exist svg', function () {
+    it('dest file should exist css', function () {
         assert(
             fs.existsSync(destFile + '.css')
         );
@@ -217,11 +217,11 @@ describe('css plugin', function () {
         }
     });
 
-    it('dest css should have ".icon-:before"', function() {
+    it('dest css should match /\.icon-(\w+):before/', function() {
         try {
             expect(fs.readFileSync(destFile + '.css', {
                 encoding: 'utf-8'
-            })).to.have.string('.icon-:before');
+            })).to.match(/\.icon-(\w+):before/);
         }
         catch (ex) {
             assert(false);

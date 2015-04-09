@@ -65,7 +65,7 @@ function ttfobject2icon(ttf, options) {
         glyfList.push({
             code: '&#x' + g.unicode[0].toString(16) + ';',
             codeName: listUnicode(g.unicode),
-            name: g.name
+            name: g.name || 'uni' + g.unicode[0].toString(16)
         });
     });
 
@@ -103,6 +103,7 @@ module.exports = function (opts) {
         // check stream
         if (file.isStream()) {
             cb(new Error('Streaming is not supported'));
+            return;
         }
 
         // check ttf
@@ -119,11 +120,12 @@ module.exports = function (opts) {
 
         // font data
         var fontInfo = {
-            fontUri: fontFile
+            fontUri: fontFile,
+            iconPrefix: ''
         };
 
         if (opts.glyph && file.ttfObject) {
-            _.defaults(
+            _.extend(
                 fontInfo,
                 ttfobject2icon(file.ttfObject, opts),
                 {
@@ -135,9 +137,17 @@ module.exports = function (opts) {
             fontInfo.fontFamily = fontFile;
         }
 
-        file.contents = new Buffer(renderCss(fontInfo));
+        var output = _.attempt(function (data) {
+            return new Buffer(renderCss(data));
+        }, fontInfo);
 
-        cb(null, file);
+        if (_.isError(output)) {
+            cb(output, file);
+        }
+        else {
+            file.contents = output;
+            cb(null, file);
+        }
 
     });
 

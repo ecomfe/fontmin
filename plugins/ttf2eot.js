@@ -21,7 +21,8 @@ function compileTtf(buffer, cb) {
     catch (ex) {
         cb(ex);
     }
-    cb(null, output);
+
+    output && cb(null, output);
 }
 
 
@@ -48,6 +49,7 @@ module.exports = function (opts) {
         // check stream
         if (file.isStream()) {
             cb(new Error('Streaming is not supported'));
+            return;
         }
 
         // check ttf
