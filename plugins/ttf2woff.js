@@ -15,14 +15,13 @@ var deflate = require('pako').deflate;
 
 function compileTtf(buffer, options, cb) {
     var output;
+    var ttf2woffOpts = {};
+
+    if (options.deflate) {
+        ttf2woffOpts.deflate = deflate;
+    }
+
     try {
-
-        var ttf2woffOpts = {};
-
-        if (options.deflate) {
-            ttf2woffOpts.deflate = deflate;
-        }
-
         output = ab2b(
             // fix: have problem in some android device, close deflate
             ttf2woff(
@@ -34,7 +33,8 @@ function compileTtf(buffer, options, cb) {
     catch (ex) {
         cb(ex);
     }
-    cb(null, output);
+
+    output && cb(null, output);
 }
 
 /**
@@ -60,6 +60,7 @@ module.exports = function (opts) {
         // check stream
         if (file.isStream()) {
             cb(new Error('Streaming is not supported'));
+            return;
         }
 
         // check ttf

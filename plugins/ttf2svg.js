@@ -46,6 +46,7 @@ module.exports = function (opts) {
         // check stream
         if (file.isStream()) {
             cb(new Error('Streaming is not supported'));
+            return;
         }
 
         // check ttf
