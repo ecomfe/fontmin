@@ -2,19 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Fontmin - 字体字集化方案</title>
+    <title>Fontmin - 字体子集化方案</title>
     <meta name="keywords" content="字体, font, typeface, 字集, JavaScript, webfont">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="asset/css/app.css">
-    <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?857ec3bab739a39e974d1c280b728595";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
     <script src="http://s1.bdstatic.com/r/www/cache/ecom/esl/2-0-4/esl.js"></script>
     <script>
     require.config({
@@ -46,7 +37,7 @@
     <div class="load-left"></div>
     <div class="load-right"></div>
     <div class="load-spinner">
-        <img src="asset/img/logo.png" alt="loading">
+        <img src="asset/img/logo.png" width="256" height="256" alt="loading">
         <h1>Fontmin</h1>
     </div>
 </div>
@@ -79,7 +70,7 @@
                     <span class="font-meta">字型: 7500+</span>
                 </p>
                 <div class="tags">
-                    <img src="https://img.shields.io/badge/TTF-4.2MB-yellow.svg?style=flat-square" alt="TTF: 4.2MB">
+                    <img data-src="https://img.shields.io/badge/TTF-4.2MB-yellow.svg?style=flat-square" alt="TTF: 4.2MB">
                 </div>
             </div>
         </div>
@@ -93,11 +84,11 @@
                     <span class="font-meta">字型: 7个</span>
                 </p>
                 <div class="tags">
-                    <img src="https://img.shields.io/badge/TTF-4.5KB-yellow.svg?style=flat-square" alt="TTF: 4.5KB">
-                    <img src="https://img.shields.io/badge/EOT-4.8KB-yellow.svg?style=flat-square" alt="EOT: 4.8KB">
-                    <img src="https://img.shields.io/badge/SVG-9.9KB-yellow.svg?style=flat-square" alt="SVG: 9.9KB">
-                    <img src="https://img.shields.io/badge/WOFF-3.3KB-yellow.svg?style=flat-square" alt="WOFF: 3.3KB">
-                    <img src="https://img.shields.io/badge/CSS-Snippet-blue.svg?style=flat-square" alt="CSS: Snippet">
+                    <img data-src="https://img.shields.io/badge/TTF-4.5KB-yellow.svg?style=flat-square" alt="TTF: 4.5KB">
+                    <img data-src="https://img.shields.io/badge/EOT-4.8KB-yellow.svg?style=flat-square" alt="EOT: 4.8KB">
+                    <img data-src="https://img.shields.io/badge/SVG-9.9KB-yellow.svg?style=flat-square" alt="SVG: 9.9KB">
+                    <img data-src="https://img.shields.io/badge/WOFF-3.3KB-yellow.svg?style=flat-square" alt="WOFF: 3.3KB">
+                    <img data-src="https://img.shields.io/badge/CSS-Snippet-blue.svg?style=flat-square" alt="CSS: Snippet">
                 </div>
             </div>
         </div>
@@ -105,13 +96,16 @@
             <i></i>
             <em></em>
         </div>
+        <div class="feature-more">
+            大道三千, 各取其一, 须弥芥子, 无所增减
+        </div>
     </div>
     <div class="section usage">
         <div class="section-title">
             <div class="bg"></div>
             <h1>使用</h1>
         </div>
-        <pre>
+<pre>
 var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
@@ -126,7 +120,7 @@ fontmin.run(function (err, files) {
     console.log(files[0]);
     // => { contents: <Buffer 00 01 00 ...> }
 });
-        </pre>
+</pre>
         <p class="links">
             Doc:
             <a target="_blank" href="https://github.com/ecomfe/fontmin#api">API</a> /
@@ -151,7 +145,7 @@ fontmin.run(function (err, files) {
         <img src="asset/img/app.png" srcset="asset/img/app@2x.png 2x" alt="app">
         <a href="https://github.com/fontmin/fontmin-app" class="down-btn">下载 Fontmin 客户端 for Windows</a>
         <div>
-            <a class="down-link" href="https://github.com/fontmin/fontmin-app">Fontmin for OSX</a> /
+            <a class="down-link" href="https://github.com/fontmin/fontmin-app">Fontmin for OS X</a> /
             <a target="_blank" href="https://github.com/fontmin/fontmin-app">Github</a>
         </div>
     </div>
@@ -197,6 +191,15 @@ fontmin.run(function (err, files) {
     require(['app'], function (app) {
         app.init();
     });
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?857ec3bab739a39e974d1c280b728595";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
 </script>
 </body>
 </html>
