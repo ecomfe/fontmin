@@ -103,6 +103,7 @@ module.exports = function (opts) {
         // check stream
         if (file.isStream()) {
             cb(new Error('Streaming is not supported'));
+            return;
         }
 
         // check ttf
@@ -136,9 +137,17 @@ module.exports = function (opts) {
             fontInfo.fontFamily = fontFile;
         }
 
-        file.contents = new Buffer(renderCss(fontInfo));
+        var output = _.attempt(function (data) {
+            return new Buffer(renderCss(data));
+        }, fontInfo);
 
-        cb(null, file);
+        if (_.isError(output)) {
+            cb(output, file);
+        }
+        else {
+            file.contents = output;
+            cb(null, file);
+        }
 
     });
 
