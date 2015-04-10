@@ -161,9 +161,11 @@ h1,h2{font-style:normal;font-weight:400}
 .terminal i,.terminal em{font-style:normal}
 .terminal i{color:#94764a}
 .terminal em{background:rgba(228,202,163,.5);padding:.125em .25em}
-.app img{display:block;margin:2em auto}
+.app img{display:block;margin:2em auto 0}
+.app .links{margin:0}
 .app .down-btn{display:inline-block;padding:.719em 1em;margin:1em;background:#3c5098;color:#fff}
 .github{margin:3.125em 0 1em;font-size:1.875em;display:block}
-.star,.thanks,.links,.copyright{color:#aaa;margin:1em 0}
-.star{margin:4em 0 2em}
-.star .star-btn{vertical-align:middle}
+.star,.thanks,.links,.copyright{margin:1em 0}
+.star{margin:4em 0 3em}
+.star .star-btn{vertical-align:bottom}
+.thanks,.links,.copyright{color:#aaa;font-size:.875em}
