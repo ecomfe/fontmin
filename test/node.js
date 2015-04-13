@@ -19,7 +19,11 @@ var srcPath = path.resolve(__dirname, '../fonts/eduSong.ttf');
 var destPath = path.resolve(__dirname, '../fonts/dest');
 var destFile = destPath + '/eduSong';
 
-var text = '细雨带风湿透黄昏的街道 抹去雨水双眼无故地仰望';
+var text = '春·日光'
+    + '殘留的夜蹄在稀薄中消失盡'
+    + '遊戲的念頭在泡影中蔓延起'
+    + '美好是因為挑戰無私的天真'
+    + '罪惡是因為克服背叛的恐懼';
 
 function getFile(files, ext) {
     var re = new RegExp(ext + '$');
@@ -55,7 +59,8 @@ before(function (done) {
             clone: true
         }))
         .use(Fontmin.css({
-            glyph: true
+            glyph: true,
+            base64: true
         }))
         .dest(path.resolve(__dirname, '../fonts/dest/'));
 

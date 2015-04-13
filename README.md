@@ -119,7 +119,7 @@ var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
     .use(Fontmin.ttf2eot({ 
-        clone: true
+        clone: true             // keep ttf, create new file
     }));
 ```
 
@@ -132,7 +132,7 @@ var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
     .use(Fontmin.ttf2woff({ 
-        clone: true,
+        clone: true,            // keep ttf, create new file
         deflate: true           // deflate woff. default = false
     }));
 ```
@@ -149,7 +149,7 @@ var svgo = require('imagemin-svgo');
 
 var fontmin = new Fontmin()
     .use(Fontmin.ttf2svg({ 
-        clone: true
+        clone: true             // keep ttf, create new file
     }));
     .use(svgo());
 
@@ -164,6 +164,8 @@ var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
     .use(Fontmin.css({
+        base64: true,           // inject base64 data:application/x-font-ttf; (gzip font with css). 
+                                // default = false
         glyph: true,            // generate class for each glyph. default = false
         iconPrefix: 'my-icon',  // class prefix, only work when glyph is `true`. default to "icon"
         fontFamily: 'myfont'    // custom fontFamily, default to filename or get from analysed ttf file

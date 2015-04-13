@@ -10,6 +10,7 @@ var path = require('path');
 var isTtf = require('is-ttf');
 var through = require('through2');
 var replaceExt = require('replace-ext');
+var b2a = require('b3b').b2a;
 
 /**
  * tpl
@@ -82,6 +83,7 @@ function ttfobject2icon(ttf, options) {
  *
  * @param {Object} opts opts
  * @param {Object} opts.glyph      生成字型 css
+ * @param {Object} opts.base64     生成 base64
  * @param {Object} opts.iconPrefix icon 前缀
  * @param {Object} opts.fontFamily fontFamily
  * @return {Object} stream.Transform instance
@@ -121,9 +123,11 @@ module.exports = function (opts) {
         // font data
         var fontInfo = {
             fontUri: fontFile,
+            base64: '',
             iconPrefix: ''
         };
 
+        // glyph
         if (opts.glyph && file.ttfObject) {
             _.extend(
                 fontInfo,
@@ -137,6 +141,14 @@ module.exports = function (opts) {
             fontInfo.fontFamily = fontFile;
         }
 
+        // base64
+        if (opts.base64) {
+            fontInfo.base64 = ''
+                + 'data:application/x-font-ttf;charset=utf-8;base64,'
+                + b2a(file.contents);
+        }
+
+        // render
         var output = _.attempt(function (data) {
             return new Buffer(renderCss(data));
         }, fontInfo);
