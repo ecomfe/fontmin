@@ -20,7 +20,8 @@ function compileTtf(buffer, cb) {
     catch (ex) {
         cb(ex);
     }
-    cb(null, output);
+
+    output && cb(null, output);
 }
 
 /**
