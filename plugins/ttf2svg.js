@@ -10,7 +10,7 @@ var through = require('through2');
 var ttf2svg = require('fonteditor-ttf').ttf2svg;
 var b2ab = require('b3b').b2ab;
 var replaceExt = require('replace-ext');
-
+var _ = require('lodash');
 
 function compileTtf(buffer, cb) {
     var output;
@@ -32,7 +32,8 @@ function compileTtf(buffer, cb) {
  * @api public
  */
 module.exports = function (opts) {
-    opts = opts || {};
+
+    opts = _.extend({clone: true}, opts);
 
     return through.ctor({
         objectMode: true

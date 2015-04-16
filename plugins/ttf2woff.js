@@ -12,6 +12,7 @@ var b2ab = require('b3b').b2ab;
 var ab2b = require('b3b').ab2b;
 var replaceExt = require('replace-ext');
 var deflate = require('pako').deflate;
+var _ = require('lodash');
 
 function compileTtf(buffer, options, cb) {
     var output;
@@ -45,7 +46,8 @@ function compileTtf(buffer, options, cb) {
  * @api public
  */
 module.exports = function (opts) {
-    opts = opts || {};
+
+    opts = _.extend({clone: true}, opts);
 
     return through.ctor({
         objectMode: true
