@@ -27,7 +27,7 @@ var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
     .src('fonts/*.ttf')
-    .dest('build/fonts')
+    .dest('build/fonts');
 
 fontmin.run(function (err, files) {
     if (err) {
