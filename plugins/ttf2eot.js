@@ -11,7 +11,7 @@ var ttf2eot = require('fonteditor-ttf').ttf2eot;
 var b2ab = require('b3b').b2ab;
 var ab2b = require('b3b').ab2b;
 var replaceExt = require('replace-ext');
-
+var _ = require('lodash');
 
 function compileTtf(buffer, cb) {
     var output;
@@ -34,7 +34,8 @@ function compileTtf(buffer, cb) {
  * @api public
  */
 module.exports = function (opts) {
-    opts = opts || {};
+
+    opts = _.extend({clone: true}, opts);
 
     return through.ctor({
         objectMode: true

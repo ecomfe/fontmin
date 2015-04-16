@@ -49,15 +49,9 @@ before(function (done) {
         .use(Fontmin.glyph({
             text: text
         }))
-        .use(Fontmin.ttf2eot({
-            clone: true
-        }))
-        .use(Fontmin.ttf2woff({
-            clone: true
-        }))
-        .use(Fontmin.ttf2svg({
-            clone: true
-        }))
+        .use(Fontmin.ttf2eot())
+        .use(Fontmin.ttf2woff())
+        .use(Fontmin.ttf2svg())
         .use(Fontmin.css({
             glyph: true,
             base64: true

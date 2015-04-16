@@ -118,9 +118,7 @@ Convert ttf to eot.
 var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
-    .use(Fontmin.ttf2eot({ 
-        clone: true             // keep ttf, create new file
-    }));
+    .use(Fontmin.ttf2eot());
 ```
 
 ### .ttf2woff()
@@ -131,8 +129,7 @@ Convert ttf to woff.
 var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
-    .use(Fontmin.ttf2woff({ 
-        clone: true,            // keep ttf, create new file
+    .use(Fontmin.ttf2woff({
         deflate: true           // deflate woff. default = false
     }));
 ```
@@ -148,9 +145,7 @@ var Fontmin = require('fontmin');
 var svgo = require('imagemin-svgo');
 
 var fontmin = new Fontmin()
-    .use(Fontmin.ttf2svg({ 
-        clone: true             // keep ttf, create new file
-    }));
+    .use(Fontmin.ttf2svg());
     .use(svgo());
 
 ```
@@ -182,8 +177,8 @@ $ npm install -g fontmin
 $ fontmin --help
 
   Usage
-    $ fontmin <file> <directory>
-    $ fontmin <directory> <output>
+    $ fontmin <file> [<output>]
+    $ fontmin <directory> [<output>]
     $ fontmin <file> > <output>
     $ cat <file> | fontmin > <output>
 
@@ -205,20 +200,20 @@ $ fontmin --help
 you can use `curl` to generate font for websites running on PHP, ASP, Rails and more:
 
 ```sh
-$ text=`curl www.baidu.com` && fontmin -t $text font.ttf
+$ text=`curl www.baidu.com` && fontmin -t "$text" font.ttf
 ```
 or you can use [html-to-text](https://www.npmjs.com/package/html-to-text) to make it smaller:
 
 ```sh
 $ npm install -g html-to-text
-$ text=`curl www.baidu.com | html-to-text` && fontmin -t $text font.ttf
+$ text=`curl www.baidu.com | html-to-text` && fontmin -t "$text" font.ttf
 ```
 
 what is more, you can use [phantom-fetch-cli](https://www.npmjs.com/package/phantom-fetch-cli) to generate font for `SPA` running JS template:
 
 ```sh
 $ npm install -g phantom-fetch-cli
-$ text=`phantom-fetch http://www.chinaw3c.org` && fontmin -t $text font.ttf
+$ text=`phantom-fetch http://www.chinaw3c.org` && fontmin -t "$text" font.ttf
 ```
 
 ## Related

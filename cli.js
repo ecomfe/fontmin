@@ -19,8 +19,8 @@ var _ = require('lodash');
 var cli = meow({
     help: [
         'Usage',
-        '  $ fontmin <file> <directory>',
-        '  $ fontmin <directory> <output>',
+        '  $ fontmin <file> [<output>]',
+        '  $ fontmin <directory> [<output>]',
         '  $ fontmin <file> > <output>',
         '  $ cat <file> | fontmin > <output>',
         '',
@@ -76,12 +76,14 @@ function run(src, dest) {
 
     cli.flags.showTime && console.time('fontmin use');
 
-    var pluginOpts = _.extend({
-        clone: true
-    }, cli.flags, {
-        deflate: cli.flags.deflateWoff,
-        glyph: cli.flags.cssGlyph
-    });
+    var pluginOpts = _.extend(
+        {},
+        cli.flags,
+        {
+            deflate: cli.flags.deflateWoff,
+            glyph: cli.flags.cssGlyph
+        }
+    );
 
     var fontmin = new Fontmin()
         .src(src)
