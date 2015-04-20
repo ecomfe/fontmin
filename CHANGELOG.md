@@ -11,5 +11,9 @@ CHANGE LOG
 
 ## 0.7.1
 
-[^] css plugin add option fontPath
+[^] css plugin add option fontPath: location of font file 
+
+## 0.7.2
+
+[^] css plugin add option asFileName: rewrite fontFamily as filename force. default = false
 
