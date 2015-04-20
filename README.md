@@ -14,11 +14,13 @@
 [![Dependencies][dep-image]][dep-url]
 [![Font support][font-image]][font-url]
 
-## Get started
+## Homepage
 
 - [简体中文](http://ecomfe.github.io/fontmin/)
 - [繁體中文](http://ecomfe.github.io/fontmin/tw.html)
+- [日本語](http://ecomfe.github.io/fontmin/jp.html)
 - [한국어](http://ecomfe.github.io/fontmin/kr.html)
+- [English](http://ecomfe.github.io/fontmin/en.html)
 
 ## Install
 
