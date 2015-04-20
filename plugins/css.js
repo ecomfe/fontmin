@@ -122,7 +122,8 @@ module.exports = function (opts) {
 
         // font data
         var fontInfo = {
-            fontUri: fontFile,
+            fontFile: fontFile,
+            fontPath: '',
             base64: '',
             iconPrefix: ''
         };
@@ -131,10 +132,8 @@ module.exports = function (opts) {
         if (opts.glyph && file.ttfObject) {
             _.extend(
                 fontInfo,
-                ttfobject2icon(file.ttfObject, opts),
-                {
-                    fontFamily: fontFile
-                }
+                opts,
+                ttfobject2icon(file.ttfObject, opts)
             );
         }
         else {
