@@ -14,7 +14,7 @@ TODO
 - [x] font-face css generator
 - [ ] ttf2woff2
 - [ ] otf -> [fontmin-otf2ttf](https://github.com/junmer/fontmin-otf2ttf)
-- [ ] app -> [fontmin-app](https://github.com/ecomfe/fontmin-app)
+- [x] app -> [fontmin-app](https://github.com/ecomfe/fontmin-app)
 - [ ] ttfmin, only analysis cmap table, get glyph by buffer offset
 - [x] get font text from web page - cli
 - [ ] svgs, merge svgs into one svg
