@@ -3,9 +3,29 @@
 <head>
     <meta charset="utf-8">
     <title>Fontmin - 字体子集化方案</title>
-    <meta name="keywords" content="字体, font, typeface, 字集, JavaScript, webfont">
+    <meta name="keywords" content="字体, font, typeface, 子集, JavaScript, webfont">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="bookmark" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="asset/css/app.css">
+    <script>
+        (function(supports) {
+            var language = (navigator.language || navigator.browserLanguage).toLowerCase();
+            var lang = language.substr(0, 2);
+            if (lang === 'zh') {
+                lang = language.substr(-2);
+            }
+            var jump = supports[lang];
+            if (jump) {
+                location.href = jump;
+            }
+        }({
+            'jp': '/jp.html',
+            'kr': '/kr.html',
+            'tw': '/tw.html'
+        }));
+    </script>
     <script src="http://s1.bdstatic.com/r/www/cache/ecom/esl/2-0-4/esl.js"></script>
     <script>
     require.config({
@@ -110,7 +130,7 @@ var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
     .src('fonts/*.ttf')
-    .dest('build/fonts')
+    .dest('build/fonts');
 
 fontmin.run(function (err, files) {
     if (err) {
@@ -201,5 +221,16 @@ fontmin.run(function (err, files) {
       s.parentNode.insertBefore(hm, s);
     })();
 </script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    // ga('create', 'UA-xxxx-1', 'auto');
+    // ga('send', 'pageview');
+
+</script>
+
 </body>
 </html>
