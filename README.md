@@ -165,6 +165,7 @@ var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
     .use(Fontmin.css({
+        fontPath: './',         // location of font file 
         base64: true,           // inject base64 data:application/x-font-ttf; (gzip font with css). 
                                 // default = false
         glyph: true,            // generate class for each glyph. default = false
