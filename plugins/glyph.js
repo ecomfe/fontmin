@@ -13,8 +13,6 @@ var TTFReader = require('fonteditor-ttf').TTFReader;
 var TTFWriter = require('fonteditor-ttf').TTFWriter;
 var b2ab = require('b3b').b2ab;
 var ab2b = require('b3b').ab2b;
-var bufferToVinyl = require('buffer-to-vinyl');
-var replaceExt = require('replace-ext');
 
 /**
  * basic chars
