@@ -128,11 +128,13 @@ module.exports = function (opts) {
             iconPrefix: ''
         };
 
+        // opts
+        _.extend(fontInfo, opts);
+
         // glyph
         if (opts.glyph && file.ttfObject) {
             _.extend(
                 fontInfo,
-                opts,
                 ttfobject2icon(file.ttfObject, opts)
             );
         }
