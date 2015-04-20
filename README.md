@@ -1,6 +1,6 @@
 
 <p align="center">
-    <a href="http://fontmin.github.io">
+    <a href="http://ecomfe.github.io/fontmin/">
         <img height="128" width="128" src="https://raw.githubusercontent.com/ecomfe/fontmin/master/fontmin.png">
     </a>
 </p>
@@ -13,6 +13,12 @@
 [![Downloads][downloads-image]][npm-url]
 [![Dependencies][dep-image]][dep-url]
 [![Font support][font-image]][font-url]
+
+## Get started
+
+- [简体中文](http://ecomfe.github.io/fontmin/)
+- [繁體中文](http://ecomfe.github.io/fontmin/tw.html)
+- [한국어](http://ecomfe.github.io/fontmin/kr.html)
 
 ## Install
 
