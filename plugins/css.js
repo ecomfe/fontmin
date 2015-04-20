@@ -42,19 +42,18 @@ function listUnicode(unicode) {
 }
 
 /**
- * ttf数据结构转 icon 数据结构
+ * convert ttf obj to icon obj
  *
- * @param {ttfObject} ttf ttfObject对象
- * @param {Object} options 选项
- * @param {Object} options.iconPrefix icon 前缀
- * @param {Object} options.fontFamily fontFamily
+ * @param {ttfObject} ttf ttfObject
+ * @param {Object} options icon options
+ * @param {string=} options.iconPrefix class prefix. default = 'icon'
  * @return {Object} icon obj
  */
 function ttfobject2icon(ttf, options) {
 
     var glyfList = [];
 
-    // glyf 信息
+    // glyf info
     var filtered = ttf.glyf.filter(function (g) {
         return g.name !== '.notdef'
             && g.name !== '.null'
@@ -71,7 +70,6 @@ function ttfobject2icon(ttf, options) {
     });
 
     return {
-        fontFamily: options.fontFamily || ttf.name.fontFamily,
         iconPrefix: options.iconPrefix || 'icon',
         glyfList: glyfList
     };
@@ -82,9 +80,9 @@ function ttfobject2icon(ttf, options) {
  * css fontmin plugin
  *
  * @param {Object} opts opts
- * @param {boolean=} opts.glyph      生成字型 css
- * @param {boolean=} opts.base64     生成 base64
- * @param {string=} opts.iconPrefix icon 前缀
+ * @param {boolean=} opts.glyph     generate class for each glyph. default = false
+ * @param {boolean=} opts.base64    inject base64
+ * @param {string=} opts.iconPrefix icon prefix
  * @param {string=} opts.fontFamily fontFamily
  * @return {Object} stream.Transform instance
  * @api public
@@ -131,16 +129,23 @@ module.exports = function (opts) {
         // opts
         _.extend(fontInfo, opts);
 
+        // ttf obj
+        var ttfObject = file.ttfObject || {
+            name: {}
+        };
+
         // glyph
-        if (opts.glyph && file.ttfObject) {
+        if (opts.glyph && ttfObject.glyf) {
             _.extend(
                 fontInfo,
-                ttfobject2icon(file.ttfObject, opts)
+                ttfobject2icon(ttfObject, opts)
             );
         }
 
         // font family
-        fontInfo.fontFamily = fontInfo.fontFamily || fontFile;
+        fontInfo.fontFamily = opts.fontFamily
+            || ttfObject.name.fontFamilyfontFile
+            || fontFile;
 
         // rewrite font family as filename
         if (opts.asFileName) {
