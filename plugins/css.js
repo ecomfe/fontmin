@@ -42,7 +42,7 @@ function listUnicode(unicode) {
 }
 
 /**
- * ttf数据结构转icon数据结构
+ * ttf数据结构转 icon 数据结构
  *
  * @param {ttfObject} ttf ttfObject对象
  * @param {Object} options 选项
@@ -82,10 +82,10 @@ function ttfobject2icon(ttf, options) {
  * css fontmin plugin
  *
  * @param {Object} opts opts
- * @param {Object} opts.glyph      生成字型 css
- * @param {Object} opts.base64     生成 base64
- * @param {Object} opts.iconPrefix icon 前缀
- * @param {Object} opts.fontFamily fontFamily
+ * @param {boolean=} opts.glyph      生成字型 css
+ * @param {boolean=} opts.base64     生成 base64
+ * @param {string=} opts.iconPrefix icon 前缀
+ * @param {string=} opts.fontFamily fontFamily
  * @return {Object} stream.Transform instance
  * @api public
  */
@@ -136,7 +136,12 @@ module.exports = function (opts) {
                 ttfobject2icon(file.ttfObject, opts)
             );
         }
-        else {
+
+        // font family
+        fontInfo.fontFamily = fontInfo.fontFamily || fontFile;
+
+        // rewrite font family as filename
+        if (opts.asFileName) {
             fontInfo.fontFamily = fontFile;
         }
 
