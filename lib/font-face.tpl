@@ -1,14 +1,14 @@
 @font-face {
     font-family: "<%=fontFamily%>";
-    src: url("<%=fontUri%>.eot"); /* IE9 */
-    src: url("<%=fontUri%>.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    src: url("<%=fontPath%><%=fontFile%>.eot"); /* IE9 */
+    src: url("<%=fontPath%><%=fontFile%>.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
     <% if (base64) { %>
-    url(<%=base64%>) format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
+    url(<%=base64%>) format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
     <% } else { %>
-    url("<%=fontUri%>.woff") format("woff"), /* chrome、firefox */
-    url("<%=fontUri%>.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
+    url("<%=fontPath%><%=fontFile%>.woff") format("woff"), /* chrome, firefox */
+    url("<%=fontPath%><%=fontFile%>.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
     <% } %>
-    url("<%=fontUri%>.svg#<%=fontFamily%>") format("svg"); /* iOS 4.1- */
+    url("<%=fontPath%><%=fontFile%>.svg#<%=fontFamily%>") format("svg"); /* iOS 4.1- */
     font-style: normal;
     font-weight: normal;
 }

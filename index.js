@@ -9,7 +9,6 @@ var combine = require('stream-combiner');
 var concat = require('concat-stream');
 var EventEmitter = require('events').EventEmitter;
 var inherits = require('util').inherits;
-var through = require('through2');
 var bufferToVinyl = require('buffer-to-vinyl');
 var vfs = require('vinyl-fs');
 

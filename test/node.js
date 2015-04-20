@@ -54,7 +54,8 @@ before(function (done) {
         .use(Fontmin.ttf2svg())
         .use(Fontmin.css({
             glyph: true,
-            base64: true
+            base64: true,
+            fontPath: './'
         }))
         .dest(path.resolve(__dirname, '../fonts/dest/'));
 
