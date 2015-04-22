@@ -1,22 +1,23 @@
-CHANGE LOG
+# Change Log
 ===
 
-## 0.6
+## 0.7.3 (2015-04-22)
 
-[+] first pub release
+- glyph plugin add option hinting: keep ttf hint info (fpgm, prep, cvt). default = true. [\#4](https://github.com/ecomfe/fontmin/issues/4)
 
-## 0.7
+## 0.7.2 (2015-04-20)
 
-[^] plugins option clone as default
+- css plugin add option asFileName: rewrite fontFamily as filename force. default = false
+- i18n doc zh-tw, jp, kr, en
 
-## 0.7.1
+## 0.7.1 (2015-04-20)
 
-[^] css plugin add option fontPath: location of font file 
+- css plugin add option fontPath: location of font file. [gulp-fontmin\#1](https://github.com/ecomfe/gulp-fontmin/issues/1)
 
-## 0.7.2
+## 0.7 (2015-04-16)
 
-[^] css plugin add option asFileName: rewrite fontFamily as filename force. default = false
+- plugins option clone as default
 
-## 0.7.3
+## 0.6 (2015-04-13)
 
-[^] glyph plugin add option hinting: keep ttf hint info (fpgm, prep, cvt). default = true
+- first release
