@@ -91,6 +91,16 @@ describe('glyph plugin', function () {
         assert(isTtf(getFile(outputFiles, 'ttf').contents));
     });
 
+    it('output ttf should have `cvt ` table', function () {
+        assert(
+            isTtf(
+                getFile(outputFiles, 'ttf').contents, {
+                    tables: ['cvt ']
+                }
+            )
+        );
+    });
+
     it('output should miner than input', function () {
         var srcBuffer = fs.readFileSync(srcPath);
         assert(srcBuffer.length > getFile(outputFiles, 'ttf').contents.length);
@@ -227,5 +237,17 @@ describe('css plugin', function () {
             assert(false);
         }
     });
+
+    it('dest css should have fontPath "./"', function() {
+        try {
+            expect(fs.readFileSync(destFile + '.css', {
+                encoding: 'utf-8'
+            })).to.have.string('./');
+        }
+        catch (ex) {
+            assert(false);
+        }
+    });
+
 
 });

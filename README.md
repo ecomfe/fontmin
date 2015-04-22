@@ -17,10 +17,10 @@
 ## Homepage
 
 - [简体中文](http://ecomfe.github.io/fontmin/)
-- [繁體中文](http://ecomfe.github.io/fontmin/tw.html)
-- [日本語](http://ecomfe.github.io/fontmin/jp.html)
-- [한국어](http://ecomfe.github.io/fontmin/kr.html)
-- [English](http://ecomfe.github.io/fontmin/en.html)
+- [繁體中文](http://ecomfe.github.io/fontmin/tw)
+- [日本語](http://ecomfe.github.io/fontmin/jp)
+- [한국어](http://ecomfe.github.io/fontmin/kr)
+- [English](http://ecomfe.github.io/fontmin/en)
 
 ## Install
 
@@ -114,7 +114,8 @@ var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
     .use(Fontmin.glyph({ 
-        text: '天地玄黄 宇宙洪荒'
+        text: '天地玄黄 宇宙洪荒',
+        hinting: false         // keep ttf hint info (fpgm, prep, cvt). default = true
     }));
 ```
 

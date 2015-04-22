@@ -134,7 +134,7 @@ function minifyTtfObject(ttfObject, text, useBasicText, plugin) {
  */
 function minifyTtfBuffer(contents, opts) {
 
-    var ttfobj = new TTFReader().read(b2ab(contents));
+    var ttfobj = new TTFReader(opts).read(b2ab(contents));
 
     var miniObj = minifyTtfObject(
         ttfobj,
@@ -143,7 +143,7 @@ function minifyTtfBuffer(contents, opts) {
         opts.use
     );
 
-    var ttfBuffer = ab2b(new TTFWriter().write(miniObj));
+    var ttfBuffer = ab2b(new TTFWriter(opts).write(miniObj));
 
     return {
         object: miniObj,
@@ -159,12 +159,14 @@ function minifyTtfBuffer(contents, opts) {
  * @param {Object} opts opts
  * @param {string=} opts.text text
  * @param {boolean=} opts.basicText useBasicText
+ * @param {boolean=} opts.hinting hint
  * @param {Function=} opts.use plugin
  * @return {Object} stream.Transform instance
  * @api public
  */
 module.exports = function (opts) {
-    opts = opts || {};
+
+    opts = _.extend({hinting: true}, opts);
 
     return through.ctor({
         objectMode: true
