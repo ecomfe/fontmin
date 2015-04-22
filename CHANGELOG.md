@@ -17,3 +17,6 @@ CHANGE LOG
 
 [^] css plugin add option asFileName: rewrite fontFamily as filename force. default = false
 
+## 0.7.3
+
+[^] glyph plugin add option hinting: keep ttf hint info (fpgm, prep, cvt). default = true
