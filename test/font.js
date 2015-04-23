@@ -3,6 +3,9 @@
  * @author junmer
  */
 
+/* eslint-env node */
+/* global before */
+
 var assert = require('chai').assert;
 var expect = require('chai').expect;
 
@@ -38,7 +41,7 @@ var outputFiles;
 before(function (done) {
 
     // clean
-    Fontmin()
+    new Fontmin()
         .src(destPath)
         .use(clean())
         .run();
@@ -60,7 +63,7 @@ before(function (done) {
         .dest(destPath);
 
 
-    fontmin.run(function(err, files, stream) {
+    fontmin.run(function (err, files, stream) {
 
         if (err) {
             console.log(err);
@@ -216,7 +219,7 @@ describe('css plugin', function () {
         );
     });
 
-    it('dest css should have "@font-face"', function() {
+    it('dest css should have "@font-face"', function () {
         try {
             expect(fs.readFileSync(destFile + '.css', {
                 encoding: 'utf-8'
@@ -227,7 +230,7 @@ describe('css plugin', function () {
         }
     });
 
-    it('dest css should match /\.icon-(\w+):before/', function() {
+    it('dest css should match /\.icon-(\w+):before/', function () {
         try {
             expect(fs.readFileSync(destFile + '.css', {
                 encoding: 'utf-8'
@@ -238,7 +241,7 @@ describe('css plugin', function () {
         }
     });
 
-    it('dest css should have fontPath "./"', function() {
+    it('dest css should have fontPath "./"', function () {
         try {
             expect(fs.readFileSync(destFile + '.css', {
                 encoding: 'utf-8'

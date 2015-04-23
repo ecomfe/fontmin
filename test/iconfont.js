@@ -3,14 +3,15 @@
  * @author junmer
  */
 
+/* eslint-env node */
+/* global before */
+
 var assert = require('chai').assert;
-var expect = require('chai').expect;
 
 var fs = require('fs');
 var path = require('path');
 var clean = require('gulp-clean');
 var isTtf = require('is-ttf');
-var isSvg = require('is-svg');
 var Fontmin = require('../index');
 
 var srcPath = path.resolve(__dirname, '../fonts/fontawesome-webfont.svg');
@@ -31,7 +32,7 @@ var outputFiles;
 before(function (done) {
 
     // clean
-    Fontmin()
+    new Fontmin()
         .src(destPath)
         .use(clean())
         .run();
@@ -43,7 +44,7 @@ before(function (done) {
         .dest(destPath);
 
 
-    fontmin.run(function(err, files, stream) {
+    fontmin.run(function (err, files, stream) {
 
         if (err) {
             console.log(err);
