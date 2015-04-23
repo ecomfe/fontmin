@@ -104,6 +104,7 @@ The following plugins are bundled with fontmin:
 * [ttf2woff](#ttf2woff) — Convert ttf to woff.
 * [ttf2svg](#ttf2svg) — Convert ttf to svg.
 * [css](#css) — Generate css from ttf, often used to make iconfont.
+* [svg2ttf](#svg2ttf) — Convert font format svg to ttf.
 
 ### .glyph()
 
@@ -176,6 +177,18 @@ var fontmin = new Fontmin()
         fontFamily: 'myfont',   // custom fontFamily, default to filename or get from analysed ttf file
         asFileName: false       // rewrite fontFamily as filename force. default = false
     }));
+```
+
+### .svg2ttf()
+
+Convert font format svg to ttf.
+
+```js
+var Fontmin = require('fontmin');
+
+var fontmin = new Fontmin()
+    .src('font.svg')
+    .use(Fontmin.svg2ttf());
 ```
 
 ## CLI
