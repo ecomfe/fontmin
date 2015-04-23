@@ -1,5 +1,5 @@
 /**
- * @file  fontmin node
+ * @file  fontmin font
  * @author junmer
  */
 
@@ -57,7 +57,7 @@ before(function (done) {
             base64: true,
             fontPath: './'
         }))
-        .dest(path.resolve(__dirname, '../fonts/dest/'));
+        .dest(destPath);
 
 
     fontmin.run(function(err, files, stream) {

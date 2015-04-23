@@ -1,10 +1,13 @@
 {
   "name": "fontmin",
   "version": "0.7.3",
-  "description": "Minify font seamlessly, get required glyph from ttf, convert to ttf, eot, woff, svg",
+  "description": "Minify font seamlessly, ttf subsetter, webfont (eot, woff, svg) converter.",
   "main": "index.js",
   "keywords": [
     "font",
+    "webfont",
+    "icon",
+    "iconfont",
     "font-face",
     "compress",
     "minify",
@@ -16,6 +19,7 @@
     "ttf2eot",
     "ttf2woff",
     "ttf2svg",
+    "svg2ttf",
     "css",
     "base64"
   ],
@@ -39,6 +43,7 @@
     "concat-stream": "^1.4.6",
     "fonteditor-ttf": "0.0.8",
     "get-stdin": "^4.0.1",
+    "is-svg": "^1.1.1",
     "is-ttf": "^0.2.1",
     "lodash": "^3.2.0",
     "meow": "^3.0.0",
@@ -52,7 +57,6 @@
     "chai": "^2.0.0",
     "gulp-clean": "^0.3.1",
     "is-eot": "^1.0.0",
-    "is-svg": "^1.0.1",
     "is-woff": "^1.0.1",
     "mocha": "^2.1.0"
   }
