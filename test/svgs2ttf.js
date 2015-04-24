@@ -43,6 +43,7 @@ before(function (done) {
     var fontmin = new Fontmin()
         .src(srcPath)
         .use(Fontmin.svgs2ttf('iconfont.ttf'))
+        .use(Fontmin.ttf2svg())
         .dest(destPath);
 
     function next() {

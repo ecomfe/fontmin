@@ -34,8 +34,25 @@ function getFileName(name) {
  * @param {Object} opts opts
  */
 function SvgFont(name, opts) {
-    this.opts = opts || {};
-    this.ttf = new TTF(getEmptyttfObject());
+
+    this.opts = _.extend(
+        {
+            adjust: {
+                leftSideBearing: 0,
+                rightSideBearing: 0,
+                ajdustToEmBox: true,
+                ajdustToEmPadding: 0
+            }
+        },
+        opts
+    );
+
+    var ttfobj = getEmptyttfObject();
+    // for save name
+    ttfobj.post.format = 2;
+    this.ttf = new TTF(ttfobj);
+
+    // set name
     this.ttf.setName(
         opts.name || {
             fontFamily: name,
@@ -45,7 +62,7 @@ function SvgFont(name, opts) {
         }
     );
 
-    this.count = 0;
+    this.startCode = opts.startCode || 0xe001;
 }
 
 /**
@@ -66,7 +83,10 @@ SvgFont.prototype.add = function (name, contents) {
     var glyf = ttfObj.glyf[0];
 
     glyf.name = getFileName(name);
-    glyf.unicode = glyf.unicode || [this.count++];
+
+    if (!Array.isArray(glyf.unicode)) {
+        glyf.unicode = [this.startCode++];
+    }
 
     this.ttf.addGlyf(glyf);
 
@@ -78,6 +98,11 @@ SvgFont.prototype.add = function (name, contents) {
  * @return {buffer} ttf buffer
  */
 SvgFont.prototype.getContents = function () {
+
+    if (this.opts.adjust) {
+        this.ttf.adjustGlyfPos(null, this.opts.adjust);
+        this.ttf.adjustGlyf(null, this.opts.adjust);
+    }
 
     return ab2b(
         new TTFWriter(
