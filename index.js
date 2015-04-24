@@ -147,7 +147,8 @@ module.exports = Fontmin;
     'ttf2woff',
     'ttf2svg',
     'css',
-    'svg2ttf'
+    'svg2ttf',
+    'svgs2ttf'
 ].forEach(function (plugin) {
     module.exports[plugin] = require('./plugins/' + plugin);
 });
