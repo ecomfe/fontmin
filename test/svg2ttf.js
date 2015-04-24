@@ -43,7 +43,7 @@ before(function (done) {
         .dest(destPath);
 
 
-    function next(){
+    function next() {
         fontmin.run(function (err, files, stream) {
 
             if (err) {

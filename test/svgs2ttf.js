@@ -45,7 +45,7 @@ before(function (done) {
         .use(Fontmin.svgs2ttf('iconfont.ttf'))
         .dest(destPath);
 
-    function next(){
+    function next() {
         fontmin.run(function (err, files, stream) {
 
             if (err) {

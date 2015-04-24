@@ -118,8 +118,6 @@ Fontmin.prototype.createStream = function () {
     return combine(this.streams);
 };
 
-
-
 /**
  * Get files
  *
@@ -133,7 +131,6 @@ Fontmin.prototype.getFiles = function () {
 
     return vfs.src(this.src());
 };
-
 
 /**
  * Module exports
@@ -152,7 +149,6 @@ module.exports = Fontmin;
 ].forEach(function (plugin) {
     module.exports[plugin] = require('./plugins/' + plugin);
 });
-
 
 // exports util, mime
 module.exports.util = exports.util = require('./lib/util');

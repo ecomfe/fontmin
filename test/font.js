@@ -44,7 +44,7 @@ before(function (done) {
     new Fontmin()
         .src(destPath)
         .use(clean())
-        .run();
+        .run(next);
 
     // minfy
     var fontmin = new Fontmin()
@@ -63,16 +63,19 @@ before(function (done) {
         .dest(destPath);
 
 
-    fontmin.run(function (err, files, stream) {
+    function next() {
+        fontmin.run(function (err, files, stream) {
 
-        if (err) {
-            console.log(err);
-            process.exit(-1);
-        }
+            if (err) {
+                console.log(err);
+                process.exit(-1);
+            }
 
-        outputFiles = files;
-        done();
-    });
+            outputFiles = files;
+
+            done();
+        });
+    }
 
 });
 
