@@ -11,14 +11,18 @@ var TTFWriter = require('fonteditor-ttf').TTFWriter;
 var TTF = require('fonteditor-ttf').TTF;
 var svg2ttfobject = require('fonteditor-ttf').svg2ttfobject;
 var ab2b = require('b3b').ab2b;
-var replaceExt = require('replace-ext');
 var _ = require('lodash');
 var bufferToVinyl = require('buffer-to-vinyl');
 var getEmptyttfObject = require('fonteditor-ttf/lib/ttf/getEmptyttfObject');
 var path = require('path');
 
-
-function getFileName(name){
+/**
+ * getFileName without ext
+ *
+ * @param  {string} name basename
+ * @return {string}      filename
+ */
+function getFileName(name) {
     return name.replace(/\.(\w+)$/, '');
 }
 
@@ -44,6 +48,12 @@ function SvgFont(name, opts) {
     this.count = 0;
 }
 
+/**
+ * add svg
+ *
+ * @param {string} name     svg basename
+ * @param {buffer} contents svg contents
+ */
 SvgFont.prototype.add = function (name, contents) {
 
     var ttfObj = svg2ttfobject(
@@ -58,14 +68,16 @@ SvgFont.prototype.add = function (name, contents) {
     glyf.name = getFileName(name);
     glyf.unicode = glyf.unicode || [this.count++];
 
-    console.log(glyf);
-
     this.ttf.addGlyf(glyf);
-}
 
+};
+
+/**
+ * get ttf buffer
+ *
+ * @return {buffer} ttf buffer
+ */
 SvgFont.prototype.getContents = function () {
-
-    // console.log(this.ttf);
 
     return ab2b(
         new TTFWriter(
@@ -76,17 +88,18 @@ SvgFont.prototype.getContents = function () {
         )
     );
 
-}
+};
 
 
 /**
  * svgs2ttf fontmin plugin
  *
+ * @param {string} file filename
  * @param {Object} opts opts
  * @return {Object} stream.Transform instance
  * @api public
  */
-module.exports = function(file, opts) {
+module.exports = function (file, opts) {
 
     if (!file) {
         throw new Error('Missing file option for fontmin-svg2ttf');
@@ -100,10 +113,12 @@ module.exports = function(file, opts) {
 
     if (typeof file === 'string') {
         fileName = file;
-    } else if (typeof file.path === 'string') {
+    }
+    else if (typeof file.path === 'string') {
         fileName = path.basename(file.path);
         firstFile = bufferToVinyl.file(null, fileName);
-    } else {
+    }
+    else {
         throw new Error('Missing path in file options for fontmin-svg2ttf');
     }
 
@@ -116,9 +131,15 @@ module.exports = function(file, opts) {
             return;
         }
 
-        // we dont do streams (yet)
+        // check stream
         if (file.isStream()) {
             this.emit('error', new Error('Streaming not supported'));
+            cb();
+            return;
+        }
+
+        // check svg
+        if (!isSvg(file.contents)) {
             cb();
             return;
         }
@@ -157,7 +178,8 @@ module.exports = function(file, opts) {
             });
 
             joinedFile.path = path.join(firstFile.base, file);
-        } else {
+        }
+        else {
             joinedFile = firstFile;
         }
 
@@ -168,5 +190,5 @@ module.exports = function(file, opts) {
     }
 
     return through.obj(bufferContents, endStream);
-}
 
+};
