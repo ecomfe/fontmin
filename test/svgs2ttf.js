@@ -44,6 +44,9 @@ before(function (done) {
         .src(srcPath)
         .use(Fontmin.svgs2ttf('iconfont.ttf'))
         .use(Fontmin.ttf2svg())
+        .use(Fontmin.css({
+            glyph: true
+        }))
         .dest(destPath);
 
     function next() {

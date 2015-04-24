@@ -7,24 +7,14 @@
 
 var isSvg = require('is-svg');
 var through = require('through2');
-var TTFWriter = require('fonteditor-ttf').TTFWriter;
-var TTF = require('fonteditor-ttf').TTF;
-var svg2ttfobject = require('fonteditor-ttf').svg2ttfobject;
+var path = require('path');
 var ab2b = require('b3b').ab2b;
 var _ = require('lodash');
 var bufferToVinyl = require('buffer-to-vinyl');
+var TTFWriter = require('fonteditor-ttf').TTFWriter;
+var TTF = require('fonteditor-ttf').TTF;
+var svg2ttfobject = require('fonteditor-ttf').svg2ttfobject;
 var getEmptyttfObject = require('fonteditor-ttf/lib/ttf/getEmptyttfObject');
-var path = require('path');
-
-/**
- * getFileName without ext
- *
- * @param  {string} name basename
- * @return {string}      filename
- */
-function getFileName(name) {
-    return name.replace(/\.(\w+)$/, '');
-}
 
 /**
  * SvgFont
@@ -42,27 +32,32 @@ function SvgFont(name, opts) {
                 rightSideBearing: 0,
                 ajdustToEmBox: true,
                 ajdustToEmPadding: 0
+            },
+            name: {
+                fontFamily: name,
+                fontSubFamily: name,
+                uniqueSubFamily: name,
+                postScriptName: name
             }
         },
         opts
     );
 
+    // empty ttfobj
     var ttfobj = getEmptyttfObject();
+
     // for save name
     ttfobj.post.format = 2;
+
+    // new TTF
     this.ttf = new TTF(ttfobj);
 
     // set name
-    this.ttf.setName(
-        opts.name || {
-            fontFamily: name,
-            fontSubFamily: name,
-            uniqueSubFamily: name,
-            postScriptName: name
-        }
-    );
+    this.ttf.setName(this.opts.name);
 
+    // unicode start
     this.startCode = opts.startCode || 0xe001;
+
 }
 
 /**
@@ -82,7 +77,7 @@ SvgFont.prototype.add = function (name, contents) {
 
     var glyf = ttfObj.glyf[0];
 
-    glyf.name = getFileName(name);
+    glyf.name = path.basename(name, '.svg');
 
     if (!Array.isArray(glyf.unicode)) {
         glyf.unicode = [this.startCode++];
@@ -93,23 +88,22 @@ SvgFont.prototype.add = function (name, contents) {
 };
 
 /**
- * get ttf buffer
+ * compile ttf contents
  *
- * @return {buffer} ttf buffer
  */
-SvgFont.prototype.getContents = function () {
+SvgFont.prototype.compile = function () {
 
     if (this.opts.adjust) {
         this.ttf.adjustGlyfPos(null, this.opts.adjust);
         this.ttf.adjustGlyf(null, this.opts.adjust);
     }
 
-    return ab2b(
+    this.contents = ab2b(
         new TTFWriter(
             this.opts
         )
         .write(
-            this.ttf.get()
+            this.ttf.ttf
         )
     );
 
@@ -176,7 +170,7 @@ module.exports = function (file, opts) {
 
         // construct SvgFont instance
         if (!svgFont) {
-            svgFont = new SvgFont(getFileName(fileName), opts);
+            svgFont = new SvgFont(path.basename(fileName, '.svg'), opts);
         }
 
         // add file to SvgFont instance
@@ -208,7 +202,12 @@ module.exports = function (file, opts) {
             joinedFile = firstFile;
         }
 
-        joinedFile.contents = svgFont.getContents();
+        // complie svgfont
+        svgFont.compile();
+
+        // set contents
+        joinedFile.contents = svgFont.contents;
+        joinedFile.ttfObject = svgFont.ttf.ttf;
 
         this.push(joinedFile);
         cb();
