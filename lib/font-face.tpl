@@ -29,7 +29,7 @@
 
 <% _.each(glyfList, function(glyf) { %>
 .<%=iconPrefix%>-<%=glyf.name%>:before {
-  content: "<%=glyf.codeName%>";
+    content: "<%=glyf.codeName%>";
 }
 <% }); %>
 <% }; %>
