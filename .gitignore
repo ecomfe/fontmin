@@ -1,4 +1,4 @@
 .DS_Store
 npm-debug.log
 /node_modules
-fonts/dest
+fonts/dest*

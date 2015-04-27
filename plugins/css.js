@@ -42,18 +42,16 @@ function listUnicode(unicode) {
 }
 
 /**
- * convert ttf obj to icon obj
+ * get glyf list from ttf obj
  *
  * @param {ttfObject} ttf ttfObject
- * @param {Object} options icon options
- * @param {string=} options.iconPrefix class prefix. default = 'icon'
  * @return {Object} icon obj
  */
-function ttfobject2icon(ttf, options) {
+function getGlyfList(ttf) {
 
     var glyfList = [];
 
-    // glyf info
+    // exclude empty glyf
     var filtered = ttf.glyf.filter(function (g) {
         return g.name !== '.notdef'
             && g.name !== '.null'
@@ -61,6 +59,7 @@ function ttfobject2icon(ttf, options) {
             && g.unicode && g.unicode.length;
     });
 
+    // format glyf info
     filtered.forEach(function (g) {
         glyfList.push({
             code: '&#x' + g.unicode[0].toString(16) + ';',
@@ -70,7 +69,6 @@ function ttfobject2icon(ttf, options) {
     });
 
     return {
-        iconPrefix: options.iconPrefix || 'icon',
         glyfList: glyfList
     };
 
@@ -123,7 +121,7 @@ module.exports = function (opts) {
             fontFile: fontFile,
             fontPath: '',
             base64: '',
-            iconPrefix: ''
+            iconPrefix: 'icon'
         };
 
         // opts
@@ -138,13 +136,13 @@ module.exports = function (opts) {
         if (opts.glyph && ttfObject.glyf) {
             _.extend(
                 fontInfo,
-                ttfobject2icon(ttfObject, opts)
+                getGlyfList(ttfObject)
             );
         }
 
         // font family
         fontInfo.fontFamily = opts.fontFamily
-            || ttfObject.name.fontFamilyfontFile
+            || ttfObject.name.fontFamily
             || fontFile;
 
         // rewrite font family as filename

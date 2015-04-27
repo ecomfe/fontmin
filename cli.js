@@ -45,11 +45,11 @@ var cli = meow({
         'deflate-woff',
         'css-glyph'
     ],
-    string: [
+    'string': [
         'text',
         'font-family'
     ],
-    alias: {
+    'alias': {
         t: 'text',
         b: 'basic-text',
         d: 'deflate-woff',

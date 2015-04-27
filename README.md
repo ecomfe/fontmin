@@ -104,6 +104,8 @@ The following plugins are bundled with fontmin:
 * [ttf2woff](#ttf2woff) — Convert ttf to woff.
 * [ttf2svg](#ttf2svg) — Convert ttf to svg.
 * [css](#css) — Generate css from ttf, often used to make iconfont.
+* [svg2ttf](#svg2ttf) — Convert font format svg to ttf.
+* [svgs2ttf](#svgs2ttf) — Concat svg files to a ttf, just like css sprite.
 
 ### .glyph()
 
@@ -178,6 +180,35 @@ var fontmin = new Fontmin()
     }));
 ```
 
+### .svg2ttf()
+
+Convert font format svg to ttf.
+
+```js
+var Fontmin = require('fontmin');
+
+var fontmin = new Fontmin()
+    .src('font.svg')
+    .use(Fontmin.svg2ttf());
+```
+
+### .svgs2ttf()
+
+Concat svg files to a ttf, just like css sprite.
+
+awesome work with [css](#css) plugin:
+
+```js
+var Fontmin = require('fontmin');
+
+var fontmin = new Fontmin()
+    .src('svgs/*.svg')
+    .use(Fontmin.svgs2ttf('font.ttf'))
+    .use(Fontmin.css({
+        glyph: true
+    }));
+```
+
 ## CLI
 
 ```bash
@@ -230,6 +261,7 @@ $ text=`phantom-fetch http://www.chinaw3c.org` && fontmin -t "$text" font.ttf
 ## Related
 
 - [fontmin-app](https://github.com/ecomfe/fontmin-app)
+- [gulp-fontmin](https://github.com/ecomfe/gulp-fontmin)
 - [fontmin-otf2ttf](https://github.com/junmer/fontmin-otf2ttf)
 - [fonteditor](https://github.com/ecomfe/fonteditor)
 

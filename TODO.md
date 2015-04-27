@@ -15,7 +15,7 @@ TODO
 - [ ] ttf2woff2
 - [ ] otf -> [fontmin-otf2ttf](https://github.com/junmer/fontmin-otf2ttf)
 - [x] app -> [fontmin-app](https://github.com/ecomfe/fontmin-app)
-- [ ] ttfmin, only analysis cmap table, get glyph by buffer offset
+- [x] <del>ttfmin, only analysis cmap table, get glyph by buffer offset</del>
 - [x] get font text from web page - cli
-- [ ] svgs, merge svgs into one svg
-- [ ] svg2ttf
+- [x] svgs, merge svgs into one svg
+- [x] svg2ttf

@@ -1,7 +1,10 @@
 /**
- * @file  fontmin node
+ * @file  fontmin font
  * @author junmer
  */
+
+/* eslint-env node */
+/* global before */
 
 var assert = require('chai').assert;
 var expect = require('chai').expect;
@@ -38,10 +41,10 @@ var outputFiles;
 before(function (done) {
 
     // clean
-    Fontmin()
+    new Fontmin()
         .src(destPath)
         .use(clean())
-        .run();
+        .run(next);
 
     // minfy
     var fontmin = new Fontmin()
@@ -57,19 +60,22 @@ before(function (done) {
             base64: true,
             fontPath: './'
         }))
-        .dest(path.resolve(__dirname, '../fonts/dest/'));
+        .dest(destPath);
 
 
-    fontmin.run(function(err, files, stream) {
+    function next() {
+        fontmin.run(function (err, files, stream) {
 
-        if (err) {
-            console.log(err);
-            process.exit(-1);
-        }
+            if (err) {
+                console.log(err);
+                process.exit(-1);
+            }
 
-        outputFiles = files;
-        done();
-    });
+            outputFiles = files;
+
+            done();
+        });
+    }
 
 });
 
@@ -216,7 +222,7 @@ describe('css plugin', function () {
         );
     });
 
-    it('dest css should have "@font-face"', function() {
+    it('dest css should have "@font-face"', function () {
         try {
             expect(fs.readFileSync(destFile + '.css', {
                 encoding: 'utf-8'
@@ -227,7 +233,7 @@ describe('css plugin', function () {
         }
     });
 
-    it('dest css should match /\.icon-(\w+):before/', function() {
+    it('dest css should match /\.icon-(\w+):before/', function () {
         try {
             expect(fs.readFileSync(destFile + '.css', {
                 encoding: 'utf-8'
@@ -238,7 +244,7 @@ describe('css plugin', function () {
         }
     });
 
-    it('dest css should have fontPath "./"', function() {
+    it('dest css should have fontPath "./"', function () {
         try {
             expect(fs.readFileSync(destFile + '.css', {
                 encoding: 'utf-8'

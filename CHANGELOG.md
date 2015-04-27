@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.8.0 (2015-04-27)
+
+- add svg2ttf plugin
+- add svgs2ttf plugin
+
 ## 0.7.3 (2015-04-22)
 
 - glyph plugin add option hinting: keep ttf hint info (fpgm, prep, cvt). default = true. [\#4](https://github.com/ecomfe/fontmin/issues/4)

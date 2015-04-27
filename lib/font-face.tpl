@@ -13,7 +13,7 @@
     font-weight: normal;
 }
 
-<% if (iconPrefix) { %>
+<% if (glyph) { %>
 [class^="<%=iconPrefix%>-"],
 [class*=" <%=iconPrefix%>-"]:after {
     font-family: "<%=fontFamily%>";
@@ -28,8 +28,8 @@
 }
 
 <% _.each(glyfList, function(glyf) { %>
-.icon-<%=glyf.name%>:before {
-  content: "<%=glyf.codeName%>";
+.<%=iconPrefix%>-<%=glyf.name%>:before {
+    content: "<%=glyf.codeName%>";
 }
 <% }); %>
 <% }; %>
