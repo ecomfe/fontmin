@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.8.1 (2015-05-05)
+
+- svgs2ttf plugin add option fontName
+
 ## 0.8.0 (2015-04-27)
 
 - add svg2ttf plugin

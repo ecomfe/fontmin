@@ -203,7 +203,7 @@ var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
     .src('svgs/*.svg')
-    .use(Fontmin.svgs2ttf('font.ttf'))
+    .use(Fontmin.svgs2ttf('font.ttf', {fontName: 'iconfont'}))
     .use(Fontmin.css({
         glyph: true
     }));
