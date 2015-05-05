@@ -8,6 +8,7 @@
 var isSvg = require('is-svg');
 var through = require('through2');
 var path = require('path');
+var replaceExt = require('replace-ext');
 var ab2b = require('b3b').ab2b;
 var _ = require('lodash');
 var bufferToVinyl = require('buffer-to-vinyl');
@@ -115,6 +116,7 @@ SvgFont.prototype.compile = function () {
  *
  * @param {string} file filename
  * @param {Object} opts opts
+ * @param {string} opts.fontName font name
  * @return {Object} stream.Transform instance
  * @api public
  */
@@ -131,6 +133,11 @@ module.exports = function (file, opts) {
     var svgFont;
 
     if (typeof file === 'string') {
+
+        // fix file ext
+        file = replaceExt(file, '.ttf');
+
+        // set file name
         fileName = file;
     }
     else if (typeof file.path === 'string') {
@@ -170,7 +177,8 @@ module.exports = function (file, opts) {
 
         // construct SvgFont instance
         if (!svgFont) {
-            svgFont = new SvgFont(path.basename(fileName, '.svg'), opts);
+            var fontName = opts.fontName || path.basename(fileName, '.ttf');
+            svgFont = new SvgFont(fontName, opts);
         }
 
         // add file to SvgFont instance
