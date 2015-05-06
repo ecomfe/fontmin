@@ -219,6 +219,7 @@ var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
     .use(Fontmin.otf2ttf());
+```
 
 ## CLI
 
