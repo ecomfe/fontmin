@@ -85,7 +85,7 @@ function getStringGlyfs(ttf, str) {
 
 
 /**
- * minifyTtfObject
+ * minifyFontObject
  *
  * @param  {Object} ttfObject    ttfObject
  * @param  {string} text         text
@@ -93,7 +93,7 @@ function getStringGlyfs(ttf, str) {
  * @param  {Function=} plugin       use plugin
  * @return {Object}              ttfObject
  */
-function minifyTtfObject(ttfObject, text, useBasicText, plugin) {
+function minifyFontObject(ttfObject, text, useBasicText, plugin) {
 
     // check null
     if (!text) {
@@ -126,24 +126,30 @@ function minifyTtfObject(ttfObject, text, useBasicText, plugin) {
 }
 
 /**
- * minifyTtfBuffer
+ * minifyTtf
  *
- * @param  {string} contents         contents
+ * @param  {Buffer|Object} contents         contents
  * @param  {Object} opts         opts
  * @return {Buffer}              buffer
  */
-function minifyTtfBuffer(contents, opts) {
+function minifyTtf(contents, opts) {
 
-    var ttfobj = new TTFReader(opts).read(b2ab(contents));
+    var ttfobj = contents;
 
-    var miniObj = minifyTtfObject(
+    if (Buffer.isBuffer(contents)) {
+        ttfobj = new TTFReader(opts).read(b2ab(contents));
+    }
+
+    var miniObj = minifyFontObject(
         ttfobj,
         opts.text,
         opts.basicText,
         opts.use
     );
 
-    var ttfBuffer = ab2b(new TTFWriter(opts).write(miniObj));
+    var ttfBuffer = ab2b(
+        new TTFWriter(opts).write(miniObj)
+    );
 
     return {
         object: miniObj,
@@ -193,7 +199,11 @@ module.exports = function (opts) {
         try {
 
             // write file buffer
-            var miniTtf = minifyTtfBuffer(file.contents, opts);
+            var miniTtf = minifyTtf(
+                file.ttfObject || file.contents,
+                opts
+            );
+
             file.contents = miniTtf.buffer;
             file.ttfObject = miniTtf.object;
 

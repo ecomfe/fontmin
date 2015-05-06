@@ -13,20 +13,23 @@ var fs = require('fs');
 var path = require('path');
 var clean = require('gulp-clean');
 var isTtf = require('is-ttf');
+var isOtf = require('is-otf');
 var isEot = require('is-eot');
 var isWoff = require('is-woff');
 var isSvg = require('is-svg');
 var Fontmin = require('../index');
 
-var srcPath = path.resolve(__dirname, '../fonts/eduSong.ttf');
-var destPath = path.resolve(__dirname, '../fonts/dest');
-var destFile = destPath + '/eduSong';
 
-var text = '春·日光'
-    + '殘留的夜蹄在稀薄中消失盡'
-    + '遊戲的念頭在泡影中蔓延起'
-    + '美好是因為挑戰無私的天真'
-    + '罪惡是因為克服背叛的恐懼';
+var fontName = 'TpldKhangXiDictTrial';
+var srcPath = path.resolve(__dirname, '../fonts/' + fontName + '.otf');
+var destPath = path.resolve(__dirname, '../fonts/dest');
+var destFile = path.resolve(destPath, fontName);
+
+var text = ''
+    + '天地玄黄    宇宙洪荒    日月盈昃    辰宿列张'
+    + '寒来暑往    秋收冬藏    闰馀成岁    律吕调阳'
+    + '云腾致雨    露结为霜    金生丽水    玉出昆冈'
+    + '剑号巨阙    珠称夜光    果珍李柰    菜重芥姜';
 
 function getFile(files, ext) {
     var re = new RegExp(ext + '$');
@@ -49,6 +52,7 @@ before(function (done) {
     // minfy
     var fontmin = new Fontmin()
         .src(srcPath)
+        .use(Fontmin.otf2ttf())
         .use(Fontmin.glyph({
             text: text
         }))
@@ -91,21 +95,36 @@ describe('Fontmin util', function () {
 
 });
 
+describe('otf2ttf plugin', function () {
+
+    it('input should be otf', function () {
+
+        var srcBuffer = fs.readFileSync(srcPath);
+        assert(isOtf(srcBuffer));
+
+    });
+
+    it('output buffer should be ttf', function () {
+        assert(isTtf(getFile(outputFiles, 'ttf').contents));
+    });
+
+});
+
 describe('glyph plugin', function () {
 
     it('output buffer should be ttf', function () {
         assert(isTtf(getFile(outputFiles, 'ttf').contents));
     });
 
-    it('output ttf should have `cvt ` table', function () {
-        assert(
-            isTtf(
-                getFile(outputFiles, 'ttf').contents, {
-                    tables: ['cvt ']
-                }
-            )
-        );
-    });
+    // it('output ttf should have `cvt ` table', function () {
+    //     assert(
+    //         isTtf(
+    //             getFile(outputFiles, 'ttf').contents, {
+    //                 tables: ['cvt ']
+    //             }
+    //         )
+    //     );
+    // });
 
     it('output should miner than input', function () {
         var srcBuffer = fs.readFileSync(srcPath);

@@ -87,6 +87,7 @@ function run(src, dest) {
 
     var fontmin = new Fontmin()
         .src(src)
+        .use(Fontmin.otf2ttf(pluginOpts))
         .use(Fontmin.glyph(pluginOpts))
         .use(Fontmin.ttf2eot(pluginOpts))
         .use(Fontmin.ttf2svg(pluginOpts))
