@@ -62,7 +62,8 @@ before(function (done) {
         .use(Fontmin.css({
             glyph: true,
             base64: true,
-            fontPath: './'
+            fontPath: './',
+            local: true
         }))
         .dest(destPath);
 
@@ -268,6 +269,18 @@ describe('css plugin', function () {
             expect(fs.readFileSync(destFile + '.css', {
                 encoding: 'utf-8'
             })).to.have.string('./');
+        }
+        catch (ex) {
+            assert(false);
+        }
+    });
+
+
+    it('dest css should have local()', function () {
+        try {
+            expect(fs.readFileSync(destFile + '.css', {
+                encoding: 'utf-8'
+            })).to.have.string('local');
         }
         catch (ex) {
             assert(false);
