@@ -177,7 +177,8 @@ var fontmin = new Fontmin()
         glyph: true,            // generate class for each glyph. default = false
         iconPrefix: 'my-icon',  // class prefix, only work when glyph is `true`. default to "icon"
         fontFamily: 'myfont',   // custom fontFamily, default to filename or get from analysed ttf file
-        asFileName: false       // rewrite fontFamily as filename force. default = false
+        asFileName: false,      // rewrite fontFamily as filename force. default = false
+        local: true             // boolean to add local font. default = false
     }));
 ```
 
@@ -218,6 +219,7 @@ Convert otf to ttf.
 var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
+    .src('fonts/*.otf')
     .use(Fontmin.otf2ttf());
 ```
 
