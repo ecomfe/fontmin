@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.9.0-alpha-2 (2015-05-20)
+
+- css plugin add option local
+
+## 0.9.0-alpha-1 (2015-05-06)
+
+- add otf2ttf plugin
+
 ## 0.8.1 (2015-05-05)
 
 - svgs2ttf plugin add option fontName
