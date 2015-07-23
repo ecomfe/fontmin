@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Fontmin - フォントサブセット化ソリューション</title>
+    <meta name="keywords" content="フォント, font, typeface, サブセット, JavaScript, webfont">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="bookmark" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="asset/css/app-jp.css">
+    <script src="http://s1.bdstatic.com/r/www/cache/ecom/esl/2-0-4/esl.js"></script>
+    <script>
+    require.config({
+        'baseUrl': 'asset',
+        'paths': {
+            'jquery': '../dep/jquery/dist/jquery.min',
+            'lettering': '../dep/Lettering.js/jquery.lettering',
+            'fullpage': '../dep/fullpage/jquery.fullPage.min'
+        },
+        'shim': {
+            'lettering': ['jquery'],
+            'fullpage': ['jquery']
+        },
+        'packages': []
+    });
+    </script>
+</head>
+
+<body>
+<!--[if lt IE 8]>
+<div style="width:100%;height:100%;z-index:99999;">
+    <p style="text-align:center;font-size:3em;line-height:1.5;margin:5em 0">You are using an <strong style="color:#DB043D">outdated</strong> browser, please <a style="color:#538BF2" href="http://browsehappy.com/">install</a> major browsers.</p>
+    <p style="text-align:center;font-size:6em;line-height:2">
+        ╮(￣▽￣)╭　
+    </p>
+</div>
+<![endif]-->
+<div id="loading">
+    <div class="load-left"></div>
+    <div class="load-right"></div>
+    <div class="load-spinner">
+        <img src="asset/img/logo.png" width="256" height="256" alt="loading">
+        <h1>Fontmin</h1>
+    </div>
+</div>
+
+<div id="fullpage">
+    <div class="section banner">
+        <img class="logo" src="asset/img/logo.png" alt="logo">
+        <h1>Fontmin</h1>
+        <h2>史上初 完全 JavaScript フォントサブセット化ソリューション</h2>
+        <div class="menu">
+            <a href="#feature">特徴</a>
+            <a href="#usage">使用</a>
+            <a href="#terminal">ターミナル</a>
+            <a href="#app">アプリ</a>
+            <a href="#source">ソースコード</a>
+        </div>
+    </div>
+    <div class="section feature">
+        <div class="section-title">
+            <div class="bg"></div>
+            <h1>特徴</h1>
+        </div>
+        <div class="feature-left">
+            <div class="font-body">
+                <div class="font-chars">
+                    <p>道可道，非常道。名可名，非常名。</p>
+                </div>
+                <p class="font-info">
+                    <span class="font-name">新蒂文徵明体</span>
+                    <span class="font-meta">フォント: 7500+</span>
+                </p>
+                <div class="tags">
+                    <img data-src="https://img.shields.io/badge/TTF-4.2MB-yellow.svg?style=flat-square" alt="TTF: 4.2MB">
+                </div>
+            </div>
+        </div>
+        <div class="feature-right">
+            <div class="font-body">
+                <div class="font-chars">
+                    <p>道可，非常。名</p>
+                </div>
+                <p class="font-info">
+                    <span class="font-name">新蒂文徵明体</span>
+                    <span class="font-meta">フォント: 7個</span>
+                </p>
+                <div class="tags">
+                    <img data-src="https://img.shields.io/badge/TTF-4.5KB-yellow.svg?style=flat-square" alt="TTF: 4.5KB">
+                    <img data-src="https://img.shields.io/badge/EOT-4.8KB-yellow.svg?style=flat-square" alt="EOT: 4.8KB">
+                    <img data-src="https://img.shields.io/badge/SVG-9.9KB-yellow.svg?style=flat-square" alt="SVG: 9.9KB">
+                    <img data-src="https://img.shields.io/badge/WOFF-3.3KB-yellow.svg?style=flat-square" alt="WOFF: 3.3KB">
+                    <img data-src="https://img.shields.io/badge/CSS-Snippet-blue.svg?style=flat-square" alt="CSS: Snippet">
+                </div>
+            </div>
+        </div>
+        <div class="arrow">
+            <i></i>
+            <em></em>
+        </div>
+        <div class="feature-more">
+            大道三千, 各取其一, 须弥芥子, 无所增减
+        </div>
+    </div>
+    <div class="section usage">
+        <div class="section-title">
+            <div class="bg"></div>
+            <h1>使用</h1>
+        </div>
+<pre>
+var Fontmin = require('fontmin');
+
+var fontmin = new Fontmin()
+    .src('fonts/*.ttf')
+    .dest('build/fonts');
+
+fontmin.run(function (err, files) {
+    if (err) {
+        throw err;
+    }
+
+    console.log(files[0]);
+    // =&gt; { contents: &lt;Buffer 00 01 00 ...&gt; }
+});
+</pre>
+        <p class="links">
+            Doc:
+            <a target="_blank" href="https://github.com/ecomfe/fontmin#api">API</a> /
+            <a target="_blank" href="https://github.com/ecomfe/fontmin#plugins">Plugins</a>
+        </p>
+    </div>
+    <div class="section terminal">
+        <div class="section-title">
+            <div class="bg"></div>
+            <h1>ターミナル</h1>
+        </div>
+        <img src="asset/img/terminal.png" srcset="asset/img/terminal@2x.png 2x" alt="terminal">
+        <p>
+            <i>Fontmin</i> コマンドプロンプトツール　インストール ：<em>npm i -g fontmin</em>
+        </p>
+    </div>
+    <div class="section app">
+        <div class="section-title">
+            <div class="bg"></div>
+            <h1>アプリ</h1>
+        </div>
+        <img src="asset/img/app.png" srcset="asset/img/app@2x.png 2x" alt="app">
+        <a href="https://github.com/ecomfe/fontmin-app/releases/download/v0.2.0/Fontmin-v0.2.0-win32.zip" class="down-btn">Fontmin クライアント Windows 版　ダウンロード</a>
+        <div class="links">
+            <a class="down-link" href="https://github.com/ecomfe/fontmin-app/releases/download/v0.2.0/Fontmin-v0.2.0-osx64.zip">Fontmin for OS X</a> /
+            <a target="_blank" href="https://github.com/ecomfe/fontmin-app">Github</a>
+        </div>
+    </div>
+    <div class="section source">
+        <div class="section-title">
+            <div class="bg"></div>
+            <h1>ソースコード</h1>
+        </div>
+        <a class="github" target="_blank" href="//github.com/ecomfe/fontmin">github.com/ecomfe/fontmin</a>
+        <p>
+            <a target="_blank" href="https://npmjs.org/package/fontmin">
+                <img data-src="http://img.shields.io/npm/v/fontmin.svg" alt="NPM version">
+            </a>
+            <a target="_blank" href="https://travis-ci.org/junmer/fontmin">
+                <img data-src="http://img.shields.io/travis/junmer/fontmin.svg" alt="Build Status">
+            </a>
+            <a target="_blank" href="https://npmjs.org/package/fontmin">
+                <img data-src="http://img.shields.io/npm/dm/fontmin.svg" alt="Downloads">
+            </a>
+        </p>
+        <div class="star">
+            気に入ったら
+            <iframe class="star-btn" data-src="https://ghbtns.com/github-btn.html?user=ecomfe&repo=fontmin&type=star&count=true" frameborder="0" scrolling="0" width="90px" height="22px"></iframe>
+            いいね ヾ(◍°∇°◍)ﾉﾞ
+        </div>
+        <div class="thanks">
+            ありがとう:
+            <a target="_blank" href="http://www.sentyfont.com/">新蒂字体</a> /
+            <a target="_blank" href="http://weibo.com/eonway">浙江民間書刻体</a> /
+            <a target="_blank" href="http://blog.typekit.com/alternate/source-han-sans-chs/">源ノアレ</a>
+        </div>
+        <div class="links">
+            Links:
+            <a target="_blank" href="http://font.baidu.com">Baidu FontEditor</a> /
+            <a target="_blank" href="http://font-spider.org">FontSpider</a> /
+            <a target="_blank" href="http://efe.baidu.com">EFE Tech</a> /
+            <a target="_blank" href="http://ecomfe.github.io/fate/">Fate</a>
+        </div>
+        <div class="copyright">© 2015 Baidu EFE</div>
+    </div>
+</div>
+
+<script>
+    require(['app'], function (app) {
+        app.init();
+    });
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?857ec3bab739a39e974d1c280b728595";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-62068109-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
