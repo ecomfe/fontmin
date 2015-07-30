@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.9.0-alpha-3 (2015-07-30)
+
+- fix css plugin glyf bug
+- up dependence fonteditor-core
+
 ## 0.9.0-alpha-2 (2015-05-20)
 
 - css plugin add option local
