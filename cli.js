@@ -43,7 +43,8 @@ var cli = meow({
         'basic-text',
         'show-time',
         'deflate-woff',
-        'css-glyph'
+        'css-glyph',
+        'version'
     ],
     'string': [
         'text',
@@ -54,9 +55,15 @@ var cli = meow({
         b: 'basic-text',
         d: 'deflate-woff',
         T: 'show-time',
-        h: 'help'
+        h: 'help',
+        v: 'version'
     }
 });
+
+// version
+if (cli.flags.version) {
+    return console.log(require('./package.json').version);
+}
 
 function isFile(path) {
     if (/^[^\s]+\.\w*$/.test(path)) {

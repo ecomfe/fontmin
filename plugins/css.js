@@ -121,6 +121,7 @@ module.exports = function (opts) {
             fontFile: fontFile,
             fontPath: '',
             base64: '',
+            glyph: false,
             iconPrefix: 'icon',
             local: false
         };

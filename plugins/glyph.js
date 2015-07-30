@@ -8,11 +8,14 @@
 var _ = require('lodash');
 var isTtf = require('is-ttf');
 var through = require('through2');
-var TTF = require('fonteditor-ttf').TTF;
-var TTFReader = require('fonteditor-ttf').TTFReader;
-var TTFWriter = require('fonteditor-ttf').TTFWriter;
+var TTF = require('fonteditor-core').TTF;
+var TTFReader = require('fonteditor-core').TTFReader;
+var TTFWriter = require('fonteditor-core').TTFWriter;
 var b2ab = require('b3b').b2ab;
 var ab2b = require('b3b').ab2b;
+
+var getPureText = require('../lib/util').getPureText;
+var getUniqText = require('../lib/util').getUniqText;
 
 /**
  * basic chars
@@ -22,40 +25,6 @@ var ab2b = require('b3b').ab2b;
  * @type {string}
  */
 var basicText = String.fromCharCode.apply(this, _.range(33, 126));
-
-
-/**
- * getPureText
- *
- * @see https://msdn.microsoft.com/zh-cn/library/ie/2yfce773
- * @param  {string} str target text
- * @return {string}     pure text
- */
-function getPureText(str) {
-
-    return str.trim()
-        .replace(/[\s]/g, '')
-        // .replace(/[\f]/g, '')
-        // .replace(/[\b]/g, '')
-        // .replace(/[\n]/g, '')
-        // .replace(/[\t]/g, '')
-        // .replace(/[\r]/g, '')
-        .replace(/[\u2028]/g, '')
-        .replace(/[\u2029]/g, '');
-
-}
-
-/**
- * getUniqText
- *
- * @param  {string} str target text
- * @return {string}     uniq text
- */
-function getUniqText(str) {
-    return _.uniq(
-        str.split('')
-    ).join('');
-}
 
 /**
  * getStringGlyfs
@@ -221,5 +190,3 @@ module.exports = function (opts) {
 
 // exports
 module.exports.basicText = basicText;
-module.exports.getPureText = getPureText;
-module.exports.getUniqText = getUniqText;

@@ -12,10 +12,10 @@ var replaceExt = require('replace-ext');
 var ab2b = require('b3b').ab2b;
 var _ = require('lodash');
 var bufferToVinyl = require('buffer-to-vinyl');
-var TTFWriter = require('fonteditor-ttf').TTFWriter;
-var TTF = require('fonteditor-ttf').TTF;
-var svg2ttfobject = require('fonteditor-ttf').svg2ttfobject;
-var getEmptyttfObject = require('fonteditor-ttf/lib/ttf/getEmptyttfObject');
+var TTFWriter = require('fonteditor-core').TTFWriter;
+var TTF = require('fonteditor-core').TTF;
+var svg2ttfobject = require('fonteditor-core').svg2ttfobject;
+var getEmptyttfObject = require('fonteditor-core/node/ttf/getEmptyttfObject');
 
 /**
  * SvgFont

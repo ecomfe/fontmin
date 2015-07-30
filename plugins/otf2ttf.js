@@ -7,8 +7,8 @@
 
 var isOtf = require('is-otf');
 var through = require('through2');
-var otf2ttfobject = require('fonteditor-ttf').otf2ttfobject;
-var TTFWriter = require('fonteditor-ttf').TTFWriter;
+var otf2ttfobject = require('fonteditor-core').otf2ttfobject;
+var TTFWriter = require('fonteditor-core').TTFWriter;
 var b2ab = require('b3b').b2ab;
 var ab2b = require('b3b').ab2b;
 var replaceExt = require('replace-ext');
