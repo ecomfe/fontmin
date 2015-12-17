@@ -41,7 +41,7 @@
     "b3b": "0.0.1",
     "buffer-to-vinyl": "^1.0.0",
     "concat-stream": "^1.4.6",
-    "fonteditor-ttf": "0.0.10",
+    "fonteditor-ttf": "https://github.com/akira-cn/fonteditor-ttf#master",
     "get-stdin": "^4.0.1",
     "is-svg": "^1.1.1",
     "is-ttf": "^0.2.1",
