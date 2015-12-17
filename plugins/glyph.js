@@ -134,7 +134,7 @@ function minifyTtfObject(ttfObject, text, useBasicText, plugin) {
  */
 function minifyTtfBuffer(contents, opts) {
 
-    var ttfobj = new TTFReader(opts).read(b2ab(contents));
+    var ttfobj = new TTFReader(opts).read(b2ab(contents), opts.text);
 
     var miniObj = minifyTtfObject(
         ttfobj,
