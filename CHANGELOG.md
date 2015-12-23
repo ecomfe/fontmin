@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.9.1 (2015-12-22)
+- subset at fonteditor-core
+- performance optimization thx @akira-cn
+
 ## 0.9.0-alpha-3 (2015-07-30)
 
 - fix css plugin glyf bug
