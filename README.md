@@ -276,7 +276,6 @@ $ text=`phantom-fetch http://www.chinaw3c.org` && fontmin -t "$text" font.ttf
 
 - [fontmin-app](https://github.com/ecomfe/fontmin-app)
 - [gulp-fontmin](https://github.com/ecomfe/gulp-fontmin)
-- [fontmin-otf2ttf](https://github.com/junmer/fontmin-otf2ttf)
 - [fonteditor](https://github.com/ecomfe/fonteditor)
 
 ## Thanks

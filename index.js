@@ -36,7 +36,7 @@ inherits(Fontmin, EventEmitter);
 /**
  * Get or set the source files
  *
- * @param {Array|Buffer|String} file files to be optimized
+ * @param {Array|Buffer|string} file files to be optimized
  * @return {Object} fontmin
  * @api public
  */

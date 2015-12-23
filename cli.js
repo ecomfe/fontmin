@@ -62,7 +62,8 @@ var cli = meow({
 
 // version
 if (cli.flags.version) {
-    return console.log(require('./package.json').version);
+    console.log(require('./package.json').version);
+    process.exit(0);
 }
 
 function isFile(path) {
