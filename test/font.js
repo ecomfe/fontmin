@@ -52,7 +52,9 @@ before(function (done) {
     // minfy
     var fontmin = new Fontmin()
         .src(srcPath)
-        .use(Fontmin.otf2ttf())
+        .use(Fontmin.otf2ttf({
+            text: text
+        }))
         .use(Fontmin.glyph({
             text: text
         }))

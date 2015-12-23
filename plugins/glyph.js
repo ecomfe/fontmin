@@ -13,34 +13,21 @@ var TTFReader = require('fonteditor-core').TTFReader;
 var TTFWriter = require('fonteditor-core').TTFWriter;
 var b2ab = require('b3b').b2ab;
 var ab2b = require('b3b').ab2b;
-
-var getPureText = require('../lib/util').getPureText;
-var getUniqText = require('../lib/util').getUniqText;
+var util = require('../lib/util');
 
 /**
- * basic chars
- *
- * "!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}"
- *
- * @type {string}
- */
-var basicText = String.fromCharCode.apply(this, _.range(33, 126));
-
-/**
- * getStringGlyfs
+ * getSubsetGlyfs
  *
  * @param  {ttfObject} ttf ttfobj
- * @param  {string} str target string
+ * @param  {Array} subset subset unicode
  * @return {Array}     glyfs array
  */
-function getStringGlyfs(ttf, str) {
+function getSubsetGlyfs(ttf, subset) {
 
     var glyphs = [];
 
     var indexList = ttf.findGlyf({
-        unicode: str.split('').map(function (s) {
-            return s.charCodeAt(0);
-        })
+        unicode: subset || []
     });
 
     if (indexList.length) {
@@ -57,34 +44,22 @@ function getStringGlyfs(ttf, str) {
  * minifyFontObject
  *
  * @param  {Object} ttfObject    ttfObject
- * @param  {string} text         text
- * @param  {boolean} useBasicText useBasicText
+ * @param  {Array} subset         subset
  * @param  {Function=} plugin       use plugin
  * @return {Object}              ttfObject
  */
-function minifyFontObject(ttfObject, text, useBasicText, plugin) {
+function minifyFontObject(ttfObject, subset, plugin) {
 
     // check null
-    if (!text) {
+    if (subset.length === 0) {
         return ttfObject;
     }
-
-    // get pure text
-    text = getPureText(text);
-
-    // check null
-    if (!text) {
-        return ttfObject;
-    }
-
-    // uniq text
-    text = getUniqText(text + (useBasicText ? basicText : ''));
 
     // new TTF Object
     var ttf = new TTF(ttfObject);
 
     // get target glyfs then set
-    ttf.setGlyf(getStringGlyfs(ttf, text));
+    ttf.setGlyf(getSubsetGlyfs(ttf, subset));
 
     // use plugin
     if (_.isFunction(plugin)) {
@@ -93,6 +68,7 @@ function minifyFontObject(ttfObject, text, useBasicText, plugin) {
 
     return ttf.get();
 }
+
 
 /**
  * minifyTtf
@@ -103,6 +79,8 @@ function minifyFontObject(ttfObject, text, useBasicText, plugin) {
  */
 function minifyTtf(contents, opts) {
 
+    opts = opts || {};
+
     var ttfobj = contents;
 
     if (Buffer.isBuffer(contents)) {
@@ -111,8 +89,7 @@ function minifyTtf(contents, opts) {
 
     var miniObj = minifyFontObject(
         ttfobj,
-        opts.text,
-        opts.basicText,
+        opts.subset,
         opts.use
     );
 
@@ -142,6 +119,11 @@ function minifyTtf(contents, opts) {
 module.exports = function (opts) {
 
     opts = _.extend({hinting: true}, opts);
+
+    // prepare subset
+    var subsetText = util.getSubsetText(opts);
+    opts.subset = util.string2unicodes(subsetText);
+
 
     return through.ctor({
         objectMode: true
@@ -186,7 +168,3 @@ module.exports = function (opts) {
     });
 
 };
-
-
-// exports
-module.exports.basicText = basicText;

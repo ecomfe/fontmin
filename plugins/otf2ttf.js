@@ -13,7 +13,7 @@ var b2ab = require('b3b').b2ab;
 var ab2b = require('b3b').ab2b;
 var replaceExt = require('replace-ext');
 var _ = require('lodash');
-
+var util = require('../lib/util');
 
 /**
  * otf2ttf fontmin plugin
@@ -25,6 +25,10 @@ var _ = require('lodash');
 module.exports = function (opts) {
 
     opts = _.extend({clone: false, hinting: true}, opts);
+
+    // prepare subset
+    var subsetText = util.getSubsetText(opts);
+    opts.subset = util.string2unicodes(subsetText);
 
     return through.ctor({
         objectMode: true
