@@ -1,7 +1,7 @@
 {
   "name": "fontmin",
-  "version": "0.8.1",
-  "description": "Minify font seamlessly, ttf subsetter, webfont (eot, woff, svg) converter.",
+  "version": "0.9.1",
+  "description": "Minify font seamlessly, font subsetter, webfont (eot, woff, svg) converter.",
   "main": "index.js",
   "keywords": [
     "font",
@@ -12,6 +12,7 @@
     "compress",
     "minify",
     "font-cli",
+    "otf",
     "ttf",
     "woff",
     "eot",
@@ -24,12 +25,7 @@
     "base64"
   ],
   "author": "junmer",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://raw.githubusercontent.com/ecomfe/fontmin/master/LICENSE"
-    }
-  ],
+  "license": "MIT",
   "repository": "ecomfe/fontmin",
   "bin": {
     "fontmin": "cli.js"
@@ -41,13 +37,14 @@
     "b3b": "0.0.1",
     "buffer-to-vinyl": "^1.0.0",
     "concat-stream": "^1.4.6",
-    "fonteditor-ttf": "0.0.10",
+    "fonteditor-core": "0.0.4",
     "get-stdin": "^4.0.1",
+    "is-otf": "^0.1.1",
     "is-svg": "^1.1.1",
     "is-ttf": "^0.2.1",
     "lodash": "^3.2.0",
     "meow": "^3.0.0",
-    "pako": "^0.2.5",
+    "pako": "^0.2.6",
     "replace-ext": "0.0.1",
     "stream-combiner": "^0.2.1",
     "through2": "^0.6.1",

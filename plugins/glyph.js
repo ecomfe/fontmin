@@ -8,70 +8,26 @@
 var _ = require('lodash');
 var isTtf = require('is-ttf');
 var through = require('through2');
-var TTF = require('fonteditor-ttf').TTF;
-var TTFReader = require('fonteditor-ttf').TTFReader;
-var TTFWriter = require('fonteditor-ttf').TTFWriter;
+var TTF = require('fonteditor-core').TTF;
+var TTFReader = require('fonteditor-core').TTFReader;
+var TTFWriter = require('fonteditor-core').TTFWriter;
 var b2ab = require('b3b').b2ab;
 var ab2b = require('b3b').ab2b;
+var util = require('../lib/util');
 
 /**
- * basic chars
- *
- * "!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}"
- *
- * @type {string}
- */
-var basicText = String.fromCharCode.apply(this, _.range(33, 126));
-
-
-/**
- * getPureText
- *
- * @see https://msdn.microsoft.com/zh-cn/library/ie/2yfce773
- * @param  {string} str target text
- * @return {string}     pure text
- */
-function getPureText(str) {
-
-    return str.trim()
-        .replace(/[\s]/g, '')
-        // .replace(/[\f]/g, '')
-        // .replace(/[\b]/g, '')
-        // .replace(/[\n]/g, '')
-        // .replace(/[\t]/g, '')
-        // .replace(/[\r]/g, '')
-        .replace(/[\u2028]/g, '')
-        .replace(/[\u2029]/g, '');
-
-}
-
-/**
- * getUniqText
- *
- * @param  {string} str target text
- * @return {string}     uniq text
- */
-function getUniqText(str) {
-    return _.uniq(
-        str.split('')
-    ).join('');
-}
-
-/**
- * getStringGlyfs
+ * getSubsetGlyfs
  *
  * @param  {ttfObject} ttf ttfobj
- * @param  {string} str target string
+ * @param  {Array} subset subset unicode
  * @return {Array}     glyfs array
  */
-function getStringGlyfs(ttf, str) {
+function getSubsetGlyfs(ttf, subset) {
 
     var glyphs = [];
 
     var indexList = ttf.findGlyf({
-        unicode: str.split('').map(function (s) {
-            return s.charCodeAt(0);
-        })
+        unicode: subset || []
     });
 
     if (indexList.length) {
@@ -85,37 +41,25 @@ function getStringGlyfs(ttf, str) {
 
 
 /**
- * minifyTtfObject
+ * minifyFontObject
  *
  * @param  {Object} ttfObject    ttfObject
- * @param  {string} text         text
- * @param  {boolean} useBasicText useBasicText
+ * @param  {Array} subset         subset
  * @param  {Function=} plugin       use plugin
  * @return {Object}              ttfObject
  */
-function minifyTtfObject(ttfObject, text, useBasicText, plugin) {
+function minifyFontObject(ttfObject, subset, plugin) {
 
     // check null
-    if (!text) {
+    if (subset.length === 0) {
         return ttfObject;
     }
-
-    // get pure text
-    text = getPureText(text);
-
-    // check null
-    if (!text) {
-        return ttfObject;
-    }
-
-    // uniq text
-    text = getUniqText(text + (useBasicText ? basicText : ''));
 
     // new TTF Object
     var ttf = new TTF(ttfObject);
 
     // get target glyfs then set
-    ttf.setGlyf(getStringGlyfs(ttf, text));
+    ttf.setGlyf(getSubsetGlyfs(ttf, subset));
 
     // use plugin
     if (_.isFunction(plugin)) {
@@ -125,25 +69,33 @@ function minifyTtfObject(ttfObject, text, useBasicText, plugin) {
     return ttf.get();
 }
 
+
 /**
- * minifyTtfBuffer
+ * minifyTtf
  *
- * @param  {string} contents         contents
+ * @param  {Buffer|Object} contents         contents
  * @param  {Object} opts         opts
  * @return {Buffer}              buffer
  */
-function minifyTtfBuffer(contents, opts) {
+function minifyTtf(contents, opts) {
 
-    var ttfobj = new TTFReader(opts).read(b2ab(contents));
+    opts = opts || {};
 
-    var miniObj = minifyTtfObject(
+    var ttfobj = contents;
+
+    if (Buffer.isBuffer(contents)) {
+        ttfobj = new TTFReader(opts).read(b2ab(contents));
+    }
+
+    var miniObj = minifyFontObject(
         ttfobj,
-        opts.text,
-        opts.basicText,
+        opts.subset,
         opts.use
     );
 
-    var ttfBuffer = ab2b(new TTFWriter(opts).write(miniObj));
+    var ttfBuffer = ab2b(
+        new TTFWriter(opts).write(miniObj)
+    );
 
     return {
         object: miniObj,
@@ -167,6 +119,11 @@ function minifyTtfBuffer(contents, opts) {
 module.exports = function (opts) {
 
     opts = _.extend({hinting: true}, opts);
+
+    // prepare subset
+    var subsetText = util.getSubsetText(opts);
+    opts.subset = util.string2unicodes(subsetText);
+
 
     return through.ctor({
         objectMode: true
@@ -193,7 +150,11 @@ module.exports = function (opts) {
         try {
 
             // write file buffer
-            var miniTtf = minifyTtfBuffer(file.contents, opts);
+            var miniTtf = minifyTtf(
+                file.ttfObject || file.contents,
+                opts
+            );
+
             file.contents = miniTtf.buffer;
             file.ttfObject = miniTtf.object;
 
@@ -207,9 +168,3 @@ module.exports = function (opts) {
     });
 
 };
-
-
-// exports
-module.exports.basicText = basicText;
-module.exports.getPureText = getPureText;
-module.exports.getUniqText = getUniqText;

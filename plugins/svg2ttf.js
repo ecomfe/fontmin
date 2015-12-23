@@ -7,8 +7,8 @@
 
 var isSvg = require('is-svg');
 var through = require('through2');
-var TTFWriter = require('fonteditor-ttf').TTFWriter;
-var svg2ttfobject = require('fonteditor-ttf').svg2ttfobject;
+var TTFWriter = require('fonteditor-core').TTFWriter;
+var svg2ttfobject = require('fonteditor-core').svg2ttfobject;
 var ab2b = require('b3b').ab2b;
 var replaceExt = require('replace-ext');
 var _ = require('lodash');

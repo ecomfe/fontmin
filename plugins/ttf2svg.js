@@ -7,7 +7,7 @@
 
 var isTtf = require('is-ttf');
 var through = require('through2');
-var ttf2svg = require('fonteditor-ttf').ttf2svg;
+var ttf2svg = require('fonteditor-core').ttf2svg;
 var b2ab = require('b3b').b2ab;
 var replaceExt = require('replace-ext');
 var _ = require('lodash');
@@ -69,6 +69,7 @@ module.exports = function (opts) {
 
             if (err) {
                 cb(err);
+                return;
             }
 
             file.contents = buffer;

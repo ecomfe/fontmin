@@ -36,7 +36,7 @@ inherits(Fontmin, EventEmitter);
 /**
  * Get or set the source files
  *
- * @param {Array|Buffer|String} file files to be optimized
+ * @param {Array|Buffer|string} file files to be optimized
  * @return {Object} fontmin
  * @api public
  */
@@ -105,6 +105,7 @@ Fontmin.prototype.createStream = function () {
     this.streams.unshift(this.getFiles());
 
     if (this.streams.length === 1) {
+        this.use(Fontmin.otf2ttf());
         this.use(Fontmin.ttf2eot());
         this.use(Fontmin.ttf2woff());
         this.use(Fontmin.ttf2svg());
@@ -145,7 +146,8 @@ module.exports = Fontmin;
     'ttf2svg',
     'css',
     'svg2ttf',
-    'svgs2ttf'
+    'svgs2ttf',
+    'otf2ttf'
 ].forEach(function (plugin) {
     module.exports[plugin] = require('./plugins/' + plugin);
 });

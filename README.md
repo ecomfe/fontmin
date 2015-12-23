@@ -106,6 +106,7 @@ The following plugins are bundled with fontmin:
 * [css](#css) — Generate css from ttf, often used to make iconfont.
 * [svg2ttf](#svg2ttf) — Convert font format svg to ttf.
 * [svgs2ttf](#svgs2ttf) — Concat svg files to a ttf, just like css sprite.
+* [otf2ttf](#otf2ttf) — Convert otf to ttf.
 
 ### .glyph()
 
@@ -176,7 +177,8 @@ var fontmin = new Fontmin()
         glyph: true,            // generate class for each glyph. default = false
         iconPrefix: 'my-icon',  // class prefix, only work when glyph is `true`. default to "icon"
         fontFamily: 'myfont',   // custom fontFamily, default to filename or get from analysed ttf file
-        asFileName: false       // rewrite fontFamily as filename force. default = false
+        asFileName: false,      // rewrite fontFamily as filename force. default = false
+        local: true             // boolean to add local font. default = false
     }));
 ```
 
@@ -207,6 +209,18 @@ var fontmin = new Fontmin()
     .use(Fontmin.css({
         glyph: true
     }));
+```
+
+### .otf2ttf()
+
+Convert otf to ttf.
+
+```js
+var Fontmin = require('fontmin');
+
+var fontmin = new Fontmin()
+    .src('fonts/*.otf')
+    .use(Fontmin.otf2ttf());
 ```
 
 ## CLI
@@ -262,7 +276,6 @@ $ text=`phantom-fetch http://www.chinaw3c.org` && fontmin -t "$text" font.ttf
 
 - [fontmin-app](https://github.com/ecomfe/fontmin-app)
 - [gulp-fontmin](https://github.com/ecomfe/gulp-fontmin)
-- [fontmin-otf2ttf](https://github.com/junmer/fontmin-otf2ttf)
 - [fonteditor](https://github.com/ecomfe/fonteditor)
 
 ## Thanks

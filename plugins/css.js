@@ -121,7 +121,9 @@ module.exports = function (opts) {
             fontFile: fontFile,
             fontPath: '',
             base64: '',
-            iconPrefix: 'icon'
+            glyph: false,
+            iconPrefix: 'icon',
+            local: false
         };
 
         // opts
@@ -155,6 +157,11 @@ module.exports = function (opts) {
             fontInfo.base64 = ''
                 + 'data:application/x-font-ttf;charset=utf-8;base64,'
                 + b2a(file.contents);
+        }
+
+        // local
+        if (fontInfo.local === true) {
+            fontInfo.local = fontInfo.fontFamily;
         }
 
         // render
