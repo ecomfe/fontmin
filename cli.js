@@ -108,7 +108,7 @@ function run(src, dest) {
 
     fontmin.run(function (err, files) {
         if (err) {
-            console.error(err.message);
+            console.error(err.stack || err);
             process.exit(1);
         }
 
