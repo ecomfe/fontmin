@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.9.2 (2016-1-5)
+- fix #26 parse name table in ASCII
+
 ## 0.9.1 (2015-12-22)
 - subset at fonteditor-core
 - performance optimization thx @akira-cn
