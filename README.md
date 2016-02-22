@@ -182,6 +182,20 @@ var fontmin = new Fontmin()
     }));
 ```
 
+Alternatively, a transform function can be passed as `fontFamily` option.
+```js
+var Fontmin = require('fontmin');
+
+var fontmin = new Fontmin()
+    .use(Fontmin.css({
+        // ...
+        fontFamily: function(fontInfo, ttf) {
+          return "Transformed Font Family Name"
+        },
+        // ...
+    }));
+```
+
 ### .svg2ttf()
 
 Convert font format svg to ttf.
