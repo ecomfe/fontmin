@@ -77,7 +77,7 @@ function getGlyfList(ttf) {
 /**
  * get font family name
  *
- * @param {Object} font info object
+ * @param {Object} fontInfo font info object
  * @param {ttfObject} ttf ttfObject
  * @param {Object} opts opts
  * @return {string} font family name

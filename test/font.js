@@ -66,8 +66,8 @@ before(function (done) {
             base64: true,
             fontPath: './',
             local: true,
-            fontFamily: function(font, ttf) {
-              return ttf.name.fontFamily + " - Transformed";  
+            fontFamily: function (font, ttf) {
+                return ttf.name.fontFamily + ' - Transformed';
             }
         }))
         .dest(destPath);
@@ -292,14 +292,17 @@ describe('css plugin', function () {
         }
     });
 
-    it('dest css should have transformed @font-family name', function() {
+    it('dest css should have transformed @font-family name', function () {
+
         var content = fs.readFileSync(destFile + '.css', {
             encoding: 'utf-8'
         });
-        var m = content.match(/font-family: \s*"(.*?)"/),
-          fontFamily = m[1];
+        var matched = content.match(/font-family: \s*"(.*?)"/);
+        var fontFamily = matched[1];
+
         expect(fontFamily).to.be.a('string')
-          .that.match(/\s-\sTransformed$/);
+            .that.match(/\s-\sTransformed$/);
+
     });
 
 
