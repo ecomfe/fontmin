@@ -14,51 +14,81 @@ var clean = require('gulp-clean');
 var isTtf = require('is-ttf');
 var Fontmin = require('../index');
 
-var fontName = 'FZDBSJW';
+var fontName = 'SentyBrush';
 var srcPath = path.resolve(__dirname, '../fonts/' + fontName + '.ttf');
 var destPath = path.resolve(__dirname, '../fonts/dest_ttf');
 
-var text = ''
-    + '天地玄黄    宇宙洪荒    日月盈昃    辰宿列张'
-    + '寒来暑往    秋收冬藏    闰馀成岁    律吕调阳'
-    + '云腾致雨    露结为霜    金生丽水    玉出昆冈'
-    + '剑号巨阙    珠称夜光    果珍李柰    菜重芥姜';
+// first mined ttf
+var mined;
 
+// first min
 before(function (done) {
 
     // clean
     new Fontmin()
         .src(destPath)
         .use(clean())
-        .run(done);
+        .run(afterClean);
+
+    // subset first
+    var fontmin = new Fontmin()
+        .src(srcPath)
+        .use(Fontmin.glyph({
+            text: 'abcdefg'
+        }))
+        .dest(destPath);
+
+    function afterClean() {
+        fontmin.run(function (err, files, stream) {
+            mined = files[0].contents;
+            done();
+        });
+    }
+
+
 });
 
 describe('subset', function () {
 
-    var fontmin = new Fontmin()
-        .src(srcPath)
-        .use(Fontmin.glyph({
-            text: text
-        }))
-        .dest(destPath);
+    it('should be ok when unicodes out of subbset', function () {
 
-    it('dest should be minier ttf', function (done) {
+        // it ttf
+        expect(isTtf(mined)).to.be.ok;
+
+    });
+
+    it('dest should be minier ttf', function () {
 
         var srcFile = fs.readFileSync(srcPath);
 
+        // minier
+        expect(mined.length).to.be.below(srcFile.length);
+
+    });
+
+    it('subset of non-existent character shoud be ttf', function (done) {
+
+        var destTtf = path.resolve(destPath, fontName + '.ttf');
+
+        var fontmin = new Fontmin()
+            .src(destTtf)
+            .use(Fontmin.glyph({
+                text: '字体里是没有中文字符的'
+            }))
+            .dest(destPath);
+
         fontmin.run(function (err, files, stream) {
 
-            var fileContent = files[0].contents;
+            var twiceMined = files[0].contents;
 
             // it ttf
-            expect(isTtf(fileContent)).to.be.ok;
-
-            // minier
-            expect(fileContent.length).to.be.below(srcFile.length);
+            expect(isTtf(twiceMined)).to.be.ok;
 
             done();
         });
 
+
     });
+
 
 });

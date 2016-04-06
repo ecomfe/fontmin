@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.9.3 (2016-4-6)
+- fix #28 subset of non-existent character 
+
 ## 0.9.2 (2016-1-5)
 - fix #26 parse name table in ASCII
 
