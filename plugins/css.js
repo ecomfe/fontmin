@@ -75,13 +75,39 @@ function getGlyfList(ttf) {
 }
 
 /**
+ * get font family name
+ *
+ * @param {Object} font info object
+ * @param {ttfObject} ttf ttfObject
+ * @param {Object} opts opts
+ * @return {string} font family name
+ */
+function getFontFamily(fontInfo, ttf, opts) {
+    var fontFamily = opts.fontFamily;
+    // Call transform function
+    if (typeof fontFamily === 'function') {
+        fontFamily = fontFamily(_.cloneDeep(fontInfo), ttf);
+    }
+    return fontFamily || ttf.name.fontFamily || fontInfo.fontFile;
+}
+
+/**
+ * Transform font family name
+ * @callback FontFamilyTransform
+ * @param {Object} font info object
+ * @param {ttfObject} ttf ttfObject
+ * @return {string} font family name
+ */
+// function(fontInfo, ttfObject) { return "Font Name"; }
+
+/**
  * css fontmin plugin
  *
  * @param {Object} opts opts
  * @param {boolean=} opts.glyph     generate class for each glyph. default = false
  * @param {boolean=} opts.base64    inject base64
  * @param {string=} opts.iconPrefix icon prefix
- * @param {string=} opts.fontFamily fontFamily
+ * @param {(string|FontFamilyTransform)=} opts.fontFamily fontFamily
  * @return {Object} stream.Transform instance
  * @api public
  */
@@ -143,9 +169,7 @@ module.exports = function (opts) {
         }
 
         // font family
-        fontInfo.fontFamily = opts.fontFamily
-            || ttfObject.name.fontFamily
-            || fontFile;
+        fontInfo.fontFamily = getFontFamily(fontInfo, ttfObject, opts);
 
         // rewrite font family as filename
         if (opts.asFileName) {
@@ -180,4 +204,3 @@ module.exports = function (opts) {
     });
 
 };
-
