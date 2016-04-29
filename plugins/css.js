@@ -137,7 +137,7 @@ module.exports = function (opts) {
         }
 
         // clone
-        this.push(file.clone());
+        this.push(file.clone(false));
 
         file.path = replaceExt(file.path, '.css');
         var fontFile = path.basename(file.path, '.css');
