@@ -48,7 +48,7 @@ module.exports = function (opts) {
 
         // clone
         if (opts.clone) {
-            this.push(file.clone());
+            this.push(file.clone(false));
         }
 
         // replace ext
