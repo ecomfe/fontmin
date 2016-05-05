@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.9.5 (2016-5-5)
+- merge #33 fix File clone bug 
+- update dependences
+
 ## 0.9.3 (2016-4-6)
 - fix #28 subset of non-existent character 
 - merge #29 Add fontFamily transform function support for css plugin 
