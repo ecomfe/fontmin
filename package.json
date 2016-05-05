@@ -40,9 +40,9 @@
     "concat-stream": "^1.4.6",
     "fonteditor-core": "^0.0.21",
     "get-stdin": "^5.0.1",
-    "is-otf": "^0.1.1",
+    "is-otf": "^0.1.2",
     "is-svg": "^1.1.1",
-    "is-ttf": "^0.2.1",
+    "is-ttf": "^0.2.2",
     "lodash": "^4.11.2",
     "meow": "^3.0.0",
     "pako": "^1.0.1",
@@ -52,7 +52,7 @@
     "vinyl-fs": "2.4.3"
   },
   "devDependencies": {
-    "chai": "^2.0.0",
+    "chai": "^3.5.0",
     "gulp-clean": "^0.3.1",
     "is-eot": "^1.0.0",
     "is-woff": "^1.0.1",
