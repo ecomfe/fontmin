@@ -45,7 +45,7 @@ Fontmin.prototype.src = function (file) {
         return this._src;
     }
 
-    this._src = file;
+    this._src = arguments;
     return this;
 };
 
@@ -61,7 +61,7 @@ Fontmin.prototype.dest = function (dir) {
         return this._dest;
     }
 
-    this._dest = dir;
+    this._dest = arguments;
     return this;
 };
 
@@ -113,7 +113,9 @@ Fontmin.prototype.createStream = function () {
     }
 
     if (this.dest()) {
-        this.streams.push(vfs.dest(this.dest()));
+        this.streams.push(
+            vfs.dest.apply(vfs, this.dest())
+        );
     }
 
     return combine(this.streams);
@@ -126,20 +128,20 @@ Fontmin.prototype.createStream = function () {
  * @api private
  */
 Fontmin.prototype.getFiles = function () {
-    if (Buffer.isBuffer(this.src())) {
-        return bufferToVinyl.stream(this.src());
+
+    if (Buffer.isBuffer(this._src[0])) {
+        return bufferToVinyl.stream(this._src[0]);
     }
 
-    return vfs.src(this.src());
+    return vfs.src.apply(vfs, this.src());
 };
 
 /**
- * Module exports
+ * plugins
+ *
+ * @type {Array}
  */
-module.exports = Fontmin;
-
-// export pkged plugins
-[
+Fontmin.plugins = [
     'glyph',
     'ttf2eot',
     'ttf2woff',
@@ -148,9 +150,17 @@ module.exports = Fontmin;
     'svg2ttf',
     'svgs2ttf',
     'otf2ttf'
-].forEach(function (plugin) {
-    module.exports[plugin] = require('./plugins/' + plugin);
+];
+
+// export pkged plugins
+Fontmin.plugins.forEach(function (plugin) {
+    Fontmin[plugin] = require('./plugins/' + plugin);
 });
+
+/**
+ * Module exports
+ */
+module.exports = Fontmin;
 
 // exports util, mime
 module.exports.util = exports.util = require('./lib/util');
