@@ -1,6 +1,6 @@
 {
   "name": "fontmin",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "Minify font seamlessly, font subsetter, webfont (eot, woff, svg) converter.",
   "main": "index.js",
   "keywords": [
@@ -31,7 +31,8 @@
     "fontmin": "cli.js"
   },
   "scripts": {
-    "test": "mocha --timeout=50000"
+    "test": "mocha",
+    "coverage": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter spec --check-leaks test/"
   },
   "dependencies": {
     "b3b": "0.0.1",
@@ -55,6 +56,7 @@
     "gulp-clean": "^0.3.1",
     "is-eot": "^1.0.0",
     "is-woff": "^1.0.1",
+    "istanbul": "^0.4.3",
     "mocha": "^2.1.0"
   }
 }

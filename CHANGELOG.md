@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.9.6 (2016-5-6)
+- fix #31 add trim optional
+- add coverage
+
 ## 0.9.5 (2016-5-5)
 - merge #33 fix File clone bug 
 - update dependences
