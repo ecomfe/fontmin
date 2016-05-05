@@ -108,7 +108,7 @@ describe('otf2ttf plugin', function () {
 
         new Fontmin()
             .src(srcPath)
-            .use(Fontmin.otf2ttf({clone: true, text: 'test'}))
+            .use(Fontmin.otf2ttf({clone: true, text: 't'}))
             .run(function (err, files) {
                 assert.equal(files.length, 2);
                 done();

@@ -88,6 +88,7 @@ describe('Fontmin base', function () {
 
             fm()
                 .src(fontPath + '/SentyBrush.ttf')
+                .use(Fontmin.glyph({text: '1'}))
                 .use(Fontmin[plugin]({clone: false}))
                 .run(function (err, files, stream) {
 
@@ -105,7 +106,7 @@ describe('Fontmin base', function () {
 
     });
 
-    it('should exclude not font', function (done) {
+    it('should exclude files not font', function (done) {
 
         fm()
             .src(fontPath + '/**.html', {read: false})
