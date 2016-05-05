@@ -59,7 +59,7 @@ before(function (done) {
             text: text
         }))
         .use(Fontmin.ttf2eot())
-        .use(Fontmin.ttf2woff())
+        .use(Fontmin.ttf2woff({deflate: true}))
         .use(Fontmin.ttf2svg())
         .use(Fontmin.css({
             glyph: true,
@@ -89,17 +89,7 @@ before(function (done) {
 
 });
 
-describe('Fontmin util', function () {
 
-    it('getFontFolder should be string', function () {
-        expect(Fontmin.util.getFontFolder()).to.be.a('string');
-    });
-
-    it('getFonts should be array', function () {
-        expect(Fontmin.util.getFonts()).to.be.a('array');
-    });
-
-});
 
 describe('otf2ttf plugin', function () {
 
@@ -112,6 +102,18 @@ describe('otf2ttf plugin', function () {
 
     it('output buffer should be ttf', function () {
         assert(isTtf(getFile(outputFiles, 'ttf').contents));
+    });
+
+    it('should keep source when clone true', function (done) {
+
+        new Fontmin()
+            .src(srcPath)
+            .use(Fontmin.otf2ttf({clone: true, text: 'test'}))
+            .run(function (err, files) {
+                assert.equal(files.length, 2);
+                done();
+            });
+
     });
 
 });

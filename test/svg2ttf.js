@@ -63,6 +63,31 @@ before(function (done) {
 
 describe('svg2ttf plugin', function () {
 
+    it('input is\'t svg shoud be pass', function (done) {
+
+        new Fontmin()
+            .src(path.resolve(__dirname, '../fonts/*.html'))
+            .use(Fontmin.svg2ttf())
+            .run(function (err, files) {
+                var ext = path.extname(files[0].path);
+                assert.equal(ext, '.html');
+                done();
+            });
+
+    });
+
+    it('should dest one when clone false', function (done) {
+
+        new Fontmin()
+            .src(srcPath)
+            .use(Fontmin.svg2ttf({clone: false}))
+            .run(function (err, files) {
+                assert.equal(files.length, 1);
+                done();
+            });
+
+    });
+
     it('output buffer should be ttf', function () {
         assert(isTtf(getFile(outputFiles, 'ttf').contents));
     });

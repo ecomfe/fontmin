@@ -5,6 +5,7 @@ npm-debug.log
 fonts/
 test/
 node_modules/
+coverage/
 fontmin.png
 TODO.md
 CHANGELOG.md
