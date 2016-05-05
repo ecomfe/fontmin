@@ -118,7 +118,7 @@ function minifyTtf(contents, opts) {
  */
 module.exports = function (opts) {
 
-    opts = _.extend({hinting: true}, opts);
+    opts = _.extend({hinting: true, trim: true}, opts);
 
     // prepare subset
     var subsetText = util.getSubsetText(opts);
