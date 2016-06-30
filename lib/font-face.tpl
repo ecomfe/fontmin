@@ -12,7 +12,7 @@
 
 <% if (glyph) { %>
 [class^="<%=iconPrefix%>-"],
-[class*=" <%=iconPrefix%>-"]:after {
+[class*=" <%=iconPrefix%>-"]:before {
     font-family: "<%=fontFamily%>";
     speak: none;
     font-style: normal;
