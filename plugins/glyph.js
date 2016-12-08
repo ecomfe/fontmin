@@ -84,7 +84,13 @@ function minifyTtf(contents, opts) {
     var ttfobj = contents;
 
     if (Buffer.isBuffer(contents)) {
+        // TTFReader sometimes return the wrong glyph for space
+        // work around it for now by loading the entire font
+        // and letting minifyFontObject do the work of minimizing the font
+        var subset = opts.subset;
+        opts.subset = [];
         ttfobj = new TTFReader(opts).read(b2ab(contents));
+        opts.subset = subset;
     }
 
     var miniObj = minifyFontObject(
