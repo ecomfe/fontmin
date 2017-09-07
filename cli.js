@@ -102,8 +102,8 @@ function run(src, dest) {
         .use(Fontmin.ttf2woff(pluginOpts))
         .use(Fontmin.css(pluginOpts));
 
-    if (process.stdout.isTTY) {
-        fontmin.dest(dest ? dest : 'build');
+    if (dest) {
+        fontmin.dest(dest);
     }
 
     fontmin.run(function (err, files) {
@@ -112,7 +112,7 @@ function run(src, dest) {
             process.exit(1);
         }
 
-        if (!process.stdout.isTTY) {
+        if (!dest) {
             files.forEach(function (file) {
                 process.stdout.write(file.contents);
             });
