@@ -66,7 +66,23 @@ function minifyFontObject(ttfObject, subset, plugin) {
         plugin(ttf);
     }
 
-    return ttf.get();
+    var ttf_w = ttf.get();
+    var checkUnicodeRepeat = {}; // 检查是否有重复代码点
+
+    for (var i = ttf_w.glyf.length - 1, glyf; i >= 0; i--) {
+        glyf = ttf_w.glyf[i];
+        if (glyf.unicode) {
+            for (var j = glyf.unicode.length - 1, u; j >= 0; j--) {
+                u = glyf.unicode[j];
+                if (checkUnicodeRepeat[u])
+                    glyf.unicode.splice(j, 1);
+                else
+                    checkUnicodeRepeat[u] = true;
+            }
+        }
+    }
+
+    return ttf_w;
 }
 
 
