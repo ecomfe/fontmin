@@ -1,6 +1,6 @@
 {
   "name": "fontmin",
-  "version": "0.9.6",
+  "version": "0.9.7-beta",
   "description": "Minify font seamlessly, font subsetter, webfont (eot, woff, svg) converter.",
   "main": "index.js",
   "keywords": [
@@ -27,6 +27,9 @@
   "author": "junmer",
   "license": "MIT",
   "repository": "ecomfe/fontmin",
+  "engines": {
+    "node": ">=7.5.0"
+  },
   "bin": {
     "fontmin": "cli.js"
   },
@@ -38,7 +41,7 @@
     "b3b": "0.0.1",
     "buffer-to-vinyl": "^1.0.0",
     "concat-stream": "^1.4.6",
-    "fonteditor-core": "^0.0.21",
+    "fonteditor-core": "^0.0.37",
     "get-stdin": "^5.0.1",
     "is-otf": "^0.1.2",
     "is-svg": "^1.1.1",
@@ -49,13 +52,15 @@
     "replace-ext": "0.0.1",
     "stream-combiner": "^0.2.1",
     "through2": "2.0.1",
-    "vinyl-fs": "2.4.3"
+    "vinyl-fs": "2.4.3",
+    "wawoff2": "^1.0.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "gulp-clean": "^0.3.1",
     "is-eot": "^1.0.0",
     "is-woff": "^1.0.1",
+    "is-woff2": "^1.0.0",
     "istanbul": "^0.4.3",
     "mocha": "^2.1.0"
   }

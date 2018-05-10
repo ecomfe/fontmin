@@ -16,6 +16,7 @@ var isTtf = require('is-ttf');
 var isOtf = require('is-otf');
 var isEot = require('is-eot');
 var isWoff = require('is-woff');
+var isWoff2 = require('is-woff2');
 var isSvg = require('is-svg');
 var Fontmin = require('../index');
 
@@ -60,6 +61,7 @@ before(function (done) {
         }))
         .use(Fontmin.ttf2eot())
         .use(Fontmin.ttf2woff({deflate: true}))
+        .use(Fontmin.ttf2woff2())
         .use(Fontmin.ttf2svg())
         .use(Fontmin.css({
             glyph: true,
@@ -204,6 +206,33 @@ describe('ttf2woff plugin', function () {
             assert(
                 isWoff(
                     fs.readFileSync(destFile + '.woff')
+                )
+            );
+        }
+        catch (ex) {
+            assert(false);
+        }
+    });
+
+});
+
+describe('ttf2woff2 plugin', function () {
+
+    it('output buffer should be woff2', function () {
+        assert(isWoff2(getFile(outputFiles, 'woff2').contents));
+    });
+
+    it('dest file should exist woff2', function () {
+        assert(
+            fs.existsSync(destFile + '.woff2')
+        );
+    });
+
+    it('dest file should be woff2', function () {
+        try {
+            assert(
+                isWoff2(
+                    fs.readFileSync(destFile + '.woff2')
                 )
             );
         }

@@ -36,7 +36,7 @@ before(function (done) {
         .src(srcPath)
         .use(Fontmin.glyph({
             text: 'abcd   efg',
-            trim: false
+            // trim: false
         }))
         .dest(destPath);
 
@@ -83,14 +83,25 @@ describe('subset', function () {
 
     });
 
-    it('should has whitespace when trim false', function () {
+    // it('should has whitespace when trim false', function () {
+
+    //     var TTFReader = require('fonteditor-core').TTFReader;
+    //     var b2ab = require('b3b').b2ab;
+    //     var ttf = new TTFReader().read(b2ab(mined));
+
+    //     // contain whitespace
+    //     expect(ttf.cmap).to.contain.any.keys(['32', '160', '202']);
+
+    // });
+
+    it('should has whitespace when mixed text and whitespace', function () {
 
         var TTFReader = require('fonteditor-core').TTFReader;
         var b2ab = require('b3b').b2ab;
         var ttf = new TTFReader().read(b2ab(mined));
 
         // contain whitespace
-        expect(ttf.cmap).to.contain.any.keys(['32', '160', '202']);
+        expect(ttf.cmap).to.contain.any.keys(['32']);
 
     });
 
