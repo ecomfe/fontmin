@@ -28,7 +28,7 @@
   "license": "MIT",
   "repository": "ecomfe/fontmin",
   "engines": {
-    "node": ">=7.10.1"
+    "node": ">=8"
   },
   "bin": {
     "fontmin": "cli.js"
