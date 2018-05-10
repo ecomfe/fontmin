@@ -40,13 +40,13 @@
   "dependencies": {
     "b3b": "0.0.1",
     "buffer-to-vinyl": "^1.0.0",
-    "concat-stream": "^1.4.6",
-    "fonteditor-core": "^0.0.37",
-    "get-stdin": "^5.0.1",
+    "concat-stream": "^1.6.2",
+    "fonteditor-core": "^1.0.2",
+    "get-stdin": "^6.0.0",
     "is-otf": "^0.1.2",
     "is-svg": "^1.1.1",
     "is-ttf": "^0.2.2",
-    "lodash": "^4.11.2",
+    "lodash": "^4.17.10",
     "meow": "^3.0.0",
     "pako": "^1.0.1",
     "replace-ext": "0.0.1",
@@ -56,12 +56,12 @@
     "wawoff2": "^1.0.2"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "gulp-clean": "^0.3.1",
+    "chai": "^4.1.2",
+    "gulp-clean": "^0.4.0",
     "is-eot": "^1.0.0",
     "is-woff": "^1.0.1",
     "is-woff2": "^1.0.0",
     "istanbul": "^0.4.3",
-    "mocha": "^2.1.0"
+    "mocha": "^5.1.1"
   }
 }
