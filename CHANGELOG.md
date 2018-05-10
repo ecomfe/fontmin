@@ -3,7 +3,7 @@
 ## 0.9.7 (2018-5-11)
 - fix #31 #40 #39 #43 #68
 - add woff2 support
-- engines: nodejs >= 7.5.0
+- nodejs >= 7.10.1 see: http://node.green/#ES2017-features-async-functions
 - update dependences
 
 ## 0.9.6 (2016-5-6)

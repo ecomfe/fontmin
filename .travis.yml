@@ -1,4 +1,4 @@
 language: node_js
 node_js:
-  - '7.5'
+  - '7.10.1'
   - '8'
