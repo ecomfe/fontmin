@@ -190,7 +190,7 @@ module.exports = function (opts) {
 
         // render
         var output = _.attempt(function (data) {
-            return new Buffer(renderCss(data));
+            return Buffer.from(renderCss(data));
         }, fontInfo);
 
         if (_.isError(output)) {

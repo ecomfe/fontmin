@@ -15,7 +15,7 @@ var _ = require('lodash');
 function compileTtf(buffer, cb) {
     var output;
     try {
-        output = new Buffer(ttf2svg(b2ab(buffer)));
+        output = Buffer.from(ttf2svg(b2ab(buffer)));
     }
     catch (ex) {
         cb(ex);

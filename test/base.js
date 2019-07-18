@@ -41,7 +41,7 @@ describe('Fontmin base', function () {
     it('should not dest when src buffer', function (done) {
 
         fm()
-            .src(new Buffer(''))
+            .src(Buffer.from(''))
             .dest(fontPath + '/dest')
             .run(function (err, files, stream) {
                 done();
