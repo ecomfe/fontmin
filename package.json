@@ -52,7 +52,7 @@
     "replace-ext": "0.0.1",
     "stream-combiner": "^0.2.1",
     "through2": "2.0.1",
-    "vinyl-fs": "2.4.3",
+    "vinyl-fs": "3.0.3",
     "ttf2woff2": "3.0.0"
   },
   "devDependencies": {
@@ -62,6 +62,6 @@
     "is-woff": "^1.0.1",
     "is-woff2": "^1.0.0",
     "istanbul": "^0.4.3",
-    "mocha": "^5.1.1"
+    "mocha": "^3.5.3"
   }
 }

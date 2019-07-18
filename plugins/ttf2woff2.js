@@ -6,7 +6,7 @@
 /* eslint-env node */
 var through = require('through2');
 var replaceExt = require('replace-ext');
-var extend = require('xtend');
+var _ = require('lodash');
 var ttf2woff2 = require('ttf2woff2');
 var isTtf = require('is-ttf');
 
@@ -19,7 +19,7 @@ var isTtf = require('is-ttf');
  */
 module.exports = function (opts) {
 
-    opts = extend({clone: true}, opts);
+    opts = _.extend({clone: true}, opts);
 
     return through.ctor({
         objectMode: true
