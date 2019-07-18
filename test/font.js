@@ -44,6 +44,8 @@ var outputFiles;
 
 before(function (done) {
 
+    this.timeout(5000);
+
     // clean
     new Fontmin()
         .src(destPath)
