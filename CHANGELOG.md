@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.9.8 (2019-7-18)
+- merge #34, #73
+- fix #72 UTF-16-encoded code points 
+- update ttf2woff2@3
+- fix (node:48024) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues.
+
 ## 0.9.7 (2018-5-11)
 - fix #31 #40 #39 #43 #68
 - add woff2 support
