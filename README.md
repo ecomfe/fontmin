@@ -157,7 +157,7 @@ var Fontmin = require('fontmin');
 var svgo = require('imagemin-svgo');
 
 var fontmin = new Fontmin()
-    .use(Fontmin.ttf2svg());
+    .use(Fontmin.ttf2svg())
     .use(svgo());
 
 ```
