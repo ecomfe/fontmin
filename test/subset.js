@@ -116,6 +116,17 @@ describe('subset', function () {
 
     });
 
+     it('should support UTF-16-encoded text', function (done) {
+
+        new Fontmin()
+            .src(srcPath)
+            .use(Fontmin.glyph({
+                text: '🐴'
+            }))
+            .run(done);
+
+    });
+
     it('should support use plugin function', function (done) {
 
         new Fontmin()

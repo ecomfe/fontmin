@@ -40,6 +40,7 @@
   "dependencies": {
     "b3b": "0.0.1",
     "buffer-to-vinyl": "^1.0.0",
+    "code-points": "^2.0.0-1",
     "concat-stream": "^1.6.2",
     "fonteditor-core": "^1.0.2",
     "get-stdin": "^6.0.0",
@@ -52,8 +53,8 @@
     "replace-ext": "0.0.1",
     "stream-combiner": "^0.2.1",
     "through2": "2.0.1",
-    "vinyl-fs": "3.0.3",
-    "ttf2woff2": "3.0.0"
+    "ttf2woff2": "3.0.0",
+    "vinyl-fs": "3.0.3"
   },
   "devDependencies": {
     "chai": "^4.1.2",
