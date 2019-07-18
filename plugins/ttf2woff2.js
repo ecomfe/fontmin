@@ -7,8 +7,7 @@
 var through = require('through2');
 var replaceExt = require('replace-ext');
 var extend = require('xtend');
-var wawoff2 = require('wawoff2');
-var arrayBufferToBuffer = require('b3b').arrayBufferToBuffer;
+var ttf2woff2 = require('ttf2woff2');
 var isTtf = require('is-ttf');
 
 /**
@@ -49,19 +48,20 @@ module.exports = function (opts) {
             this.push(file.clone(false));
         }
 
-        // to woff2
-        wawoff2
-            .compress(file.contents)
-            .then(
-                function (out) {
-                    file.path = replaceExt(file.path, '.woff2');
-                    file.contents = arrayBufferToBuffer(out);
-                    cb(null, file);
-                },
-                function (err) {
-                    cb(err, file);
-                }
-            );
+        // ttf2woff2
+        var ouput;
+        try {
+            ouput = ttf2woff2(file.contents);
+        }
+        catch (ex) {
+            cb(ex, file);
+        }
+
+        if (ouput) {
+            file.path = replaceExt(file.path, '.woff2');
+            file.contents = ouput;
+            cb(null, file);
+        }
 
     });
 
