@@ -1,5 +1,4 @@
 language: node_js
 node_js:
-  - '4'
-  - '8'
-  - '12'
+  - 'lts/*'
+  - 'node'
