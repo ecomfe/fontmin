@@ -1,6 +1,6 @@
 {
   "name": "fontmin",
-  "version": "0.9.8-beta",
+  "version": "0.9.8",
   "description": "Minify font seamlessly, font subsetter, webfont (eot, woff, svg) converter.",
   "main": "index.js",
   "keywords": [
