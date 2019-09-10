@@ -100,6 +100,7 @@ function run(src, dest) {
         .use(Fontmin.ttf2eot(pluginOpts))
         .use(Fontmin.ttf2svg(pluginOpts))
         .use(Fontmin.ttf2woff(pluginOpts))
+        .use(Fontmin.ttf2woff2(pluginOpts))
         .use(Fontmin.css(pluginOpts));
 
     if (process.stdout.isTTY) {
