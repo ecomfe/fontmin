@@ -107,6 +107,7 @@ function getFontFamily(fontInfo, ttf, opts) {
  * @param {boolean=} opts.glyph     generate class for each glyph. default = false
  * @param {boolean=} opts.base64    inject base64
  * @param {string=} opts.iconPrefix icon prefix
+ * @param {string=} opts.filename  set filename
  * @param {(string|FontFamilyTransform)=} opts.fontFamily fontFamily
  * @return {Object} stream.Transform instance
  * @api public
@@ -140,7 +141,7 @@ module.exports = function (opts) {
         this.push(file.clone(false));
 
         file.path = replaceExt(file.path, '.css');
-        var fontFile = path.basename(file.path, '.css');
+        var fontFile = opts.filename || path.basename(file.path, '.css');
 
         // font data
         var fontInfo = {
