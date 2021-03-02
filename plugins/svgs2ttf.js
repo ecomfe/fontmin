@@ -15,7 +15,7 @@ var bufferToVinyl = require('buffer-to-vinyl');
 var TTFWriter = require('fonteditor-core').TTFWriter;
 var TTF = require('fonteditor-core').TTF;
 var svg2ttfobject = require('fonteditor-core').svg2ttfobject;
-var getEmptyttfObject = require('fonteditor-core/ttf/getEmptyttfObject');
+var getEmptyttfObject = require('fonteditor-core/lib/ttf/getEmptyttfObject').default;
 
 /**
  * SvgFont
