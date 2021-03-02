@@ -19,7 +19,9 @@ function compileTtf(buffer, options, cb) {
     var ttf2woffOpts = {};
 
     if (options.deflate) {
-        ttf2woffOpts.deflate = deflate;
+        ttf2woffOpts.deflate = function (input) {
+            return deflate(Uint8Array.from(input));
+        };
     }
 
     try {
