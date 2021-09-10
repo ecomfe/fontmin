@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.9.9 (2021-9-10)
+- merge #75, #76, #86, #92
+- update dependences
 ## 0.9.8 (2019-7-18)
 - merge #34, #73
 - fix #72 UTF-16-encoded code points 
