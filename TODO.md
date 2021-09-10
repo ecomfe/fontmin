@@ -12,7 +12,8 @@ TODO
 - [x] <del>independent koa middleware</del>
 - [x] refactor plugin code 
 - [x] font-face css generator
-- [ ] ttf2woff2
+- [x] ttf2woff2
+- [ ] use fonteditor-core builtin ttf2woff2
 - [x] otf2ttf
 - [x] app -> [fontmin-app](https://github.com/ecomfe/fontmin-app)
 - [x] <del>ttfmin, only analysis cmap table, get glyph by buffer offset</del>
