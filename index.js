@@ -5,12 +5,14 @@
 
 /* eslint-env node */
 
-var combine = require('stream-combiner');
-var concat = require('concat-stream');
-var EventEmitter = require('events').EventEmitter;
-var inherits = require('util').inherits;
-var bufferToVinyl = require('buffer-to-vinyl');
-var vfs = require('vinyl-fs');
+import combine from 'stream-combiner';
+import concat from 'concat-stream';
+import { EventEmitter } from 'events';
+import { inherits } from 'util';
+import bufferToVinyl from 'buffer-to-vinyl';
+import vfs from 'vinyl-fs';
+import util from './lib/util.js';
+import mime from './lib/mime-types.js';
 
 /**
  * Initialize Fontmin
@@ -155,15 +157,21 @@ Fontmin.plugins = [
 ];
 
 // export pkged plugins
-Fontmin.plugins.forEach(function (plugin) {
-    Fontmin[plugin] = require('./plugins/' + plugin);
+Fontmin.plugins.forEach(async function (name) {
+    try {
+        const plugin = await import(`./plugins/${name}.js`);
+
+        Fontmin[name] = plugin.default;
+    } catch (err) {
+        throw err;
+    }
 });
+
+// exports util, mime
+Fontmin.util = util;
+Fontmin.mime = mime;
 
 /**
  * Module exports
  */
-module.exports = Fontmin;
-
-// exports util, mime
-module.exports.util = exports.util = require('./lib/util');
-module.exports.mime = exports.mime = require('./lib/mime-types');
+export default Fontmin;
