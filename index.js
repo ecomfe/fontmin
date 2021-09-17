@@ -14,6 +14,16 @@ import vfs from 'vinyl-fs';
 import util from './lib/util.js';
 import mime from './lib/mime-types.js';
 
+import pluginGlyph from './plugins/glyph.js';
+import pluginTtf2eot from './plugins/ttf2eot.js';
+import pluginTtf2woff from './plugins/ttf2woff.js';
+import pluginTtf2woff2 from './plugins/ttf2woff2.js';
+import pluginTtf2svg from './plugins/ttf2svg.js';
+import pluginCss from './plugins/css.js';
+import pluginSvg2ttf from './plugins/svg2ttf.js';
+import pluginSvgs2ttf from './plugins/svgs2ttf.js';
+import pluginOtf2ttf from './plugins/otf2ttf.js';
+
 /**
  * Initialize Fontmin
  *
@@ -157,15 +167,15 @@ Fontmin.plugins = [
 ];
 
 // export pkged plugins
-Fontmin.plugins.forEach(async function (name) {
-    try {
-        const plugin = await import(`./plugins/${name}.js`);
-
-        Fontmin[name] = plugin.default;
-    } catch (err) {
-        throw err;
-    }
-});
+Fontmin.glyph = pluginGlyph;
+Fontmin.ttf2eot = pluginTtf2eot;
+Fontmin.ttf2woff = pluginTtf2woff;
+Fontmin.ttf2woff2 = pluginTtf2woff2;
+Fontmin.ttf2svg = pluginTtf2svg;
+Fontmin.css = pluginCss;
+Fontmin.svg2ttf = pluginSvg2ttf;
+Fontmin.svgs2ttf = pluginSvgs2ttf;
+Fontmin.otf2ttf = pluginOtf2ttf;
 
 // exports util, mime
 Fontmin.util = util;
