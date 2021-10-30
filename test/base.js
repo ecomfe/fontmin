@@ -5,12 +5,13 @@
 
 /* eslint-env node */
 
-var expect = require('chai').expect;
-var path = require('path');
-var bufferToVinyl = require('buffer-to-vinyl');
-var Fontmin = require('../index');
-var fm = Fontmin;
-var fontPath = path.resolve(__dirname, '../fonts');
+import { expect } from 'chai';
+import path from 'path';
+import bufferToVinyl from 'buffer-to-vinyl';
+import Fontmin from '../index.js';
+
+var dirname = path.dirname((new URL(import.meta.url)).pathname);
+var fontPath = path.resolve(dirname, '../fonts');
 
 describe('Fontmin util', function () {
 
@@ -29,7 +30,7 @@ describe('Fontmin base', function () {
 
     it('should run when no cb', function (done) {
 
-        fm()
+        Fontmin()
             .src(fontPath + '/**.empty')
             .run()
             .on('end', function () {
@@ -40,7 +41,7 @@ describe('Fontmin base', function () {
 
     it('should not dest when src buffer', function (done) {
 
-        fm()
+        Fontmin()
             .src(Buffer.from(''))
             .dest(fontPath + '/dest')
             .run(function (err, files, stream) {
@@ -59,7 +60,7 @@ describe('Fontmin base', function () {
 
         function usePlugin(plugin) {
 
-            fm()
+            Fontmin()
                 .src(fontPath + '/SentyBrush.ttf', {read: false})
                 .use(Fontmin[plugin]())
                 .run(function (err, files, stream) {
@@ -86,7 +87,7 @@ describe('Fontmin base', function () {
 
         function usePlugin(plugin) {
 
-            fm()
+            Fontmin()
                 .src(fontPath + '/SentyBrush.ttf')
                 .use(Fontmin.glyph({text: '1'}))
                 .use(Fontmin[plugin]({clone: false}))
@@ -108,7 +109,7 @@ describe('Fontmin base', function () {
 
     it('should exclude files not font', function (done) {
 
-        fm()
+        Fontmin()
             .src(fontPath + '/**.html', {read: false})
             .dest(fontPath + '/dest')
             .run(function (err, files, stream) {
@@ -124,7 +125,7 @@ describe('Fontmin base', function () {
 
         function usePlugin(plugin) {
 
-            fm()
+            Fontmin()
                 .src(fontPath + '/SentyBrush.ttf', {buffer: false})
                 .use(Fontmin[plugin]('test'))
                 .run(function (err, files, stream) {

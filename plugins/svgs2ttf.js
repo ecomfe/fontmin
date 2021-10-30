@@ -5,17 +5,18 @@
 
 /* eslint-env node */
 
-var isSvg = require('is-svg');
-var through = require('through2');
-var path = require('path');
-var replaceExt = require('replace-ext');
-var ab2b = require('b3b').ab2b;
-var _ = require('lodash');
-var bufferToVinyl = require('buffer-to-vinyl');
-var TTFWriter = require('fonteditor-core').TTFWriter;
-var TTF = require('fonteditor-core').TTF;
-var svg2ttfobject = require('fonteditor-core').svg2ttfobject;
-var getEmptyttfObject = require('fonteditor-core/lib/ttf/getEmptyttfObject').default;
+import isSvg from 'is-svg';
+import through from 'through2';
+import path from 'path';
+import replaceExt from 'replace-ext';
+import { ab2b } from 'b3b';
+import _ from 'lodash';
+import bufferToVinyl from 'buffer-to-vinyl';
+import fonteditorCore from 'fonteditor-core';
+import getEmptyttfObject from 'fonteditor-core/lib/ttf/getEmptyttfObject.js';
+
+const getEmpty = getEmptyttfObject.default;
+const { TTFWriter, TTF, svg2ttfobject } = fonteditorCore;
 
 /**
  * SvgFont
@@ -45,7 +46,7 @@ function SvgFont(name, opts) {
     );
 
     // empty ttfobj
-    var ttfobj = getEmptyttfObject();
+    var ttfobj = getEmpty();
 
     // for save name
     ttfobj.post.format = 2;
@@ -120,7 +121,7 @@ SvgFont.prototype.compile = function () {
  * @return {Object} stream.Transform instance
  * @api public
  */
-module.exports = function (file, opts) {
+export default function (file, opts) {
 
     if (!file) {
         throw new Error('Missing file option for fontmin-svg2ttf');

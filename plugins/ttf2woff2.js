@@ -4,11 +4,11 @@
  */
 
 /* eslint-env node */
-var through = require('through2');
-var replaceExt = require('replace-ext');
-var _ = require('lodash');
-var ttf2woff2 = require('ttf2woff2');
-var isTtf = require('is-ttf');
+import through from 'through2';
+import replaceExt from 'replace-ext';
+import _ from 'lodash';
+import ttf2woff2 from 'ttf2woff2';
+import isTtf from 'is-ttf';
 
 /**
  * wawoff2 fontmin plugin
@@ -17,7 +17,7 @@ var isTtf = require('is-ttf');
  * @return {Object} stream.Transform instance
  * @api public
  */
-module.exports = function (opts) {
+export default function (opts) {
 
     opts = _.extend({clone: true}, opts);
 

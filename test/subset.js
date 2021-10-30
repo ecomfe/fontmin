@@ -6,16 +6,19 @@
 /* eslint-env node */
 /* global before */
 
-var expect = require('chai').expect;
-
-var fs = require('fs');
-var path = require('path');
-var clean = require('gulp-clean');
-var isTtf = require('is-ttf');
-var Fontmin = require('../index');
+import { expect } from 'chai';
+import fs from 'fs';
+import path from 'path';
+import clean from 'gulp-clean';
+import isTtf from 'is-ttf';
+import Fontmin from '../index.js';
+import fonteditorCore from 'fonteditor-core';
+import { b2ab } from 'b3b';
+const { TTFReader } = fonteditorCore;
 
 var fontName = 'SentyBrush';
-var fontDir = path.resolve(__dirname, '../fonts');
+var dirname = path.dirname((new URL(import.meta.url)).pathname);
+var fontDir = path.resolve(dirname, '../fonts');
 var srcPath = path.resolve(fontDir, fontName + '.ttf');
 var destPath = path.resolve(fontDir, 'dest_ttf');
 
@@ -96,8 +99,6 @@ describe('subset', function () {
 
     it('should has whitespace when mixed text and whitespace', function () {
 
-        var TTFReader = require('fonteditor-core').TTFReader;
-        var b2ab = require('b3b').b2ab;
         var ttf = new TTFReader().read(b2ab(mined));
 
         // contain whitespace

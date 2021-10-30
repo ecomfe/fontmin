@@ -9,36 +9,35 @@
 
 'use strict';
 
-var fs = require('fs');
-var meow = require('meow');
-var path = require('path');
-var stdin = require('get-stdin');
-var Fontmin = require('./');
-var _ = require('lodash');
+import fs from 'fs';
+import meow from 'meow';
+import path from 'path';
+import stdin from 'get-stdin';
+import Fontmin from './index.js';
+import _ from 'lodash';
 
-var cli = meow({
-    help: [
-        'Usage',
-        '  $ fontmin <file> [<output>]',
-        '  $ fontmin <directory> [<output>]',
-        '  $ fontmin <file> > <output>',
-        '  $ cat <file> | fontmin > <output>',
-        '',
-        'Example',
-        '  $ fontmin fonts/* build',
-        '  $ fontmin fonts build',
-        '  $ fontmin foo.ttf > foo-optimized.ttf',
-        '  $ cat foo.ttf | fontmin > foo-optimized.ttf',
-        '',
-        'Options',
-        '  -t, --text                          require glyphs by text',
-        '  -b, --basic-text                    require glyphs with base chars',
-        '  -d, --deflate-woff                  deflate woff',
-        '  --font-family                       font-family for @font-face CSS',
-        '  --css-glyph                         generate class for each glyf. default = false',
-        '  -T, --show-time                     show time fontmin cost'
-    ].join('\n')
-}, {
+var cli = meow([
+    'Usage',
+    '  $ fontmin <file> [<output>]',
+    '  $ fontmin <directory> [<output>]',
+    '  $ fontmin <file> > <output>',
+    '  $ cat <file> | fontmin > <output>',
+    '',
+    'Example',
+    '  $ fontmin fonts/* build',
+    '  $ fontmin fonts build',
+    '  $ fontmin foo.ttf > foo-optimized.ttf',
+    '  $ cat foo.ttf | fontmin > foo-optimized.ttf',
+    '',
+    'Options',
+    '  -t, --text                          require glyphs by text',
+    '  -b, --basic-text                    require glyphs with base chars',
+    '  -d, --deflate-woff                  deflate woff',
+    '  --font-family                       font-family for @font-face CSS',
+    '  --css-glyph                         generate class for each glyf. default = false',
+    '  -T, --show-time                     show time fontmin cost'
+].join('\n'), {
+    importMeta: import.meta,
     'boolean': [
         'basic-text',
         'show-time',

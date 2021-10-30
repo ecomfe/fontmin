@@ -6,24 +6,23 @@
 /* eslint-env node */
 /* global before */
 
-var assert = require('chai').assert;
-var expect = require('chai').expect;
-
-var fs = require('fs');
-var path = require('path');
-var clean = require('gulp-clean');
-var isTtf = require('is-ttf');
-var isOtf = require('is-otf');
-var isEot = require('is-eot');
-var isWoff = require('is-woff');
-var isWoff2 = require('is-woff2');
-var isSvg = require('is-svg');
-var Fontmin = require('../index');
+import { assert, expect } from 'chai';
+import fs from 'fs';
+import path from 'path';
+import clean from 'gulp-clean';
+import isTtf from 'is-ttf';
+import isOtf from 'is-otf';
+import isEot from 'is-eot';
+import isWoff from 'is-woff';
+import isWoff2 from 'is-woff2';
+import isSvg from 'is-svg';
+import Fontmin from '../index.js';
 
 
 var fontName = 'TpldKhangXiDictTrial';
-var srcPath = path.resolve(__dirname, '../fonts/' + fontName + '.otf');
-var destPath = path.resolve(__dirname, '../fonts/dest');
+var dirname = path.dirname((new URL(import.meta.url)).pathname);
+var srcPath = path.resolve(dirname, '../fonts/' + fontName + '.otf');
+var destPath = path.resolve(dirname, '../fonts/dest');
 var destFile = path.resolve(destPath, fontName);
 
 var text = ''
@@ -43,7 +42,6 @@ function getFile(files, ext) {
 var outputFiles;
 
 before(function (done) {
-
     this.timeout(5000);
 
     // clean

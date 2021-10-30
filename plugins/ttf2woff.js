@@ -5,14 +5,15 @@
 
 /* eslint-env node */
 
-var isTtf = require('is-ttf');
-var through = require('through2');
-var ttf2woff = require('fonteditor-core').ttf2woff;
-var b2ab = require('b3b').b2ab;
-var ab2b = require('b3b').ab2b;
-var replaceExt = require('replace-ext');
-var deflate = require('pako').deflate;
-var _ = require('lodash');
+import isTtf from 'is-ttf';
+import through from 'through2';
+import { b2ab, ab2b } from 'b3b';
+import replaceExt from 'replace-ext';
+import { deflate } from 'pako';
+import _ from 'lodash';
+import fonteditorCore from 'fonteditor-core';
+
+const { ttf2woff } = fonteditorCore;
 
 function compileTtf(buffer, options, cb) {
     var output;
@@ -47,7 +48,7 @@ function compileTtf(buffer, options, cb) {
  * @return {Object} stream.Transform instance
  * @api public
  */
-module.exports = function (opts) {
+export default function (opts) {
 
     opts = _.extend({clone: true}, opts);
 

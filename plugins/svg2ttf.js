@@ -5,13 +5,14 @@
 
 /* eslint-env node */
 
-var isSvg = require('is-svg');
-var through = require('through2');
-var TTFWriter = require('fonteditor-core').TTFWriter;
-var svg2ttfobject = require('fonteditor-core').svg2ttfobject;
-var ab2b = require('b3b').ab2b;
-var replaceExt = require('replace-ext');
-var _ = require('lodash');
+import isSvg from 'is-svg';
+import through from 'through2';
+import { ab2b } from 'b3b';
+import replaceExt from 'replace-ext';
+import _ from 'lodash';
+import fonteditorCore from 'fonteditor-core';
+
+const { TTFWriter, svg2ttfobject } = fonteditorCore;
 
 /**
  * svg2ttf fontmin plugin
@@ -20,7 +21,7 @@ var _ = require('lodash');
  * @return {Object} stream.Transform instance
  * @api public
  */
-module.exports = function (opts) {
+export default function (opts) {
 
     opts = _.extend({clone: true, hinting: true}, opts);
 
