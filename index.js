@@ -96,6 +96,22 @@ Fontmin.prototype.run = function (cb) {
 };
 
 /**
+ * run Optimize files with return Promise
+ *
+ * @return {Array<Buffer>} file result
+ * @api public
+ */
+Fontmin.prototype.runAsync = function () {
+    return new Promise((resolve, reject) => {
+        var stream = this.createStream();
+        stream.on('error', reject);
+
+        stream.pipe(concat(resolve));
+    });
+};
+
+
+/**
  * Create stream
  *
  * @return {Stream} file stream
@@ -165,5 +181,6 @@ Fontmin.plugins.forEach(function (plugin) {
 module.exports = Fontmin;
 
 // exports util, mime
+module.exports.default = Fontmin;
 module.exports.util = exports.util = require('./lib/util');
 module.exports.mime = exports.mime = require('./lib/mime-types');

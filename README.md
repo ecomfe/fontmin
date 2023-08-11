@@ -31,9 +31,9 @@ $ npm install --save fontmin
 ## Usage
 
 ```js
-var Fontmin = require('fontmin');
+import Fontmin from 'fontmin';
 
-var fontmin = new Fontmin()
+const fontmin = new Fontmin()
     .src('fonts/*.ttf')
     .dest('build/fonts');
 
@@ -50,10 +50,10 @@ fontmin.run(function (err, files) {
 You can use [gulp-rename](https://github.com/hparra/gulp-rename) to rename your files:
 
 ```js
-var Fontmin = require('fontmin');
-var rename = require('gulp-rename');
+import Fontmin from 'fontmin';
+const rename = require('gulp-rename');
 
-var fontmin = new Fontmin()
+const fontmin = new Fontmin()
     .src('fonts/big.ttf')
     .use(rename('small.ttf'));
 ```
@@ -114,10 +114,10 @@ The following plugins are bundled with fontmin:
 Compress ttf by glyph.
 
 ```js
-var Fontmin = require('fontmin');
+import Fontmin from 'fontmin';
 
-var fontmin = new Fontmin()
-    .use(Fontmin.glyph({ 
+const fontmin = new Fontmin()
+    .use(Fontmin.glyph({
         text: '天地玄黄 宇宙洪荒',
         hinting: false         // keep ttf hint info (fpgm, prep, cvt). default = true
     }));
@@ -128,9 +128,9 @@ var fontmin = new Fontmin()
 Convert ttf to eot.
 
 ```js
-var Fontmin = require('fontmin');
+import Fontmin from 'fontmin';
 
-var fontmin = new Fontmin()
+const fontmin = new Fontmin()
     .use(Fontmin.ttf2eot());
 ```
 
@@ -139,9 +139,9 @@ var fontmin = new Fontmin()
 Convert ttf to woff.
 
 ```js
-var Fontmin = require('fontmin');
+import Fontmin from 'fontmin';
 
-var fontmin = new Fontmin()
+const fontmin = new Fontmin()
     .use(Fontmin.ttf2woff({
         deflate: true           // deflate woff. default = false
     }));
@@ -152,9 +152,9 @@ var fontmin = new Fontmin()
 Convert ttf to woff2.
 
 ```js
-var Fontmin = require('fontmin');
+import Fontmin from 'fontmin';
 
-var fontmin = new Fontmin()
+const fontmin = new Fontmin()
     .use(Fontmin.ttf2woff2());
 ```
 
@@ -165,10 +165,10 @@ Convert ttf to svg.
 you can use [imagemin-svgo](https://github.com/imagemin/imagemin-svgo) to compress svg:
 
 ```js
-var Fontmin = require('fontmin');
-var svgo = require('imagemin-svgo');
+import Fontmin from 'fontmin';
+const svgo = require('imagemin-svgo');
 
-var fontmin = new Fontmin()
+const fontmin = new Fontmin()
     .use(Fontmin.ttf2svg())
     .use(svgo());
 
@@ -179,12 +179,12 @@ var fontmin = new Fontmin()
 Generate css from ttf, often used to make iconfont.
 
 ```js
-var Fontmin = require('fontmin');
+import Fontmin from 'fontmin';
 
-var fontmin = new Fontmin()
+const fontmin = new Fontmin()
     .use(Fontmin.css({
-        fontPath: './',         // location of font file 
-        base64: true,           // inject base64 data:application/x-font-ttf; (gzip font with css). 
+        fontPath: './',         // location of font file
+        base64: true,           // inject base64 data:application/x-font-ttf; (gzip font with css).
                                 // default = false
         glyph: true,            // generate class for each glyph. default = false
         iconPrefix: 'my-icon',  // class prefix, only work when glyph is `true`. default to "icon"
@@ -196,9 +196,9 @@ var fontmin = new Fontmin()
 
 Alternatively, a transform function can be passed as `fontFamily` option.
 ```js
-var Fontmin = require('fontmin');
+import Fontmin from 'fontmin';
 
-var fontmin = new Fontmin()
+const fontmin = new Fontmin()
     .use(Fontmin.css({
         // ...
         fontFamily: function(fontInfo, ttf) {
@@ -213,9 +213,9 @@ var fontmin = new Fontmin()
 Convert font format svg to ttf.
 
 ```js
-var Fontmin = require('fontmin');
+import Fontmin from 'fontmin';
 
-var fontmin = new Fontmin()
+const fontmin = new Fontmin()
     .src('font.svg')
     .use(Fontmin.svg2ttf());
 ```
@@ -227,9 +227,9 @@ Concat svg files to a ttf, just like css sprite.
 awesome work with [css](#css) plugin:
 
 ```js
-var Fontmin = require('fontmin');
+import Fontmin from 'fontmin';
 
-var fontmin = new Fontmin()
+const fontmin = new Fontmin()
     .src('svgs/*.svg')
     .use(Fontmin.svgs2ttf('font.ttf', {fontName: 'iconfont'}))
     .use(Fontmin.css({
@@ -242,9 +242,9 @@ var fontmin = new Fontmin()
 Convert otf to ttf.
 
 ```js
-var Fontmin = require('fontmin');
+import Fontmin from 'fontmin';
 
-var fontmin = new Fontmin()
+const fontmin = new Fontmin()
     .src('fonts/*.otf')
     .use(Fontmin.otf2ttf());
 ```

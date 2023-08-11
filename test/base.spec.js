@@ -77,6 +77,13 @@ describe('Fontmin base', function () {
 
     });
 
+    it('should run with runAsync', async function () {
+        const res = await fm()
+            .src(Buffer.from(''))
+            .dest(fontPath + '/dest')
+            .runAsync();
+        console.log(res);
+    });
 
     it('should dest one when clone false', function (done) {
 

@@ -78,16 +78,13 @@ before(function (done) {
 
 
     function next() {
-        fontmin.run(function (err, files, stream) {
-
-            if (err) {
-                console.log(err);
-                process.exit(-1);
-            }
-
+        fontmin.runAsync().then(files => {
             outputFiles = files;
-
             done();
+        })
+        .catch (err => {
+            console.log(err);
+            process.exit(-1);
         });
     }
 

@@ -1,8 +1,9 @@
 {
   "name": "fontmin",
-  "version": "0.9.9",
+  "version": "1.0.0",
   "description": "Minify font seamlessly, font subsetter, webfont (eot, woff, svg) converter.",
   "main": "index.js",
+  "types": "index.d.ts",
   "keywords": [
     "font",
     "webfont",
@@ -30,16 +31,22 @@
   "license": "MIT",
   "repository": "ecomfe/fontmin",
   "engines": {
-    "node": ">=8"
+    "node": ">=12"
   },
   "bin": {
     "fontmin": "cli.js"
   },
   "scripts": {
-    "test": "mocha",
-    "coverage": "nyc mocha --reporter spec --check-leaks test/"
+    "test": "mocha test/*.spec.js",
+    "coverage": "nyc mocha --reporter spec --check-leaks test/*.spec.js"
+  },
+  "exports": {
+    "require": "./index.js",
+    "import": "./index.js"
   },
   "dependencies": {
+    "@types/node": "^12.20.55",
+    "@types/through2": "^2.0.38",
     "b3b": "^0.0.1",
     "buffer-to-vinyl": "^1.0.0",
     "code-points": "^2.0.0-1",

@@ -1,0 +1,17 @@
+{
+  "name": "ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "example.js",
+  "scripts": {
+    "test": "tsc && node example.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fontmin": "file:../../",
+    "gulp-rename": "^2.0.0",
+    "typescript": "^5.1.6"
+  }
+}
