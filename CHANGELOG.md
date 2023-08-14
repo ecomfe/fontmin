@@ -1,12 +1,16 @@
 # Change Log
 
+## 1.0.1 (2023-8-14)
+- support esm import
+- add dts support
+
 ## 0.9.9 (2021-9-10)
 - merge #75, #76, #86, #92
 - update dependences
 
 ## 0.9.8 (2019-7-18)
 - merge #34, #73
-- fix #72 UTF-16-encoded code points 
+- fix #72 UTF-16-encoded code points
 - update ttf2woff2@3
 - fix (node:48024) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues.
 
@@ -21,12 +25,12 @@
 - add coverage
 
 ## 0.9.5 (2016-5-5)
-- merge #33 fix File clone bug 
+- merge #33 fix File clone bug
 - update dependences
 
 ## 0.9.3 (2016-4-6)
-- fix #28 subset of non-existent character 
-- merge #29 Add fontFamily transform function support for css plugin 
+- fix #28 subset of non-existent character
+- merge #29 Add fontFamily transform function support for css plugin
 - update dependences
 
 ## 0.9.2 (2016-1-5)

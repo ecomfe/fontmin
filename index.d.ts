@@ -1,14 +1,12 @@
 /**
- * @file index.d.ts
+ * @file fontmin
  * @author kekee000(kekee000@gmail.com)
  */
-import through from 'through2';
-import {EventEmitter} from 'events';
 import {Transform} from 'stream';
 import {TTF} from 'fonteditor-core'
 
 type PluginDesc = (...args: any[]) => Transform;
-type InternalPlugin<T = any> = (opts?: T) => PluginDesc;
+type InternalPlugin<T extends Record<string, any> = {}> = (opts?: T) => PluginDesc;
 
 interface GlyphPluginOptions {
     /**
@@ -16,7 +14,7 @@ interface GlyphPluginOptions {
      */
     text: string;
     /**
-     * add basic chars to glyph
+     * add basic chars to glyph, default false
      * @example "!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}"
      */
     basicText?: boolean;
@@ -41,7 +39,7 @@ interface FontInfo {
 
 interface CssPluginOptions {
     /**
-     *generate class for each glyph. default = false
+     * generate class for each glyph. default = false
      */
     glyph?: boolean;
     /**
@@ -49,11 +47,11 @@ interface CssPluginOptions {
      */
     base64?: boolean;
     /**
-     * class prefix, only work when glyph is `true`. default to "icon"
+     * class prefix, only work when glyph is `true`. default = "icon"
      */
     iconPrefix?: string;
     /**
-     * rewrite fontFamily as filename force. default = false
+     * rewrite fontFamily from filename force. default = false
      */
     asFileName?: boolean;
     /**
@@ -61,25 +59,27 @@ interface CssPluginOptions {
      */
     fontPath?: string;
     /**
-     * custom fontFamily, default to filename or get from analysed ttf file
+     * custom fontFamily, default = ttf.fontFamily or filename
+     *
+     * if opts.fontFamily is funciton, then fontFamily will be function return value
      */
     fontFamily?: string | ((fontInfo: FontInfo, ttf: TTF.TTFObject) => string);
     /**
-     *  boolean to add local font. default = false
+     *  add local font. default = false
      */
     local?: boolean;
 }
 
 interface Svgs2ttfPluginOptions {
     /**
-     * set font name
+     * set svg font name
      */
     fontName?: string;
 }
 
 declare namespace Fontmin {
     /*
-     * get subset font using giving text
+     * get font subset with giving text
      */
     const glyph: InternalPlugin<GlyphPluginOptions>;
 
@@ -121,7 +121,7 @@ declare namespace Fontmin {
     /**
      * concat svg files to a ttf, just like css sprite
      */
-    const svgs2ttf: (file: string, opts?: Svgs2ttfPluginOptions) => through.Through2Constructor;
+    const svgs2ttf: (file: string, opts?: Svgs2ttfPluginOptions) => PluginDesc;
 
     /**
      * convert otf to ttf
@@ -131,15 +131,13 @@ declare namespace Fontmin {
 
 type PluginNames = keyof typeof Fontmin;
 
-declare class Fontmin extends EventEmitter {
+declare class Fontmin {
     static plugins: PluginNames[];
-
     /**
      * Get or set the source files
      * @param file files to be optimized
      */
     src(src: ArrayLike<number> | Buffer | string): this;
-
     /**
      * Get or set the destination folder
      * @param dir folder to written
@@ -153,10 +151,10 @@ declare class Fontmin extends EventEmitter {
     use(plugin: PluginDesc): this;
 
     /**
-     * run Optimize files
+     * run Optimize files with callback
      * @param callback plugin function
      */
-    run(callback: (err: Error, files: Buffer[]) => void): Transform;
+    run(callback: (e: Error, files: Buffer[]) => void): Transform;
 
     /**
      * run Optimize files with return Promise
