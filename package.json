@@ -34,7 +34,7 @@
     "node": ">=12"
   },
   "bin": {
-    "fontmin": "cli.js"
+    "fontmin": "cli.mjs"
   },
   "scripts": {
     "test": "mocha test/*.spec.js",
@@ -57,7 +57,7 @@
     "is-svg": "^4.2.1",
     "is-ttf": "^0.2.2",
     "lodash": "^4.17.10",
-    "meow": "^10.1.1",
+    "meow": "^12.1.1",
     "pako": "^2.0.3",
     "replace-ext": "^2.0.0",
     "stream-combiner": "^0.2.1",
