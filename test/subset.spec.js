@@ -18,7 +18,7 @@ var fontName = 'SentyBrush';
 var fontDir = path.resolve(__dirname, '../fonts');
 var srcPath = path.resolve(fontDir, fontName + '.ttf');
 var destPath = path.resolve(fontDir, 'dest_ttf');
-
+var {Font} = require('fonteditor-core');
 // first mined ttf
 var mined;
 
@@ -177,4 +177,51 @@ describe('subset', function () {
     });
 
 
+    it('字符串中无空格', function (done) {
+        console.log(path.resolve(fontDir, 'HYWenHei-85W-1.ttf'))
+        var fontmin = new Fontmin()
+            .src(path.resolve(fontDir, 'HYWenHei-85W-1.ttf'))
+            .use(Fontmin.glyph({
+                text: '天地玄黄',
+                basicText: true
+            }));
+
+        fontmin.run(function (err, files, stream) {
+
+            var twiceMined = files[0].contents;
+
+            // it ttf
+            expect(isTtf(twiceMined)).to.be.ok;
+
+            var font = Font.create(twiceMined, {type: 'ttf'});
+            expect(font.get().glyf.length).to.be.eq(5, 'glyf length');
+            done();
+        });
+    });
+
+    it('中文空格和英文空格', function (done) {
+        console.log(path.resolve(fontDir, 'HYWenHei-85W-1.ttf'))
+        var fontmin = new Fontmin()
+            .src(path.resolve(fontDir, 'HYWenHei-85W-1.ttf'))
+            .use(Fontmin.glyph({
+                text: ' 天地玄黄 \u3000 ',
+                basicText: true
+            }));
+
+        fontmin.run(function (err, files, stream) {
+
+            var twiceMined = files[0].contents;
+
+            // it ttf
+            expect(isTtf(twiceMined)).to.be.ok;
+
+            var font = Font.create(twiceMined, {type: 'ttf'});
+            expect(font.get().glyf.length).to.be.eq(7, 'glyf length');
+            expect(font.get().glyf.some(g => g.unicode && g.unicode.includes(0x3000))).to.be.ok;
+            expect(font.get().glyf.some(g => g.unicode && g.unicode.includes(0x20))).to.be.ok;
+            done();
+        });
+
+
+    });
 });

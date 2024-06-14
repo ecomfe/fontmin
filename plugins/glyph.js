@@ -94,7 +94,7 @@ function minifyTtf(contents, opts) {
     );
 
     var ttfBuffer = ab2b(
-        new TTFWriter(opts).write(miniObj)
+        new TTFWriter(Object.assign({writeZeroContoursGlyfData: true}, opts)).write(miniObj)
     );
 
     return {
