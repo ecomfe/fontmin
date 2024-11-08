@@ -40,7 +40,7 @@ export default function (opts) {
         }
 
         // check svg
-        if (!isSvg(file.contents)) {
+        if (!isSvg(file.contents.toString())) {
             cb(null, file);
             return;
         }

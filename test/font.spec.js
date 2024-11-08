@@ -245,7 +245,7 @@ describe('ttf2woff2 plugin', function () {
 describe('ttf2svg plugin', function () {
 
     it('output buffer should be svg', function () {
-        assert(isSvg(getFile(outputFiles, 'svg').contents));
+        assert(isSvg(getFile(outputFiles, 'svg').contents.toString()));
     });
 
     it('dest file should exist svg', function () {
@@ -258,7 +258,7 @@ describe('ttf2svg plugin', function () {
         try {
             assert(
                 isSvg(
-                    fs.readFileSync(destFile + '.svg')
+                    fs.readFileSync(destFile + '.svg', 'utf8')
                 )
             );
         }

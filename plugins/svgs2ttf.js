@@ -163,7 +163,7 @@ export default function (file, opts) {
         }
 
         // check svg
-        if (!isSvg(file.contents)) {
+        if (!isSvg(file.contents.toString())) {
             cb();
             return;
         }
