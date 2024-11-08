@@ -32,7 +32,7 @@
   "license": "MIT",
   "repository": "ecomfe/fontmin",
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "bin": {
     "fontmin": "cli.js"
@@ -58,7 +58,7 @@
     "is-svg": "^5.1.0",
     "is-ttf": "^0.2.2",
     "lodash": "^4.17.10",
-    "meow": "^9.0.0",
+    "meow": "^13.2.0",
     "pako": "^2.0.3",
     "replace-ext": "^2.0.0",
     "stream-combiner": "^0.2.1",
