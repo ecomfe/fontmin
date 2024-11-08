@@ -2,6 +2,7 @@
   "name": "fontmin",
   "version": "1.1.0",
   "description": "Minify font seamlessly, font subsetter, webfont (eot, woff, svg) converter.",
+  "type": "module",
   "main": "index.js",
   "types": "index.d.ts",
   "keywords": [
@@ -31,7 +32,7 @@
   "license": "MIT",
   "repository": "ecomfe/fontmin",
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "bin": {
     "fontmin": "cli.js"

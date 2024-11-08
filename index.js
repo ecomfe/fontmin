@@ -5,12 +5,25 @@
 
 /* eslint-env node */
 
-var combine = require('stream-combiner');
-var concat = require('concat-stream');
-var EventEmitter = require('events').EventEmitter;
-var inherits = require('util').inherits;
-var bufferToVinyl = require('buffer-to-vinyl');
-var vfs = require('vinyl-fs');
+import combine from 'stream-combiner';
+import concat from 'concat-stream';
+import { EventEmitter } from 'events';
+import { inherits } from 'util';
+import * as bufferToVinyl from 'buffer-to-vinyl';
+import vfs from 'vinyl-fs';
+
+import * as util from './lib/util.js';
+import mime from './lib/mime-types.js';
+
+import glyph from './plugins/glyph.js';
+import ttf2eot from './plugins/ttf2eot.js';
+import ttf2woff from './plugins/ttf2woff.js';
+import ttf2woff2 from './plugins/ttf2woff2.js';
+import ttf2svg from './plugins/ttf2svg.js';
+import css from './plugins/css.js';
+import svg2ttf from './plugins/svg2ttf.js';
+import svgs2ttf from './plugins/svgs2ttf.js';
+import otf2ttf from './plugins/otf2ttf.js';
 
 /**
  * Initialize Fontmin
@@ -171,16 +184,21 @@ Fontmin.plugins = [
 ];
 
 // export pkged plugins
-Fontmin.plugins.forEach(function (plugin) {
-    Fontmin[plugin] = require('./plugins/' + plugin);
-});
+Fontmin.glyph = glyph;
+Fontmin.ttf2eot = ttf2eot;
+Fontmin.ttf2woff = ttf2woff;
+Fontmin.ttf2woff2 = ttf2woff2;
+Fontmin.ttf2svg = ttf2svg;
+Fontmin.css = css;
+Fontmin.svg2ttf = svg2ttf;
+Fontmin.svgs2ttf = svgs2ttf;
+Fontmin.otf2ttf = otf2ttf;
 
 /**
  * Module exports
  */
-module.exports = Fontmin;
 
-// exports util, mime
-module.exports.default = Fontmin;
-module.exports.util = exports.util = require('./lib/util');
-module.exports.mime = exports.mime = require('./lib/mime-types');
+export { util, mime };
+export default Fontmin;
+Fontmin.util = util;
+Fontmin.mime = mime;

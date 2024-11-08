@@ -6,24 +6,24 @@
 /* eslint-env node */
 /* global before */
 
-var assert = require('chai').assert;
-var expect = require('chai').expect;
+import { assert, expect } from 'chai';
 
-var fs = require('fs');
-var path = require('path');
-var clean = require('gulp-clean');
-var isTtf = require('is-ttf');
-var isOtf = require('is-otf');
-var isEot = require('is-eot');
-var isWoff = require('is-woff');
-var isWoff2 = require('is-woff2');
-var isSvg = require('is-svg');
-var Fontmin = require('../index');
+import * as fs from 'fs';
+import * as path from 'path';
+import * as url from 'url';
+import clean from 'gulp-clean';
+import isTtf from 'is-ttf';
+import isOtf from 'is-otf';
+import isEot from 'is-eot';
+import isWoff from 'is-woff';
+import isWoff2 from 'is-woff2';
+import isSvg from 'is-svg';
+import Fontmin from '../index.js';
 
 
 var fontName = 'TpldKhangXiDictTrial';
-var srcPath = path.resolve(__dirname, '../fonts/' + fontName + '.otf');
-var destPath = path.resolve(__dirname, '../fonts/dest');
+var srcPath = url.fileURLToPath(new URL('../fonts/' + fontName + '.otf', import.meta.url));
+var destPath = url.fileURLToPath(new URL('../fonts/dest', import.meta.url));
 var destFile = path.resolve(destPath, fontName);
 
 var text = ''

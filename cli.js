@@ -7,14 +7,13 @@
 
 /* eslint-env node */
 
-'use strict';
-
-var fs = require('fs');
-var meow = require('meow');
-var path = require('path');
-var stdin = require('get-stdin');
-var Fontmin = require('./');
-var _ = require('lodash');
+import * as fs from 'fs';
+import meow from 'meow';
+import * as path from 'path';
+import * as url from 'url';
+import stdin from 'get-stdin';
+import Fontmin from './index.js';
+import _ from 'lodash';
 
 var cli = meow({
     help: [
@@ -62,7 +61,8 @@ var cli = meow({
 
 // version
 if (cli.flags.version) {
-    console.log(require('./package.json').version);
+    var pkg = JSON.parse(fs.readFileSync(url.fileURLToPath(new URL('package.json', import.meta.url))));
+    console.log(pkg.version);
     process.exit(0);
 }
 

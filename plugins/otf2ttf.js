@@ -5,15 +5,13 @@
 
 /* eslint-env node */
 
-var isOtf = require('is-otf');
-var through = require('through2');
-var otf2ttfobject = require('fonteditor-core').otf2ttfobject;
-var TTFWriter = require('fonteditor-core').TTFWriter;
-var b2ab = require('b3b').b2ab;
-var ab2b = require('b3b').ab2b;
-var replaceExt = require('replace-ext');
-var _ = require('lodash');
-var util = require('../lib/util');
+import isOtf from 'is-otf';
+import through from 'through2';
+import fonteditorCore from 'fonteditor-core';
+import { b2ab, ab2b } from 'b3b';
+import replaceExt from 'replace-ext';
+import _ from 'lodash';
+import * as util from '../lib/util.js';
 
 /**
  * otf2ttf fontmin plugin
@@ -22,7 +20,7 @@ var util = require('../lib/util');
  * @return {Object} stream.Transform instance
  * @api public
  */
-module.exports = function (opts) {
+export default function (opts) {
 
     opts = _.extend({clone: false, hinting: true}, opts);
 
@@ -67,9 +65,9 @@ module.exports = function (opts) {
         // try otf2ttf
         try {
 
-            ttfObj = otf2ttfobject(b2ab(file.contents), opts);
+            ttfObj = fonteditorCore.otf2ttfobject(b2ab(file.contents), opts);
 
-            ttfBuffer = ab2b(new TTFWriter(opts).write(ttfObj));
+            ttfBuffer = ab2b(new fonteditorCore.TTFWriter(opts).write(ttfObj));
 
         }
         catch (ex) {

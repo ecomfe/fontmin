@@ -4,13 +4,14 @@
  */
 
 /* eslint-env node */
-var _ = require('lodash');
-var fs = require('fs');
-var path = require('path');
-var isTtf = require('is-ttf');
-var through = require('through2');
-var replaceExt = require('replace-ext');
-var b2a = require('b3b').b2a;
+import _ from 'lodash';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as url from 'url';
+import isTtf from 'is-ttf';
+import through from 'through2';
+import replaceExt from 'replace-ext';
+import { b2a } from 'b3b';
 
 /**
  * tpl
@@ -18,7 +19,7 @@ var b2a = require('b3b').b2a;
  * @type {string}
  */
 var tpl = fs.readFileSync(
-    path.resolve(__dirname, '../lib/font-face.tpl')
+    url.fileURLToPath(new URL('../lib/font-face.tpl', import.meta.url))
 ).toString('utf-8');
 
 /**
@@ -112,7 +113,7 @@ function getFontFamily(fontInfo, ttf, opts) {
  * @return {Object} stream.Transform instance
  * @api public
  */
-module.exports = function (opts) {
+export default function (opts) {
     opts = opts || {};
 
     return through.ctor({
