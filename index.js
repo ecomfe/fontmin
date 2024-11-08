@@ -163,7 +163,8 @@ Fontmin.prototype.getFiles = function () {
         return bufferToVinyl.stream(this._src[0]);
     }
 
-    return vfs.src.apply(vfs, this.src());
+    var [src, options] = this.src();
+    return vfs.src(src, {encoding: false, ...options});
 };
 
 /**
