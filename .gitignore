@@ -3,6 +3,5 @@ npm-debug.log
 node_modules
 fonts/dest*
 /coverage
-.nyc_output
 package-lock.json
 test/ts/example.js
