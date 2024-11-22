@@ -5,15 +5,12 @@
 
 /* eslint-env node */
 
-var _ = require('lodash');
-var isTtf = require('is-ttf');
-var through = require('through2');
-var TTF = require('fonteditor-core').TTF;
-var TTFReader = require('fonteditor-core').TTFReader;
-var TTFWriter = require('fonteditor-core').TTFWriter;
-var b2ab = require('b3b').b2ab;
-var ab2b = require('b3b').ab2b;
-var util = require('../lib/util');
+import _ from 'lodash';
+import isTtf from 'is-ttf';
+import through from 'through2';
+import fonteditorCore from 'fonteditor-core';
+import { b2ab, ab2b } from 'b3b';
+import * as util from '../lib/util.js';
 
 /**
  * getSubsetGlyfs
@@ -56,7 +53,7 @@ function minifyFontObject(ttfObject, subset, plugin) {
     }
 
     // new TTF Object
-    var ttf = new TTF(ttfObject);
+    var ttf = new fonteditorCore.TTF(ttfObject);
 
     // get target glyfs then set
     ttf.setGlyf(getSubsetGlyfs(ttf, subset));
@@ -84,7 +81,7 @@ function minifyTtf(contents, opts) {
     var ttfobj = contents;
 
     if (Buffer.isBuffer(contents)) {
-        ttfobj = new TTFReader(opts).read(b2ab(contents));
+        ttfobj = new fonteditorCore.TTFReader(opts).read(b2ab(contents));
     }
 
     var miniObj = minifyFontObject(
@@ -94,7 +91,7 @@ function minifyTtf(contents, opts) {
     );
 
     var ttfBuffer = ab2b(
-        new TTFWriter(Object.assign({writeZeroContoursGlyfData: true}, opts)).write(miniObj)
+        new fonteditorCore.TTFWriter(Object.assign({writeZeroContoursGlyfData: true}, opts)).write(miniObj)
     );
 
     return {
@@ -116,7 +113,7 @@ function minifyTtf(contents, opts) {
  * @return {Object} stream.Transform instance
  * @api public
  */
-module.exports = function (opts) {
+export default function (opts) {
 
     opts = _.extend({hinting: true, trim: true}, opts);
 

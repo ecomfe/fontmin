@@ -5,12 +5,11 @@
 
 /* eslint-env node */
 
-var expect = require('chai').expect;
-var path = require('path');
-var bufferToVinyl = require('buffer-to-vinyl');
-var Fontmin = require('../index');
+import { expect } from 'chai';
+import * as url from 'url';
+import Fontmin from '../index.js';
 var fm = Fontmin;
-var fontPath = path.resolve(__dirname, '../fonts');
+var fontPath = url.fileURLToPath(new URL('../fonts', import.meta.url));
 
 describe('Fontmin util', function () {
 

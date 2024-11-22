@@ -6,19 +6,21 @@
 /* eslint-env node */
 /* global before */
 
-var expect = require('chai').expect;
+import { expect } from 'chai';
 
-var fs = require('fs');
-var path = require('path');
-var clean = require('gulp-clean');
-var isTtf = require('is-ttf');
-var Fontmin = require('../index');
+import * as fs from 'fs';
+import path from 'path';
+import * as url from 'url';
+import clean from 'gulp-clean';
+import isTtf from 'is-ttf';
+import Fontmin from '../index.js';
+import fonteditorCore from 'fonteditor-core';
+import { b2ab } from 'b3b';
 
 var fontName = 'SentyBrush';
-var fontDir = path.resolve(__dirname, '../fonts');
+var fontDir = url.fileURLToPath(new URL('../fonts', import.meta.url));
 var srcPath = path.resolve(fontDir, fontName + '.ttf');
 var destPath = path.resolve(fontDir, 'dest_ttf');
-var {Font} = require('fonteditor-core');
 // first mined ttf
 var mined;
 
@@ -85,9 +87,7 @@ describe('subset', function () {
 
     // it('should has whitespace when trim false', function () {
 
-    //     var TTFReader = require('fonteditor-core').TTFReader;
-    //     var b2ab = require('b3b').b2ab;
-    //     var ttf = new TTFReader().read(b2ab(mined));
+    //     var ttf = new fonteditorCore.TTFReader().read(b2ab(mined));
 
     //     // contain whitespace
     //     expect(ttf.cmap).to.contain.any.keys(['32', '160', '202']);
@@ -96,9 +96,7 @@ describe('subset', function () {
 
     it('should has whitespace when mixed text and whitespace', function () {
 
-        var TTFReader = require('fonteditor-core').TTFReader;
-        var b2ab = require('b3b').b2ab;
-        var ttf = new TTFReader().read(b2ab(mined));
+        var ttf = new fonteditorCore.TTFReader().read(b2ab(mined));
 
         // contain whitespace
         expect(ttf.cmap).to.contain.any.keys(['32']);
@@ -193,7 +191,7 @@ describe('subset', function () {
             // it ttf
             expect(isTtf(twiceMined)).to.be.ok;
 
-            var font = Font.create(twiceMined, {type: 'ttf'});
+            var font = fonteditorCore.Font.create(twiceMined, {type: 'ttf'});
             expect(font.get().glyf.length).to.be.eq(5, 'glyf length');
             done();
         });
@@ -215,7 +213,7 @@ describe('subset', function () {
             // it ttf
             expect(isTtf(twiceMined)).to.be.ok;
 
-            var font = Font.create(twiceMined, {type: 'ttf'});
+            var font = fonteditorCore.Font.create(twiceMined, {type: 'ttf'});
             expect(font.get().glyf.length).to.be.eq(7, 'glyf length');
             expect(font.get().glyf.some(g => g.unicode && g.unicode.includes(0x3000))).to.be.ok;
             expect(font.get().glyf.some(g => g.unicode && g.unicode.includes(0x20))).to.be.ok;

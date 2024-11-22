@@ -5,17 +5,15 @@
 
 /* eslint-env node */
 
-var isSvg = require('is-svg');
-var through = require('through2');
-var path = require('path');
-var replaceExt = require('replace-ext');
-var ab2b = require('b3b').ab2b;
-var _ = require('lodash');
-var bufferToVinyl = require('buffer-to-vinyl');
-var TTFWriter = require('fonteditor-core').TTFWriter;
-var TTF = require('fonteditor-core').TTF;
-var svg2ttfobject = require('fonteditor-core').svg2ttfobject;
-var getEmptyttfObject = require('fonteditor-core/lib/ttf/getEmptyttfObject').default;
+import isSvg from 'is-svg';
+import through from 'through2';
+import * as path from 'path';
+import replaceExt from 'replace-ext';
+import { ab2b } from 'b3b';
+import _ from 'lodash';
+import * as bufferToVinyl from 'buffer-to-vinyl';
+import fonteditorCore from 'fonteditor-core';
+import getEmptyttfObject from 'fonteditor-core/lib/ttf/getEmptyttfObject.js';
 
 /**
  * SvgFont
@@ -45,13 +43,13 @@ function SvgFont(name, opts) {
     );
 
     // empty ttfobj
-    var ttfobj = getEmptyttfObject();
+    var ttfobj = getEmptyttfObject.default();
 
     // for save name
     ttfobj.post.format = 2;
 
     // new TTF
-    this.ttf = new TTF(ttfobj);
+    this.ttf = new fonteditorCore.TTF(ttfobj);
 
     // set name
     this.ttf.setName(this.opts.name);
@@ -69,7 +67,7 @@ function SvgFont(name, opts) {
  */
 SvgFont.prototype.add = function (name, contents) {
 
-    var ttfObj = svg2ttfobject(
+    var ttfObj = fonteditorCore.svg2ttfobject(
         contents.toString('utf-8'),
         {
             combinePath: true
@@ -100,7 +98,7 @@ SvgFont.prototype.compile = function () {
     }
 
     this.contents = ab2b(
-        new TTFWriter(
+        new fonteditorCore.TTFWriter(
             this.opts
         )
         .write(
@@ -120,7 +118,7 @@ SvgFont.prototype.compile = function () {
  * @return {Object} stream.Transform instance
  * @api public
  */
-module.exports = function (file, opts) {
+export default function (file, opts) {
 
     if (!file) {
         throw new Error('Missing file option for fontmin-svg2ttf');
@@ -165,7 +163,7 @@ module.exports = function (file, opts) {
         }
 
         // check svg
-        if (!isSvg(file.contents)) {
+        if (!isSvg(file.contents.toString())) {
             cb();
             return;
         }

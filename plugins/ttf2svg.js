@@ -5,17 +5,17 @@
 
 /* eslint-env node */
 
-var isTtf = require('is-ttf');
-var through = require('through2');
-var ttf2svg = require('fonteditor-core').ttf2svg;
-var b2ab = require('b3b').b2ab;
-var replaceExt = require('replace-ext');
-var _ = require('lodash');
+import isTtf from 'is-ttf';
+import through from 'through2';
+import fonteditorCore from 'fonteditor-core';
+import { b2ab } from 'b3b';
+import replaceExt from 'replace-ext';
+import _ from 'lodash';
 
 function compileTtf(buffer, cb) {
     var output;
     try {
-        output = Buffer.from(ttf2svg(b2ab(buffer)));
+        output = Buffer.from(fonteditorCore.ttf2svg(b2ab(buffer)));
     }
     catch (ex) {
         cb(ex);
@@ -31,7 +31,7 @@ function compileTtf(buffer, cb) {
  * @return {Object} stream.Transform instance
  * @api public
  */
-module.exports = function (opts) {
+export default function (opts) {
 
     opts = _.extend({clone: true}, opts);
 

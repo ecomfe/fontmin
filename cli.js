@@ -7,16 +7,15 @@
 
 /* eslint-env node */
 
-'use strict';
-
-var fs = require('fs');
-var meow = require('meow');
-var path = require('path');
-var stdin = require('get-stdin');
-var Fontmin = require('./');
-var _ = require('lodash');
+import * as fs from 'fs';
+import meow from 'meow';
+import * as path from 'path';
+import stdin from 'get-stdin';
+import Fontmin from './index.js';
+import _ from 'lodash';
 
 var cli = meow({
+    importMeta: import.meta,
     help: [
         'Usage',
         '  $ fontmin <file> [<output>]',
@@ -37,34 +36,16 @@ var cli = meow({
         '  --font-family                       font-family for @font-face CSS',
         '  --css-glyph                         generate class for each glyf. default = false',
         '  -T, --show-time                     show time fontmin cost'
-    ].join('\n')
-}, {
-    'boolean': [
-        'basic-text',
-        'show-time',
-        'deflate-woff',
-        'css-glyph',
-        'version'
-    ],
-    'string': [
-        'text',
-        'font-family'
-    ],
-    'alias': {
-        t: 'text',
-        b: 'basic-text',
-        d: 'deflate-woff',
-        T: 'show-time',
-        h: 'help',
-        v: 'version'
-    }
+    ].join('\n'),
+    flags: {
+        basicText: { type: 'boolean', shortFlag: 'b' },
+        showTime: { type: 'boolean', shortFlag: 'T' },
+        deflateWoff: { type: 'boolean', shortFlag: 'd' },
+        cssGlyph: { type: 'boolean' },
+        text: { type: 'string', shortFlag: 't' },
+        fontFamily: { type: 'string' },
+    },
 });
-
-// version
-if (cli.flags.version) {
-    console.log(require('./package.json').version);
-    process.exit(0);
-}
 
 function isFile(path) {
     if (/^[^\s]+\.\w*$/.test(path)) {

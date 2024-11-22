@@ -6,16 +6,16 @@
 /* eslint-env node */
 /* global before */
 
-var assert = require('chai').assert;
+import { assert } from 'chai';
 
-var fs = require('fs');
-var path = require('path');
-var clean = require('gulp-clean');
-var isTtf = require('is-ttf');
-var Fontmin = require('../index');
+import * as fs from 'fs';
+import * as url from 'url';
+import clean from 'gulp-clean';
+import isTtf from 'is-ttf';
+import Fontmin from '../index.js';
 
-var srcPath = path.resolve(__dirname, '../fonts/svg/*.svg');
-var destPath = path.resolve(__dirname, '../fonts/dest_svgs');
+var srcPath = url.fileURLToPath(new URL('../fonts/svg/*.svg', import.meta.url));
+var destPath = url.fileURLToPath(new URL('../fonts/dest_svgs', import.meta.url));
 var destFile = destPath + '/iconfont';
 
 
@@ -93,7 +93,7 @@ describe('svgs2ttf plugin', function () {
     it('input is\'t svg shoud be exclude', function (done) {
 
         new Fontmin()
-            .src(path.resolve(__dirname, '../fonts/*.html'))
+            .src(url.fileURLToPath(new URL('../fonts/*.html', import.meta.url)))
             .use(Fontmin.svgs2ttf('test.ttf'))
             .run(function (err, files) {
                 assert.equal(files.length, 0);

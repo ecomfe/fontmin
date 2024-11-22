@@ -2,6 +2,7 @@
   "name": "fontmin",
   "version": "1.1.0",
   "description": "Minify font seamlessly, font subsetter, webfont (eot, woff, svg) converter.",
+  "type": "module",
   "main": "index.js",
   "types": "index.d.ts",
   "keywords": [
@@ -31,47 +32,47 @@
   "license": "MIT",
   "repository": "ecomfe/fontmin",
   "engines": {
-    "node": ">=12"
+    "node": ">=18"
   },
   "bin": {
     "fontmin": "cli.js"
   },
   "scripts": {
     "test": "mocha test/*.spec.js",
-    "coverage": "nyc mocha --reporter spec --check-leaks test/*.spec.js"
+    "coverage": "c8 mocha --reporter spec --check-leaks test/*.spec.js"
   },
   "exports": {
     "require": "./index.js",
     "import": "./index.js"
   },
   "dependencies": {
-    "@types/node": "^12.20.55",
+    "@types/node": "*",
     "@types/through2": "^2.0.38",
     "b3b": "^0.0.1",
     "buffer-to-vinyl": "^1.0.0",
     "code-points": "^2.0.0-1",
     "concat-stream": "^2.0.0",
     "fonteditor-core": "^2.4.0",
-    "get-stdin": "^8.0.0",
+    "get-stdin": "^9.0.0",
     "is-otf": "^0.1.2",
-    "is-svg": "^4.2.1",
+    "is-svg": "^5.1.0",
     "is-ttf": "^0.2.2",
     "lodash": "^4.17.10",
-    "meow": "^9.0.0",
+    "meow": "^13.2.0",
     "pako": "^2.0.3",
     "replace-ext": "^2.0.0",
     "stream-combiner": "^0.2.1",
     "through2": "^4.0.2",
-    "ttf2woff2": "^4.0.1",
-    "vinyl-fs": "^3.0.3"
+    "ttf2woff2": "^6.0.1",
+    "vinyl-fs": "^4.0.0"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
+    "c8": "^10.1.2",
+    "chai": "^5.1.2",
     "gulp-clean": "^0.4.0",
     "is-eot": "^1.0.0",
     "is-woff": "^1.0.1",
     "is-woff2": "^1.0.0",
-    "mocha": "^9.1.1",
-    "nyc": "^15.1.0"
+    "mocha": "^10.8.2"
   }
 }
