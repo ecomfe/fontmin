@@ -28,6 +28,14 @@
 $ npm install --save fontmin
 ```
 
+### Notice
+
+**fontmin v2.x only support ES Modules, and run on Node v16+.**
+
+If you need to use CommonJS version, please install `fontmin v1.x`:
+
+> npm install --save fontmin@1
+
 ## Usage
 
 ```js
