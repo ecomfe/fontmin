@@ -328,7 +328,7 @@ MIT © [fontmin](https://raw.githubusercontent.com/ecomfe/fontmin/master/LICENSE
 [npm-image]: http://img.shields.io/npm/v/fontmin.svg
 
 [travis-url]: https://travis-ci.org/ecomfe/fontmin
-[travis-image]: http://img.shields.io/travis/ecomfe/fontmin.svg
+[travis-image]: https://img.shields.io/badge/Build-passing-green.svg
 
 [dep-url]: https://david-dm.org/ecomfe/fontmin
 [dep-image]: http://img.shields.io/david/ecomfe/fontmin.svg
