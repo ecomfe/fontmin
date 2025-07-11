@@ -13,7 +13,6 @@ import { ab2b } from 'b3b';
 import _ from 'lodash';
 import * as bufferToVinyl from 'buffer-to-vinyl';
 import fonteditorCore from 'fonteditor-core';
-import getEmptyttfObject from 'fonteditor-core/lib/ttf/getEmptyttfObject.js';
 
 /**
  * SvgFont
@@ -43,7 +42,7 @@ function SvgFont(name, opts) {
     );
 
     // empty ttfobj
-    var ttfobj = getEmptyttfObject.default();
+    var ttfobj = fonteditorCore.createFont().get();
 
     // for save name
     ttfobj.post.format = 2;

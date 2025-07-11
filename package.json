@@ -1,6 +1,6 @@
 {
   "name": "fontmin",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Minify font seamlessly, font subsetter, webfont (eot, woff, svg) converter.",
   "type": "module",
   "main": "index.js",
@@ -52,7 +52,7 @@
     "buffer-to-vinyl": "^1.0.0",
     "code-points": "^2.0.0-1",
     "concat-stream": "^2.0.0",
-    "fonteditor-core": "^2.4.0",
+    "fonteditor-core": "^2.5.2",
     "get-stdin": "^9.0.0",
     "is-otf": "^0.1.2",
     "is-svg": "^5.1.0",

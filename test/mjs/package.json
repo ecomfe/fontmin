@@ -2,7 +2,8 @@
   "name": "mjs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "module": "index.mjs",
+  "type": "module",
   "scripts": {
     "test": "node example.mjs"
   },
