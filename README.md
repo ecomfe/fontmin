@@ -11,7 +11,6 @@
 [![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Downloads][downloads-image]][npm-url]
-[![Dependencies][dep-image]][dep-url]
 [![Font support][font-image]][font-url]
 
 ## Homepage
