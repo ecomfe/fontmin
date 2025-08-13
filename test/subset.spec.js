@@ -222,4 +222,33 @@ describe('subset', function () {
 
 
     });
+
+
+    it('Helvetica.ttf', function (done) {
+        console.log(path.resolve(fontDir, 'Helvetica.ttf'))
+        var fontmin = new Fontmin()
+            .src(path.resolve(fontDir, 'Helvetica.ttf'))
+            .use(Fontmin.glyph({
+                text: 'acef^&*Zc ',
+                basicText: false
+            }));
+
+        fontmin.run(function (err, files, stream) {
+
+            var twiceMined = files[0].contents;
+
+            // it ttf
+            expect(isTtf(twiceMined)).to.be.ok;
+
+            var font = fonteditorCore.Font.create(twiceMined, {type: 'ttf'});
+            expect(font.get().glyf.some(g => g.unicode && g.unicode.includes('a'.codePointAt(0)))).to.be.ok;
+            expect(font.get().glyf.some(g => g.unicode && g.unicode.includes('Z'.codePointAt(0)))).to.be.ok;
+            expect(font.get().glyf.some(g => g.unicode && g.unicode.includes('^'.codePointAt(0)))).to.be.ok;
+            expect(font.get().glyf.some(g => g.unicode && g.unicode.includes('*'.codePointAt(0)))).to.be.ok;
+            expect(font.get().glyf.some(g => g.unicode && g.unicode.includes(0x20))).to.be.ok;
+            done();
+        });
+
+
+    });
 });
