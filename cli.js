@@ -104,7 +104,7 @@ function run(src, dest) {
     });
 }
 
-if (process.stdin.isTTY) {
+if (process.stdin.isTTY || cli.input.length) {
     var src = cli.input;
     var dest;
 
@@ -139,5 +139,5 @@ if (process.stdin.isTTY) {
     run(src, dest);
 }
 else {
-    stdin.buffer(run);
+    stdin.buffer().then(run);
 }
